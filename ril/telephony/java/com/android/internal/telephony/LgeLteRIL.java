@@ -56,7 +56,6 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
     protected String[] mLastDataIface = new String[20];
     boolean RILJ_LOGV = true;
     boolean RILJ_LOGD = true;
-    boolean skipCdmaSubcription = needsOldRilFeature("skipCdmaSubcription");
 
     private final int RIL_INT_RADIO_OFF = 0;
     private final int RIL_INT_RADIO_UNAVALIABLE = 1;
@@ -202,12 +201,17 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
             status.mApplications[i] = ca;
         }
         int appIndex = -1;
-        if (mPhoneType == RILConstants.CDMA_PHONE && !skipCdmaSubcription) {
+        if (mPhoneType == RILConstants.CDMA_PHONE &&
+             status.mCdmaSubscriptionAppIndex >= 0) {
             appIndex = status.mCdmaSubscriptionAppIndex;
             Log.d(LOG_TAG, "This is a CDMA PHONE " + appIndex);
         } else {
             appIndex = status.mGsmUmtsSubscriptionAppIndex;
             Log.d(LOG_TAG, "This is a GSM PHONE " + appIndex);
+        }
+
+        if (cardState == RILConstants.SIM_ABSENT) {
+            return status;
         }
 
         if (numApplications > 0) {
@@ -481,7 +485,8 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
                         mRil.setRadioState(CommandsInterface.RadioState.RADIO_ON);
                     } else {
                         int appIndex = -1;
-                        if (mPhoneType == RILConstants.CDMA_PHONE && !skipCdmaSubcription) {
+                        if (mPhoneType == RILConstants.CDMA_PHONE &&
+                               status.mCdmaSubscriptionAppIndex >= 0) {
                             appIndex = status.mCdmaSubscriptionAppIndex;
                             Log.d(LOG_TAG, "This is a CDMA PHONE " + appIndex);
                         } else {
