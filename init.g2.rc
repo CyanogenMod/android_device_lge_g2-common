@@ -416,3 +416,9 @@ service conn_init /system/bin/logwrapper /system/bin/hwaddrs
 on property:init.svc.conn_init=stopped
     chmod 644 /data/misc/wifi/config
     chmod 644 /data/misc/bdaddr
+
+service time_daemon /system/bin/time_daemon
+    class late_start
+    user root
+    group root
+
