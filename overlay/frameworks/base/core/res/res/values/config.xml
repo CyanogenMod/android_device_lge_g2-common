@@ -245,4 +245,7 @@
         <item>0</item>
     </integer-array>
 
+    <!-- Device supports LED flashlight -->
+    <bool name="config_enableTorch">true</bool>
+
 </resources>
