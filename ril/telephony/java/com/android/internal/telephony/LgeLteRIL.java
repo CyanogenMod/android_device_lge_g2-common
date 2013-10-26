@@ -570,6 +570,104 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
         send(rr);
     }
 
+    protected void
+    processSolicited (Parcel p) {
+        int serial, error;
+        boolean found = false;
+        int dataPosition = p.dataPosition(); // save off position within the Parcel
+        serial = p.readInt();
+        error = p.readInt();
+
+        RILRequest rr = null;
+
+        /* Pre-process the reply before popping it */
+        synchronized (mRequestList) {
+            for (int i = 0, s = mRequestList.size() ; i < s ; i++) {
+                RILRequest tr = mRequestList.get(i);
+                if (tr.mSerial == serial) {
+                    if (error == 0 || p.dataAvail() > 0) {
+                        try {switch (tr.mRequest) {
+                            /* Get those we're interested in */
+                            case RIL_REQUEST_DATA_REGISTRATION_STATE:
+                                rr = tr;
+                                break;
+                        }} catch (Throwable thr) {
+                            // Exceptions here usually mean invalid RIL responses
+                            if (rr.mResult != null) {
+                                AsyncResult.forMessage(rr.mResult, null, thr);
+                                rr.mResult.sendToTarget();
+                            }
+                            rr.release();
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (rr == null) {
+            /* Nothing we care about, go up */
+            p.setDataPosition(dataPosition);
+
+            // Forward responses that we are not overriding to the super class
+            super.processSolicited(p);
+        }
+
+
+        rr = findAndRemoveRequestFromList(serial);
+
+        if (rr == null) {
+            return;
+        }
+
+        Object ret = null;
+
+        if (error == 0 || p.dataAvail() > 0) {
+            switch (rr.mRequest) {
+                case RIL_REQUEST_DATA_REGISTRATION_STATE: ret =  dataRegState(p); break;
+                default:
+                    throw new RuntimeException("Unrecognized solicited response: " + rr.mRequest);
+            }
+            //break;
+        }
+
+        if (RILJ_LOGD) riljLog(rr.serialString() + "< " + requestToString(rr.mRequest)
+            + " " + retToString(rr.mRequest, ret));
+
+        if (rr.mResult != null) {
+            AsyncResult.forMessage(rr.mResult, ret, null);
+            rr.mResult.sendToTarget();
+        }
+
+        rr.release();
+    }
+
+    private Object
+    dataRegState(Parcel p) {
+        int num;
+        String response[];
+
+        response = p.readStringArray();
+
+        /* DANGER WILL ROBINSON
+         * In the vzw variant, we're getting a "roaming" data indication
+         * in the LTE response... with EHRPD as the RAT, and all the other
+         * fields nulled out. Let's assume that's some weird kind of
+         * stating we're out of LTE and declare it as regular service */
+        if (response.length > 10 &&
+            response[0].equals("5") &&
+            response[2] == null &&
+            response[3].equals("13") &&
+            response[6] == null &&
+            response[7] == null &&
+            response[8] == null) {
+
+            response[0] = "1";
+        }
+
+        return response;
+    }
+
     /*
     @Override
     public void
