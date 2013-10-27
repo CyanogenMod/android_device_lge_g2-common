@@ -143,6 +143,10 @@ PRODUCT_PACKAGES += \
 	gralloc.msm8974 \
 	copybit.msm8974
 
+# Local wrapper for fixups
+PRODUCT_PACKAGES += \
+	camera.g2
+
 PRODUCT_PACKAGES += \
 	audio_policy.msm8974 \
 	audio.primary.msm8974 \
