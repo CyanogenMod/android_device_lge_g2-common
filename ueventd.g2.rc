@@ -178,3 +178,4 @@
 
 /dev/ttyHS99              0600   bluetooth  bluetooth
 /dev/block/mmcblk0p13     0660   system     system
+/dev/btlock               0660   bluetooth  bluetooth
