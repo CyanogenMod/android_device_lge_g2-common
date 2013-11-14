@@ -31,6 +31,7 @@ int main() {
 	fd1 = open("/dev/block/platform/msm_sdcc.1/by-name/misc",O_RDONLY);
 	fd2 = open("/data/misc/wifi/config",O_WRONLY|O_CREAT|O_TRUNC,S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH);
 
+	write(fd2,"btc_mode=1\n",11);
 	write(fd2,"mpc=1\n",6);
 	write(fd2,"roam_off=0\n",11);
 	write(fd2,"roam_scan_period=10\n",20);
