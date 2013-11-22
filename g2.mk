@@ -144,7 +144,8 @@ PRODUCT_PACKAGES += \
 	liboverlay \
 	hwcomposer.msm8974 \
 	gralloc.msm8974 \
-	copybit.msm8974
+	copybit.msm8974 \
+	memtrack.msm8974
 
 # Local wrapper for fixups
 PRODUCT_PACKAGES += \
