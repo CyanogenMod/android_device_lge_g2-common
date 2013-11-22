@@ -71,24 +71,23 @@ WIFI_DRIVER_FW_PATH_P2P     := "/system/etc/firmware/fw_bcmdhd_p2p.bin"
 BOARD_EGL_CFG := device/lge/g2-common/egl.cfg
 
 ## the main variant works... except for video scaling :(
-TARGET_QCOM_DISPLAY_VARIANT := mdss
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
 TARGET_USES_OVERLAY := true
 TARGET_USES_C2D_COMPOSITION := true
 
 BOARD_USES_QCOM_HARDWARE := true
-TARGET_USES_QCOM_BSP := true
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP -DLG_CAMERA_HARDWARE -DLPA_DEFAULT_BUFFER_SIZE=512
+COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DLG_CAMERA_HARDWARE -DLPA_DEFAULT_BUFFER_SIZE=512
+#-DQCOM_BSP 
 #TARGET_DISPLAY_USE_RETIRE_FENCE := true
 
+# Camera
+USE_DEVICE_SPECIFIC_CAMERA := true
+COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
+
 # Audio
-TARGET_QCOM_AUDIO_VARIANT := caf
 #TARGET_USES_QCOM_COMPRESSED_AUDIO := true
 BOARD_HAVE_LOW_LATENCY_AUDIO := true
-
-# Media
-TARGET_QCOM_MEDIA_VARIANT := v4l2
 
 RECOVERY_FSTAB_VERSION = 2
 TARGET_RECOVERY_FSTAB = device/lge/g2-common/fstab.g2
@@ -121,34 +120,11 @@ BOARD_HARDWARE_CLASS := device/lge/g2-common/cmhw/
 BOARD_SEPOLICY_DIRS += \
         device/lge/g2-common/sepolicy
 
-BOARD_SEPOLICY_UNION += \
-	file_contexts \
-	property_contexts \
-	te_macros \
-	bridge.te \
-	camera.te \
-	conn_init.te \
-	device.te \
-	dhcp.te \
-	domain.te \
-	drmserver.te \
-	file.te \
-	kickstart.te \
-	init.te \
-	mediaserver.te \
-	mpdecision.te \
-	netmgrd.te \
-	property.te \
-	qmux.te \
-	rild.te \
-	rmt.te \
-	sensors.te \
-	surfaceflinger.te \
-	system.te \
-	tee.te \
-	thermald.te \
-	ueventd.te \
-	wpa_supplicant.te
+# The list below is order dependent
+BOARD_SEPOLICY_UNION := \
+       device.te \
+       app.te \
+       file_contexts
 
 BOARD_NFC_HAL_SUFFIX := g2
 
