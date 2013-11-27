@@ -69,11 +69,14 @@ WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmware/fw_bcmdhd_apsta.bin"
 
 BOARD_EGL_CFG := device/lge/g2-common/egl.cfg
 
-## the main variant works... except for video scaling :(
 USE_OPENGL_RENDERER := true
+VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
+SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
 TARGET_USES_ION := true
 TARGET_USES_OVERLAY := true
 TARGET_USES_C2D_COMPOSITION := true
+
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 BOARD_USES_QCOM_HARDWARE := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DLG_CAMERA_HARDWARE -DLPA_DEFAULT_BUFFER_SIZE=512
