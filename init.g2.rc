@@ -5,6 +5,8 @@ on early-init
     write /sys/class/leds/lcd-backlight/brightness 150
 
 on init
+    chmod 0701 /mnt/media_rw
+    mkdir /mnt/media_rw/usb 0775 system system
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
@@ -428,3 +430,6 @@ service time_daemon /system/bin/time_daemon
     user root
     group root
 
+service fuse_usb /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/usb /storage/usb
+    class late_start
+    disabled
