@@ -7,6 +7,7 @@
 /dev/msm_aac.*                 u:object_r:audio_device:s0
 
 /dev/bcm2079x                  u:object_r:nfc_device:s0
+/dev/pn544                     u:object_r:nfc_device:s0
 /dev/qseecom                   u:object_r:tee_device:s0
 
 # Jpeg Engine support
