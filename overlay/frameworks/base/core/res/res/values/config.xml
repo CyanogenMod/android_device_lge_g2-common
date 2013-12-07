@@ -260,4 +260,6 @@
     <string name="config_perf_profile_default_entry">1</string>
 
     <bool name="config_lidControlsSleep">true</bool>
+
+    <bool name="config_suspendWhenScreenOffDueToProximity">true</bool>
 </resources>
