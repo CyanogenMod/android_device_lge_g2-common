@@ -177,6 +177,6 @@
 /dev/lge_ddm_tty0         0660   system     system
 
 /dev/ttyHS99              0600   bluetooth  bluetooth
-/dev/block/mmcblk0p13     0660   system     system
+/dev/block/mmcblk0p13     0660   system     wifi
 /dev/btlock               0660   bluetooth  bluetooth
 /dev/rfkill               0660   wifi       wifi
