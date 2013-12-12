@@ -72,6 +72,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps.conf:system/etc/gps.conf
 
 PRODUCT_PACKAGES += \
+    GestureSettings
+
+PRODUCT_PACKAGES += \
     charger_res_images \
     charger
 
