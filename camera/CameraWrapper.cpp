@@ -117,6 +117,13 @@ static char * camera_fixup_getparams(int id, const char * settings)
         free(manipBuf);
     }
 
+    /* LIE! The camera will set 3 snaps when doing HDR, and only return one. This hangs apps
+     * that wait for the rest to come in. Make sure we never return multiple snaps unless
+     * doing ZSL */
+    if (!videoMode && (!params.get("zsl") || strncmp(params.get("zsl"),"on", 2))) {
+        params.set("num-snaps-per-shutter", "1");
+    }
+
     ALOGV("%s: fixed parameters:", __func__);
     //params.dump();
 
