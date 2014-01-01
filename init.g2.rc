@@ -215,6 +215,9 @@ on post-fs-data
     mkdir /dev/socket/mpdecision 0770 system system
     chmod 2770 /dev/socket/mpdecision
 
+    # time_daemon storage
+    mkdir /data/time/ 0700 system system
+
     # Enable Power modes and set the CPU Freq Sampling rates
     write /sys/module/lpm_resources/enable_low_power/l2 2
     write /sys/module/lpm_resources/enable_low_power/pxo 1
