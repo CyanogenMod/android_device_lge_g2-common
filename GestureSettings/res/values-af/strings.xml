@@ -1,0 +1,11 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="knockonoff_panel_title">Klop-Klop Aan/af gebare</string>
+
+    <string name="knockon_enable_head">Klop-Klop aan</string>
+    <string name="knockon_enable_summary_off">Klop-Klop aan gebaar afgeskakel</string>
+    <string name="knockon_enable_summary_on">Klop-Klop aan gebaar aangeskakel</string>
+
+    <string name="knockoff_enable_head">Klop-Klop af</string>
+    <string name="knockoff_enable_summary_off">Statusbalk klop-klop gebaar afgeskakel</string>
+    <string name="knockoff_enable_summary_on">Statusbalk klop-klop gebaar aangeskakel</string>
+</resources>
