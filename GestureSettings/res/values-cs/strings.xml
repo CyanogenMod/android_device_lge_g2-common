@@ -15,13 +15,13 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="knockonoff_panel_title">Knock On/Off Gestures</string>
+    <string name="knockonoff_panel_title">Gesta KnockON/OFF</string>
 
-    <string name="knockon_enable_head">Knock On</string>
-    <string name="knockon_enable_summary_off">Knock on gesture disabled</string>
-    <string name="knockon_enable_summary_on">Knock on gesture enabled</string>
+    <string name="knockon_enable_head">KnockON</string>
+    <string name="knockon_enable_summary_off">Gesto pro funkci KnockON vypnuto</string>
+    <string name="knockon_enable_summary_on">Gesto pro funkci KnockON zapnuto</string>
 
-    <string name="knockoff_enable_head">Knock Off</string>
-    <string name="knockoff_enable_summary_off">Statusbar knock off gesture disabled</string>
-    <string name="knockoff_enable_summary_on">Statusbar Knock off gesture enabled</string>
+    <string name="knockoff_enable_head">KnockOFF</string>
+    <string name="knockoff_enable_summary_off">Gesto pro funkci KnockOFF na stavovém řádku vypnuto</string>
+    <string name="knockoff_enable_summary_on">Gesto pro funkci KnockOFF na stavovém řádku zapnuto</string>
 </resources>
