@@ -112,7 +112,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.audio.dualmic.config=endfire \
 	af.resampler.quality=4 \
 	audio.offload.buffer.size.kb=32 \
-	audio.offload.gapless.enabled=true \
+	audio.offload.gapless.enabled=false \
 	av.offload.enable=true
 
 # Do not power down SIM card when modem is sent to Low Power Mode.
