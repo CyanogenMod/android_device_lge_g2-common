@@ -300,6 +300,7 @@
         <ctl name="RX7 Digital Volume" value="67" />
         <ctl name="SPK DRV Volume" value="6" />
         <ctl name="SPK DAC Switch" value="1" />
+        <ctl name="RX7 HPF cut off" value="MIN_3DB_150Hz" />
     </path>
 
     <path name="speaker-mic">
