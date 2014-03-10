@@ -177,7 +177,7 @@
 
     <!-- Setting this true forces the headset jack switches to use the/dev/input/event subsystem
          rather than the uevent framework. -->
-    <bool name="config_useDevInputEventForAudioJack">false</bool>
+    <bool name="config_useDevInputEventForAudioJack">true</bool>
 
     <!-- The default iface on which to monitor data use -->
     <string name="config_datause_iface" translatable="false">rmnet0</string>
