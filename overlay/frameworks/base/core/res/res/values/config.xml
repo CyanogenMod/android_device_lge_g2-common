@@ -260,4 +260,12 @@
     <string name="config_perf_profile_default_entry">1</string>
 
     <bool name="config_lidControlsSleep">true</bool>
+
+    <integer-array name="config_smartCoverWindowCoords">
+        <item>55</item>     <!-- Top -->
+        <item>200</item>    <!-- Left -->
+        <item>850</item>    <!-- Bottom -->
+        <item>880</item>    <!-- Right -->
+    </integer-array>
+
 </resources>
