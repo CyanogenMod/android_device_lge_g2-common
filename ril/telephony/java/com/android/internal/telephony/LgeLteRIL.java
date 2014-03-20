@@ -694,4 +694,19 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
         super.setupDataCall(radioTechnology, profile, apn, user, password, 
                             authType, protocol, result);
     }*/
+
+    @Override
+    public void getImsRegistrationState(Message result) {
+        if(mRilVersion >= 8)
+            super.getImsRegistrationState(result);
+        else {
+            if (result != null) {
+                CommandException ex = new CommandException(
+                    CommandException.Error.REQUEST_NOT_SUPPORTED);
+                AsyncResult.forMessage(result, null, ex);
+                result.sendToTarget();
+            }
+        }
+    }
+
 }
