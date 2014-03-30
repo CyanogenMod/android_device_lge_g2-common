@@ -263,11 +263,13 @@
 
     <bool name="config_suspendWhenScreenOffDueToProximity">true</bool>
 
-    <integer-array name="config_smartCoverWindowCoords">
-        <item>35</item>     <!-- Top -->
-        <item>200</item>    <!-- Left -->
-        <item>850</item>    <!-- Bottom -->
-        <item>880</item>    <!-- Right -->
-    </integer-array>
-
+    <add-resource type="array" name="config_smartCoverWindowCoords"> 
+        <integer-array name="config_smartCoverWindowCoords">
+            <item>35</item>     <!-- Top -->
+            <item>200</item>    <!-- Left -->
+            <item>850</item>    <!-- Bottom -->
+            <item>880</item>    <!-- Right -->
+        </integer-array>
+    </add-resource>
+    
 </resources>
