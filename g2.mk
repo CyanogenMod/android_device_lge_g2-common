@@ -201,7 +201,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
         debug.egl.recordable.rgba8888=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.qc.sensors.wl_dis=true
+	ro.qualcomm.sensors.qmd=true \
+	ro.qc.sdk.sensors.gestures=true \
+	ro.qualcomm.sensors.pedometer=true \
+	ro.qualcomm.sensors.pam=true \
+	ro.qualcomm.sensors.scrn_ortn=true \
+	debug.qualcomm.sns.hal=1 \
+	debug.qualcomm.sns.daemon=1 \
+	debug.qualcomm.sns.libsensor1=e
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp
