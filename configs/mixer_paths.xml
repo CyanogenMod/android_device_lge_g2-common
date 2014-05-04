@@ -17,13 +17,13 @@
     <ctl name="LINEOUT4 Volume" value="12" />
     <ctl name="HPHL Volume" value="16" />
     <ctl name="HPHR Volume" value="16" />
-    <ctl name="RX1 Digital Volume" value="84" />
-    <ctl name="RX2 Digital Volume" value="84" />
-    <ctl name="RX3 Digital Volume" value="84" />
-    <ctl name="RX4 Digital Volume" value="84" />
-    <ctl name="RX5 Digital Volume" value="84" />
-    <ctl name="RX6 Digital Volume" value="84" />
-    <ctl name="RX7 Digital Volume" value="84" />
+    <ctl name="RX1 Digital Volume" value="65" />
+    <ctl name="RX2 Digital Volume" value="65" />
+    <ctl name="RX3 Digital Volume" value="65" />
+    <ctl name="RX4 Digital Volume" value="65" />
+    <ctl name="RX5 Digital Volume" value="65" />
+    <ctl name="RX6 Digital Volume" value="65" />
+    <ctl name="RX7 Digital Volume" value="65" />
     <ctl name="ADC1 Volume" value="13" />
     <ctl name="ADC2 Volume" value="13" />
     <ctl name="ADC3 Volume" value="13" />
@@ -34,8 +34,8 @@
     <ctl name="DEC2 Volume" value="84" />
     <ctl name="DEC3 Volume" value="84" />
     <ctl name="DEC4 Volume" value="84" />
-    <ctl name="DEC5 Volume" value="84" />
-    <ctl name="DEC6 Volume" value="84" />
+    <ctl name="DEC5 Volume" value="65" />
+    <ctl name="DEC6 Volume" value="61" />
     <ctl name="DEC7 Volume" value="84" />
     <ctl name="DEC8 Volume" value="84" />
     <ctl name="DEC9 Volume" value="84" />
@@ -136,6 +136,12 @@
     <ctl name="FM Radio" value="OFF" />
     <ctl name="RX7 HPF cut off" value="MIN_3DB_4Hz" />
 
+    <!-- usb headset -->
+    <ctl name="AFE_PCM_RX Audio Mixer MultiMedia1" value="0" />
+    <ctl name="MultiMedia1 Mixer AFE_PCM_TX" value="0" />
+    <ctl name="AFE_PCM_RX Audio Mixer MultiMedia5" value="0" />
+    <!-- usb headset end -->
+
     <!-- These are audio route (FE to BE) specific mixer settings -->
     <path name="deep-buffer-playback">
         <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia1" value="1" />
@@ -154,6 +160,19 @@
         <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia1" value="1" />
     </path>
 
+    <path name="deep-buffer-playback afe-proxy">
+        <ctl name="AFE_PCM_RX Audio Mixer MultiMedia1" value="1" />
+    </path>
+
+    <path name="deep-buffer-playback usb-headphones">
+        <path name="deep-buffer-playback afe-proxy" />
+    </path>
+
+    <path name="deep-buffer-playback speaker-and-usb-headphones">
+        <path name="deep-buffer-playback usb-headphones" />
+        <path name="deep-buffer-playback" />
+    </path>
+
     <path name="low-latency-playback">
         <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia5" value="1" />
     </path>
@@ -168,6 +187,19 @@
 
     <path name="low-latency-playback speaker-and-hdmi">
         <path name="low-latency-playback hdmi" />
+        <path name="low-latency-playback" />
+    </path>
+
+    <path name="low-latency-playback afe-proxy">
+        <ctl name="AFE_PCM_RX Audio Mixer MultiMedia5" value="1" />
+    </path>
+
+    <path name="low-latency-playback usb-headphones">
+        <path name="low-latency-playback afe-proxy" />
+    </path>
+
+    <path name="low-latency-playback speaker-and-usb-headphones">
+        <path name="low-latency-playback usb-headphones" />
         <path name="low-latency-playback" />
     </path>
 
@@ -192,8 +224,25 @@
         <path name="compress-offload-playback" />
     </path>
 
+    <path name="compress-offload-playback afe-proxy">
+        <ctl name="AFE_PCM_RX Audio Mixer MultiMedia4" value="1" />
+    </path>
+
+    <path name="compress-offload-playback usb-headphones">
+        <path name="compress-offload-playback afe-proxy" />
+    </path>
+
+    <path name="compress-offload-playback speaker-and-usb-headphones">
+        <path name="compress-offload-playback usb-headphones" />
+        <path name="compress-offload-playback" />
+    </path>
+
     <path name="audio-record">
         <ctl name="MultiMedia1 Mixer SLIM_0_TX" value="1" />
+    </path>
+
+    <path name="audio-record usb-headset-mic">
+        <ctl name="MultiMedia1 Mixer AFE_PCM_TX" value="1" />
     </path>
 
     <path name="audio-record bt-sco">
@@ -248,15 +297,15 @@
         <ctl name="SLIM RX1 MUX" value="AIF1_PB" />
         <ctl name="SLIM_0_RX Channels" value="One" />
         <ctl name="RX7 MIX1 INP1" value="RX1" />
-        <ctl name="RX7 Digital Volume" value="62" />
-        <ctl name="SPK DRV Volume" value="7" />
+        <ctl name="RX7 Digital Volume" value="60" />
+        <ctl name="SPK DRV Volume" value="6" />
         <ctl name="SPK DAC Switch" value="1" />
         <ctl name="RX7 HPF cut off" value="MIN_3DB_150Hz" />
     </path>
 
     <path name="speaker-mic">
         <path name="adc5" />
-        <ctl name="DEC2 Volume" value="65" />
+        <ctl name="DEC2 Volume" value="70" />
     </path>
 
     <path name="handset">
@@ -264,14 +313,13 @@
         <ctl name="SLIM_0_RX Channels" value="One" />
         <ctl name="RX1 MIX1 INP1" value="RX1" />
         <ctl name="CLASS_H_DSM MUX" value="DSM_HPHL_RX1" />
-	<ctl name="RX1 Digital Volume" value="65" />
         <ctl name="DAC1 Switch" value="1" />
     </path>
 
     <path name="handset-mic">
         <path name="adc1" />
 	<ctl name="ADC1 Volume" value="12" />
-	<ctl name="DEC6 Volume" value="65" />
+	<ctl name="DEC6 Volume" value="68" />
     </path>
 
     <path name="headphones">
@@ -282,8 +330,8 @@
         <ctl name="RX2 MIX1 INP1" value="RX2" />
         <ctl name="CLASS_H_DSM MUX" value="DSM_HPHL_RX1" />
         <ctl name="HPHL DAC Switch" value="1" />
-        <ctl name="RX1 Digital Volume" value="56" />
-        <ctl name="RX2 Digital Volume" value="56" />
+        <ctl name="RX1 Digital Volume" value="58" />
+        <ctl name="RX2 Digital Volume" value="58" />
         <ctl name="HPHL Volume" value="15" />
         <ctl name="HPHR Volume" value="15" />
     </path>
@@ -304,8 +352,9 @@
 
     <path name="voice-speaker">
         <path name="speaker" />
-        <ctl name="SPK DRV Volume" value="8" />
+        <ctl name="SPK DRV Volume" value="18" />
         <ctl name="RX7 Digital Volume" value="70" />
+		<ctl name="RX7 HPF cut off" value="MIN_3DB_150Hz" />
     </path>
 
     <path name="voice-speaker-mic">
@@ -340,7 +389,18 @@
         <ctl name="RX7 Digital Volume" value="60" />
     </path>
 
+    <path name="usb-headphones">
+    </path>
+
+    <path name="afe-proxy">
+    </path>
+
     <path name="hdmi">
+    </path>
+
+    <path name="speaker-and-usb-headphones">
+        <path name="speaker" />
+        <path name="usb-headphones" />
     </path>
 
     <path name="speaker-and-hdmi">
@@ -369,6 +429,9 @@
     </path>
 
     <path name="bt-sco-mic">
+    </path>
+
+    <path name="usb-headset-mic">
     </path>
 
     <!-- Dual MIC devices -->
