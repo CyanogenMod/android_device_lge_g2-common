@@ -223,9 +223,12 @@ PRODUCT_COPY_FILES += \
 
 # This hw ships locked, work around it with loki
 PRODUCT_PACKAGES += \
-        loki.sh \
-        loki_patch \
-        loki_flash
+        loki.sh 
+# Loki tool
+# there is loki source in bootable/recovery/loki 
+PRODUCT_PACKAGES += \
+    loki_tool_static
+
 
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 
