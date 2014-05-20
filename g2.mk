@@ -34,7 +34,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/configs/snd_soc_msm_Taiko:system/etc/snd_soc_msm/snd_soc_msm_Taiko \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/mixer_paths.xml:system/etc/mixer_paths.xml
@@ -111,9 +110,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Audio Configuration
 PRODUCT_PROPERTY_OVERRIDES += \
-	persist.audio.fluence.voicecall=true \
-	persist.audio.dualmic.config=endfire \
-	af.resampler.quality=4 \
+	ro.qc.sdk.audio.ssr=false \
+	ro.qc.sdk.audio.fluencetype=fluence \
+	persist.audio.fluence.mode=endfire \
+	persist.audio.handset.mic=digital \
+	persist.audio.voicecall.mic=0 \
+	persist.audio.voice.clarity=none \
+	persist.audio.aanc.enable=false \
+	persist.audio.handset_rx_type=DEFAULT \
+	persist.audio.nsenabled=ON \
+	persist.speaker.prot.enable=false \
+	persist.audio.spkcall_2mic=OFF \
+	ro.config.vc_call_vol_steps=12 \
+	ro.config.vc_call_vol_default=8 \
+	af.resampler.quality=255 \
 	audio.offload.buffer.size.kb=32 \
 	audio.offload.gapless.enabled=false \
 	av.offload.enable=true
@@ -156,7 +166,6 @@ PRODUCT_PACKAGES += \
 	camera.g2
 
 PRODUCT_PACKAGES += \
-	audio_policy.default \
 	audio.primary.msm8974 \
 	audio.a2dp.default \
 	audio.usb.default \
