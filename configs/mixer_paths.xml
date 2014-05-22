@@ -134,7 +134,7 @@
     <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia4" value="0" />
     <ctl name="AUX PCM SampleRate" value="rate_8000" />
     <ctl name="FM Radio" value="OFF" />
-    <ctl name="RX7 HPF cut off" value="MIN_3DB_4Hz" />
+    <ctl name="RX7 HPF cut off" value="MIN_3DB_150Hz" />
 
     <!-- usb headset -->
     <ctl name="AFE_PCM_RX Audio Mixer MultiMedia1" value="0" />
@@ -300,7 +300,6 @@
         <ctl name="RX7 Digital Volume" value="64" />
         <ctl name="SPK DRV Volume" value="7" />
         <ctl name="SPK DAC Switch" value="1" />
-        <ctl name="RX7 HPF cut off" value="MIN_3DB_150Hz" />
     </path>
 
     <path name="speaker-mic">
@@ -361,7 +360,6 @@
         <ctl name="ADC5 Volume" value="12" />
         <ctl name="DEC2 Volume" value="65" />
         <ctl name="SPK DAC Switch" value="1" />
-        <ctl name="RX7 HPF cut off" value="MIN_3DB_150Hz" />
     </path>
 
     <path name="voice-headphones">
