@@ -204,6 +204,14 @@ struct target targets[] = {
 		.lg = 1,
 	},
 	{
+		.vendor = "DoCoMo",
+		.device = "LG G2",
+		.build = "L-01F",
+		.check_sigs = 0xf813538,
+		.hdr = 0xf8d41c0,
+		.lg = 1,
+	},
+	{
 		.vendor = "Verizon",
 		.device = "LG G2",
 		.build = "VS98010b",
