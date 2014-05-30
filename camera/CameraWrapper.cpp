@@ -77,6 +77,7 @@ typedef struct wrapper_camera_device {
 
 static bool flipZsl = false;
 static bool zslState = false;
+static bool previewRunning = false;
 
 #define CAMERA_ID(device) (((wrapper_camera_device_t *)(device))->id)
 
@@ -159,11 +160,11 @@ char * camera_fixup_setparams(int id, const char * settings)
     }
 
     if (!strcmp(params.get("zsl"), "on")) {
-        if (!zslState) { flipZsl = true; }
+        if (previewRunning && !zslState) { flipZsl = true; }
         zslState = true;
         params.set("camera-mode", "1");
     } else {
-        if (zslState) { flipZsl = true; }
+        if (previewRunning && zslState) { flipZsl = true; }
         zslState = false;
         params.set("camera-mode", "0");
     }
@@ -244,13 +245,16 @@ int camera_msg_type_enabled(struct camera_device * device, int32_t msg_type)
 
 int camera_start_preview(struct camera_device * device)
 {
+    int rc = 0;
     ALOGV("%s", __FUNCTION__);
     ALOGV("%s->%08X->%08X", __FUNCTION__, (uintptr_t)device, (uintptr_t)(((wrapper_camera_device_t*)device)->vendor));
 
     if (!device)
         return -EINVAL;
 
-    return VENDOR_CALL(device, start_preview);
+    rc = VENDOR_CALL(device, start_preview);
+    previewRunning = rc > 0;
+    return rc;
 }
 
 void camera_stop_preview(struct camera_device * device)
@@ -261,6 +265,7 @@ void camera_stop_preview(struct camera_device * device)
     if (!device)
         return;
 
+    previewRunning = false;
     VENDOR_CALL(device, stop_preview);
 }
 
