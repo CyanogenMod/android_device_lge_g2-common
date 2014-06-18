@@ -1,7 +1,6 @@
 #!/sbin/sh
 #
-# This leverages the loki_patch utility created by djrbliss which allows us
-# to bypass the bootloader checks on jfltevzw and jflteatt
+# This leverages the loki_patch utility created by djrbliss
 # See here for more information on loki: https://github.com/djrbliss/loki
 #
 

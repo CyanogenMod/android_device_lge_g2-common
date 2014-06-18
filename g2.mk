@@ -225,7 +225,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
         loki.sh \
         loki_patch \
-        loki_flash
+        loki_flash \
+        recovery-transform
 
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 
