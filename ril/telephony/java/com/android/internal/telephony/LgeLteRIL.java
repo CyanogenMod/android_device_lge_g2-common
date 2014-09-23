@@ -583,23 +583,21 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
 
         /* Pre-process the reply before popping it */
         synchronized (mRequestList) {
-            for (int i = 0, s = mRequestList.size() ; i < s ; i++) {
-                RILRequest tr = mRequestList.get(i);
-                if (tr != null && tr.mSerial == serial) {
-                    if (error == 0 || p.dataAvail() > 0) {
-                        try {switch (tr.mRequest) {
-                            /* Get those we're interested in */
-                            case RIL_REQUEST_DATA_REGISTRATION_STATE:
-                                rr = tr;
-                                break;
-                        }} catch (Throwable thr) {
-                            // Exceptions here usually mean invalid RIL responses
-                            if (tr.mResult != null) {
-                                AsyncResult.forMessage(tr.mResult, null, thr);
-                                tr.mResult.sendToTarget();
-                            }
-                            return tr;
+            RILRequest tr = mRequestList.get(serial);
+            if (tr != null && tr.mSerial == serial) {
+                if (error == 0 || p.dataAvail() > 0) {
+                    try {switch (tr.mRequest) {
+                        /* Get those we're interested in */
+                        case RIL_REQUEST_DATA_REGISTRATION_STATE:
+                            rr = tr;
+                            break;
+                    }} catch (Throwable thr) {
+                        // Exceptions here usually mean invalid RIL responses
+                        if (tr.mResult != null) {
+                            AsyncResult.forMessage(tr.mResult, null, thr);
+                            tr.mResult.sendToTarget();
                         }
+                        return tr;
                     }
                 }
             }
