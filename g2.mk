@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2011 The Android Open-Source Project
+# Copyright (C) 2013 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,39 +14,53 @@
 # limitations under the License.
 #
 
-## overlays
+# Overlays
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 
-# This device is xhdpi.  However the platform doesn't
-# currently contain all of the bitmaps at xhdpi density so
-# we do this little trick to fall back to the hdpi version
-# if the xhdpi doesn't exist.
+# Device uses high-density artwork where available 
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
+# Init
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/init.g2.rc:root/init.g2.rc \
+	$(LOCAL_PATH)/init.g2.usb.rc:root/init.g2.usb.rc \
+	$(LOCAL_PATH)/ueventd.g2.rc:root/ueventd.g2.rc \
+	$(LOCAL_PATH)/fstab.g2:root/fstab.g2
+
+# Sensors
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/sensors.sh:root/sensors.sh \
+    $(LOCAL_PATH)/configs/sap.conf:system/etc/sap.conf \
+    $(LOCAL_PATH)/configs/sensor_def_common.conf:system/etc/sensor_def_common.conf
+
+# Audio
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
+	$(LOCAL_PATH)/configs/snd_soc_msm_Taiko:system/etc/snd_soc_msm/snd_soc_msm_Taiko \
+	$(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+	$(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
+	$(LOCAL_PATH)/configs/mixer_paths.xml:system/etc/mixer_paths.xml \
+	$(LOCAL_PATH)/configs/audio_effects.conf:system/vendor/etc/audio_effects.conf
+
+# Thermal
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/thermald-8974.conf:system/etc/thermald-8974.conf \
+	$(LOCAL_PATH)/configs/thermal-engine-8974.conf:system/etc/thermal-engine-8974.conf \
+	$(LOCAL_PATH)/configs/thermal-engine-8974-default.conf:system/etc/thermal-engine-8974-default.conf
+
+# Touchscreen
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/touch_dev.idc:system/usr/idc/touch_dev.idc
+
+# WiFi
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.g2.rc:root/init.g2.rc \
-    $(LOCAL_PATH)/init.g2.usb.rc:root/init.g2.usb.rc \
-    $(LOCAL_PATH)/ueventd.g2.rc:root/ueventd.g2.rc \
-    $(LOCAL_PATH)/fstab.g2:root/fstab.g2
+	$(LOCAL_PATH)/configs/DxHDCP.cfg:system/etc/DxHDCP.cfg
 
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/configs/snd_soc_msm_Taiko:system/etc/snd_soc_msm/snd_soc_msm_Taiko \
-    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
-    $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/mixer_paths.xml:system/etc/mixer_paths.xml
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermald.conf:system/etc/thermald.conf \
-    $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine.conf
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/touch_dev.idc:system/usr/idc/touch_dev.idc
-
-# These are the hardware-specific features
+# Permissions
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
 	frameworks/native/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
@@ -66,71 +80,80 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
 	frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
-	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
+	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
+	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
+	frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
 
-
-# GPS configuration
+# GPS
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gps.conf:system/etc/gps.conf
+	$(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
+	$(LOCAL_PATH)/configs/flp.conf:system/etc/flp.conf \
+	$(LOCAL_PATH)/configs/izat.conf:system/etc/izat.conf \
+	$(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
 
+# Charger
 PRODUCT_PACKAGES += \
-    charger_res_images \
-    charger
+	charger_res_images \
+	charger
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    VisualizationWallpapers \
-    librs_jni
+	LiveWallpapers \
+	LiveWallpapersPicker \
+	VisualizationWallpapers \
+	librs_jni
 
 # NFC packages
 PRODUCT_PACKAGES += \
-    Tag \
-    com.android.nfc_extras
+	Tag \
+	com.android.nfc_extras
 
 # NFCEE access control
 ifeq ($(TARGET_BUILD_VARIANT),user)
-    NFCEE_ACCESS_PATH := $(LOCAL_PATH)/nfc/nfcee_access.xml
+	NFCEE_ACCESS_PATH := $(LOCAL_PATH)/nfc/nfcee_access.xml
 else
-    NFCEE_ACCESS_PATH := $(LOCAL_PATH)/nfc/nfcee_access_debug.xml
+	NFCEE_ACCESS_PATH := $(LOCAL_PATH)/nfc/nfcee_access_debug.xml
 endif
 
 # NFC access control + feature files + configuration
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-    $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml
+	$(LOCAL_PATH)/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
+	$(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml \
+	frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
+	frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+	frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml
 
 PRODUCT_PROPERTY_OVERRIDES += \
-        ro.sf.lcd_density=480 \
+	ro.sf.lcd_density=480 \
 	ro.opengles.version=196608 \
 	ro.loki_enabled=1
 
-# Audio Configuration
+# Audio configuration
 PRODUCT_PROPERTY_OVERRIDES += \
+	ro.qc.sdk.audio.fluencetype=fluence \
 	persist.audio.fluence.voicecall=true \
-	persist.audio.dualmic.config=endfire \
+	persist.audio.fluence.mode=endfire \
+	persist.audio.handset.mic=digital \
 	af.resampler.quality=4 \
+	audio.offload.min.duration.secs=30 \
 	audio.offload.buffer.size.kb=32 \
-	audio.offload.gapless.enabled=false \
-	av.offload.enable=true
+	av.offload.enable=true \
+	av.streaming.offload.enable=true \
+	audio.offload.pcm.enable=true \
+	audio.offload.24bit.enable=1
 
-# Do not power down SIM card when modem is sent to Low Power Mode.
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.radio.apm_sim_not_pwdn=1
+# Camera
+PRODUCT_PACKAGES += \
+	camera.g2
 
-# Ril sends only one RIL_UNSOL_CALL_RING, so set call_ring.multiple to false
+# Ril
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.telephony.call_ring.multiple=0
-
-PRODUCT_PROPERTY_OVERRIDES += \
+	persist.radio.apm_sim_not_pwdn=1 \
+	persist.radio.add_power_save=1 \
+	ro.telephony.call_ring.multiple=0 \
 	ro.telephony.ril_class=LgeLteRIL \
 	ro.telephony.ril.v3=qcomdsds
 
-#Upto 3 layers can go through overlays
 PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable=true
 
 PRODUCT_TAGS += dalvik.gc.type-precise
@@ -143,41 +166,55 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	e2fsck
 
+# Graphics
 PRODUCT_PACKAGES += \
-	libgenlock \
-	liboverlay \
 	hwcomposer.msm8974 \
 	gralloc.msm8974 \
 	copybit.msm8974 \
-	memtrack.msm8974
+	memtrack.msm8974 \
+	liboverlay
 
-# Local wrapper for fixups
+# Audio
 PRODUCT_PACKAGES += \
-	camera.g2
-
-PRODUCT_PACKAGES += \
-	audio_policy.default \
 	audio.primary.msm8974 \
 	audio.a2dp.default \
 	audio.usb.default \
 	audio.r_submix.default \
-	libaudio-resampler
+	libaudio-resampler \
+	libqcomvisualizer \
+	libqcomvoiceprocessing \
+	libqcomvoiceprocessingdescriptors
 
+# Media
 PRODUCT_PACKAGES += \
-        libmm-omxcore \
+	libc2dcolorconvert \
 	libdivxdrmdecrypt \
+	libdashplayer \
+	libmm-omxcore \
+	libOmxAacEnc \
+	libOmxAmrEnc \
+	libOmxCore \
+	libOmxEvrcEnc \
+	libOmxQcelp13Enc \
 	libOmxVdec \
+	libOmxVdecHevc \
 	libOmxVenc \
 	libOmxCore \
 	libstagefrighthw \
-	libc2dcolorconvert
+	qcmediaplayer
 
+PRODUCT_PROPERTY_OVERRIDES += \
+	mm.enable.smoothstreaming=true
+
+PRODUCT_BOOT_JARS += qcmediaplayer
+
+# GPS
 PRODUCT_PACKAGES += \
-	libloc_adapter \
-	libloc_eng \
-	libloc_api_v02 \
-	libgps.utils \
-	gps.msm8974
+	libloc_adapter
+
+# Wifi
+PRODUCT_PACKAGES += \
+	libnetcmdiface
 
 PRODUCT_PACKAGES += \
 	hwaddrs
@@ -193,62 +230,60 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	wifi.interface=wlan0 \
-	wifi.supplicant_scan_interval=15
+	wifi.supplicant_scan_interval=30
 
 # Enable AAC 5.1 output
 PRODUCT_PROPERTY_OVERRIDES += \
-    media.aac_51_output_enabled=true
+	media.aac_51_output_enabled=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
-        debug.egl.recordable.rgba8888=1
+	debug.egl.recordable.rgba8888=1
 
+# Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.qualcomm.sensors.qmd=true \
 	ro.qc.sdk.sensors.gestures=true \
 	ro.qualcomm.sensors.pedometer=true \
 	ro.qualcomm.sensors.pam=true \
 	ro.qualcomm.sensors.scrn_ortn=true \
-	debug.qualcomm.sns.hal=1 \
-	debug.qualcomm.sns.daemon=1 \
+	debug.qualcomm.sns.hal=w \
+	debug.qualcomm.sns.daemon=w \
 	debug.qualcomm.sns.libsensor1=e
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp
 
 PRODUCT_PACKAGES += \
-        lights.g2
+	lights.g2
 
-PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
+# Input resampling configuration
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.input.noresample=1
 
 # This hw ships locked, work around it with loki
 PRODUCT_PACKAGES += \
-        loki.sh \
-        loki_tool_static_g2 \
-        recovery-transform.sh
+	loki.sh \
+	loki_tool_static_g2 \
+	recovery-transform.sh
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.hwui.texture_cache_size=72 \
+	ro.hwui.layer_cache_size=48 \
+	ro.hwui.r_buffer_cache_size=8 \
+	ro.hwui.path_cache_size=32 \
+	ro.hwui.gradient_cache_size=1 \
+	ro.hwui.drop_shadow_cache_size=6 \
+	ro.hwui.texture_cache_flushrate=0.4 \
+	ro.hwui.text_small_cache_width=1024 \
+	ro.hwui.text_small_cache_height=1024 \
+	ro.hwui.text_large_cache_width=2048 \
+	ro.hwui.text_large_cache_height=1024
+
+# QC perf
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.vendor.extension_library=/vendor/lib/libqc-opt.so
 
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 
-## These values are still too low and cause cache corruption. Use the hammerhead's
-#$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hwui.texture_cache_size=72 \
-    ro.hwui.layer_cache_size=48 \
-    ro.hwui.r_buffer_cache_size=8 \
-    ro.hwui.path_cache_size=32 \
-    ro.hwui.gradient_cache_size=1 \
-    ro.hwui.drop_shadow_cache_size=6 \
-    ro.hwui.texture_cache_flushrate=0.4 \
-    ro.hwui.text_small_cache_width=1024 \
-    ro.hwui.text_small_cache_height=1024 \
-    ro.hwui.text_large_cache_width=2048 \
-    ro.hwui.text_large_cache_height=1024
-
-PRODUCT_PROPERTY_OVERRIDES += \
-        ro.vendor.extension_library=/vendor/lib/libqc-opt.so
-
-# Disregard the firmware, go straight for the confs...
-#$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4335/device-bcm.mk)
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
-
 $(call inherit-product-if-exists, hardware/qcom/msm8x74/msm8x74.mk)
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
