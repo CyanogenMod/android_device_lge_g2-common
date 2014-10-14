@@ -45,7 +45,7 @@ char const*const LCD_FILE
         = "/sys/class/leds/lcd-backlight/brightness";
 
 char const*const PTN_BLINK_FILE
-        = "/sys/class/g2_rgb_led/use_patterns/blink_patterns";
+        = "/sys/class/lg_rgb_led/use_patterns/blink_patterns";
 
 char const*const BACKBTN_LEFT_FILE
         = "/sys/class/leds/button-backlight1/brightness";
