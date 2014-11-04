@@ -32,6 +32,10 @@ if [ -f /sys/devices/soc0/soc_id ]; then
 else
     platformid=`cat /sys/devices/system/soc/soc0/id`
 fi
+
+# grep the modem partition for baseband version and set it
+setprop gsm.version.baseband `strings /dev/block/platform/msm_sdcc.1/by-name/modem | grep "MPSS_DI_" | head -1`
+
 #
 # Function to start sensors for DSPS enabled platforms
 #
