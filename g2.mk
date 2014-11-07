@@ -160,6 +160,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_BOOT_JARS += \
     qcmediaplayer
 
+# tcmiface for tcm support
+PRODUCT_PACKAGES += tcmiface
+
+PRODUCT_BOOT_JARS += \
+    tcmiface
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
