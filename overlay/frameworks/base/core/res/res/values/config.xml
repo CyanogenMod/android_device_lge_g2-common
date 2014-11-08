@@ -32,10 +32,10 @@
     <integer name="config_defaultNotificationLedOff">9000</integer>
 
     <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
-    <bool name="config_intrusiveBatteryLed">true</bool>
+    <!--bool name="config_intrusiveBatteryLed">true</bool-->
 
     <!-- Does the battery LED support multiple colors? Used to decide if the user can change the colors -->
-    <bool name="config_multiColorBatteryLed">true</bool>
+    <!--bool name="config_multiColorBatteryLed">true</bool-->
 
     <!-- Flag indicating whether the we should enable the automatic brightness in Settings.
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
@@ -186,7 +186,7 @@
     <bool name="config_speed_up_audio_on_mt_calls">true</bool>
 
 
-    <integer name="config_deviceHardwareKeys">0</integer>
+    <!--integer name="config_deviceHardwareKeys">0</integer-->
 
     <!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
                   autodetected from the Configuration. -->
@@ -250,29 +250,29 @@
     </integer-array>
 
     <!-- Device supports LED flashlight -->
-    <bool name="config_enableTorch">true</bool>
+    <!--bool name="config_enableTorch">true</bool-->
 
     <!-- Disable lockscreen translucent decor by default -->
     <bool name="config_enableLockScreenTranslucentDecor">true</bool>
 
     <!-- Performance profiles -->
-    <string name="config_perf_profile_prop">sys.perf.profile</string>
-    <string name="config_perf_profile_default_entry">1</string>
+    <!--string name="config_perf_profile_prop">sys.perf.profile</string>
+    <string name="config_perf_profile_default_entry">1</string-->
 
     <bool name="config_lidControlsSleep">true</bool>
 
-    <integer-array name="config_smartCoverWindowCoords">
-        <item>55</item>     <!-- Top -->
-        <item>200</item>    <!-- Left -->
-        <item>850</item>    <!-- Bottom -->
-        <item>880</item>    <!-- Right -->
-    </integer-array>
+    <!--integer-array name="config_smartCoverWindowCoords">
+        <item>55</item>
+        <item>200</item>
+        <item>850</item>
+        <item>880</item>
+    </integer-array-->
 
     <!-- Enable the option to check proximity sensor when deciding whether to
          turn the screen on
          NOTE ! - Enable for devices that have a fast response proximity sensor
     -->
-    <bool name="config_proximityCheckOnWake">true</bool>
-    <integer name="config_proximityCheckTimeout">400</integer>
+    <!--bool name="config_proximityCheckOnWake">true</bool>
+    <integer name="config_proximityCheckTimeout">400</integer-->
 
 </resources>
