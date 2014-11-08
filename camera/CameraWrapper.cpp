@@ -255,6 +255,8 @@ int camera_start_preview(struct camera_device * device)
 
     rc = VENDOR_CALL(device, start_preview);
     previewRunning = (rc == android::NO_ERROR);
+    // always run a focus loop at start. camera3 is causing some state mismatches
+    if (previewRunning) VENDOR_CALL(device, auto_focus);
     return rc;
 }
 

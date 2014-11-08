@@ -117,11 +117,39 @@ BOARD_HARDWARE_CLASS := device/lge/g2-common/cmhw/
 BOARD_SEPOLICY_DIRS += \
         device/lge/g2-common/sepolicy
 
+
 # The list below is order dependent
-BOARD_SEPOLICY_UNION := \
-       device.te \
-       app.te \
-       file_contexts
+BOARD_SEPOLICY_UNION += \
+        app.te \
+        bluetooth_loader.te \
+        bridge.te \
+        camera.te \
+        device.te \
+        domain.te \
+        file.te \
+        hostapd.te \
+        irsc_util.te \
+        mediaserver.te \
+        mpdecision.te \
+        netmgrd.te \
+        platform_app.te \
+        qmux.te \
+        radio.te \
+        rild.te \
+        rmt.te \
+        sensors.te \
+        ssr.te \
+        surfaceflinger.te \
+        system_server.te \
+        tee.te \
+        thermald.te \
+        time.te \
+        ueventd.te \
+        vss.te \
+        wpa.te \
+        file_contexts \
+        genfs_contexts \
+        te_macros
 
 BOARD_NFC_HAL_SUFFIX := g2
 
@@ -145,3 +173,6 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
+TARGET_USES_LOGD := false
+
+TARGET_SPECIFIC_HEADER_PATH := device/lge/g2-common/include
