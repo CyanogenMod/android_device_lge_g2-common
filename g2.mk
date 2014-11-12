@@ -237,7 +237,7 @@ PRODUCT_PACKAGES += \
         loki_tool_static_g2 \
         recovery-transform.sh
 
-$(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 
 ## These values are still too low and cause cache corruption. Use the hammerhead's
 #$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
