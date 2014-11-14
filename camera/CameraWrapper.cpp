@@ -79,8 +79,23 @@ typedef struct wrapper_camera_device {
 static bool flipZsl = false;
 static bool zslState = false;
 static bool previewRunning = false;
+static bool activeFocusMove = false;
+static camera_notify_callback sNotifCb;
 
 #define CAMERA_ID(device) (((wrapper_camera_device_t *)(device))->id)
+
+static void notify_intercept(int32_t msg, int32_t b, int32_t c, void *cookie) {
+    if (msg == CAMERA_MSG_FOCUS) {
+        ALOGV("GOT FOCUS MESSAGE: %d",b);
+    } else if (msg == CAMERA_MSG_FOCUS_MOVE && b == 1) {
+        ALOGV("GOT FOCUS MOVE START");
+        activeFocusMove = true;
+    } else if (msg == CAMERA_MSG_FOCUS_MOVE && b == 0) {
+        ALOGV("GOT FOCUS MOVE STOP");
+        activeFocusMove = false;
+    }
+    sNotifCb(msg, b, c, cookie);
+}
 
 static int check_vendor_module()
 {
@@ -208,7 +223,8 @@ void camera_set_callbacks(struct camera_device * device,
     if (!device)
         return;
 
-    VENDOR_CALL(device, set_callbacks, notify_cb, data_cb, data_cb_timestamp, get_memory, user);
+    sNotifCb = notify_cb;
+    VENDOR_CALL(device, set_callbacks, notify_intercept, data_cb, data_cb_timestamp, get_memory, user);
 }
 
 void camera_enable_msg_type(struct camera_device * device, int32_t msg_type)
@@ -255,8 +271,6 @@ int camera_start_preview(struct camera_device * device)
 
     rc = VENDOR_CALL(device, start_preview);
     previewRunning = (rc == android::NO_ERROR);
-    // always run a focus loop at start. camera3 is causing some state mismatches
-    if (previewRunning) VENDOR_CALL(device, auto_focus);
     return rc;
 }
 
@@ -352,6 +366,12 @@ int camera_auto_focus(struct camera_device * device)
     if (!device)
         return -EINVAL;
 
+
+    if (activeFocusMove) {
+       ALOGV("FORCED FOCUS MOVE STOP");
+       VENDOR_CALL(device, cancel_auto_focus);
+       activeFocusMove = false;
+    }
 
     return VENDOR_CALL(device, auto_focus);
 }
