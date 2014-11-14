@@ -151,8 +151,6 @@ BOARD_SEPOLICY_UNION += \
         genfs_contexts \
         te_macros
 
-BOARD_NFC_HAL_SUFFIX := g2
-
 BOARD_RIL_CLASS := ../../../device/lge/g2-common/ril/
 TARGET_RELEASETOOLS_EXTENSIONS := device/lge/g2-common/releasetools
 
