@@ -300,6 +300,7 @@
         <ctl name="SPK DRV Volume" value="7" />
         <ctl name="SPK DAC Switch" value="1" />
         <ctl name="RX7 Digital Volume" value="64" />
+        <ctl name="COMP0 Switch" value="1" />
     </path>
 
     <path name="speaker-mic">
@@ -329,6 +330,7 @@
         <ctl name="RX2 MIX1 INP1" value="RX2" />
         <ctl name="CLASS_H_DSM MUX" value="DSM_HPHL_RX1" />
         <ctl name="HPHL DAC Switch" value="1" />
+        <ctl name="COMP1 Switch" value="1" />
         <ctl name="RX1 Digital Volume" value="58" />
         <ctl name="RX2 Digital Volume" value="58" />
         <ctl name="HPHL Volume" value="15" />
@@ -382,6 +384,7 @@
         <ctl name="RX1 Digital Volume" value="52" />
         <ctl name="RX2 Digital Volume" value="52" />
         <ctl name="RX7 MIX1 INP1" value="RX1" />
+        <ctl name="COMP0 Switch" value="1" />
         <ctl name="RX7 Digital Volume" value="60" />
     </path>
 
