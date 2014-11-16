@@ -5,8 +5,11 @@
 # Bluetooth
 /dev/ttyHS99        u:object_r:hci_attach_dev:s0
 
-# nfc
+# NFC
+# D80x and VS980
 /dev/bcm2079x       u:object_r:nfc_device:s0
+# LS980
+/dev/pn544          u:object_r:nfc_device:s0
 
 # Used by keystore to access trustzone
 /dev/qseecom        u:object_r:tee_device:s0
