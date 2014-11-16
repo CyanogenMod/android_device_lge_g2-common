@@ -254,6 +254,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_width=2048 \
     ro.hwui.text_large_cache_height=1024
 
+# QCOM Perf lib
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.vendor.extension_library=/vendor/lib/libqc-opt.so
 

@@ -45,6 +45,8 @@ r_dir_file(mpdecision, mediaserver)
 
 allow mpdecision self:capability sys_nice;
 
+allow mpdecision power_control_device:chr_file rw_file_perms;
+
 allow mpdecision self:process execmem;
 allow mpdecision servicemanager:binder { call };
 

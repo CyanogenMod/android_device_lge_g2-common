@@ -365,7 +365,7 @@ service charger /sbin/healthd
 service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
     class late_start
 
-service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
+service mpdecision /system/bin/mpdecision --avg_comp
     class main
 
 service qcamerasvr /system/bin/mm-qcamera-daemon
