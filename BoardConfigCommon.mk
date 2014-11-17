@@ -114,7 +114,6 @@ BOARD_HARDWARE_CLASS := device/lge/g2-common/cmhw/
 BOARD_SEPOLICY_DIRS += \
         device/lge/g2-common/sepolicy
 
-
 # The list below is order dependent
 BOARD_SEPOLICY_UNION += \
         app.te \
@@ -122,16 +121,13 @@ BOARD_SEPOLICY_UNION += \
         bridge.te \
         camera.te \
         device.te \
-        domain.te \
         file.te \
         hostapd.te \
-        irsc_util.te \
         mediaserver.te \
         mpdecision.te \
         netmgrd.te \
         platform_app.te \
         qmux.te \
-        radio.te \
         rild.te \
         rmt.te \
         sensors.te \
