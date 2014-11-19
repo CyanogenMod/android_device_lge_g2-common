@@ -101,6 +101,9 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/g2-common/bluetooth
 BOARD_BLUEDROID_VENDOR_CONF := device/lge/g2-common/bluetooth/vnd_g2.txt
 
+# Fonts
+EXTENDED_FONT_FOOTPRINT := true
+
 # GPS
 TARGET_NO_RPC := true
 
