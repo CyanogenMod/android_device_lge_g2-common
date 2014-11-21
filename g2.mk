@@ -258,6 +258,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.vendor.extension_library=/vendor/lib/libqc-opt.so
 
+# Default to AwesomePlayer
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.stagefright.use-awesome=true
+
 # Disregard the firmware, go straight for the confs...
 #$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4335/device-bcm.mk)
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
