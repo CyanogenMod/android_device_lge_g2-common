@@ -1,7 +1,4 @@
-# Reading from /persist/wifi/.macaddr
-allow wpa persist_file:dir r_dir_perms;
-r_dir_file(wpa, persist_wifi_file)
-
 allow wpa rfkill_device:chr_file rw_file_perms;
 allow wpa block_device:dir search;
 allow wpa misc_block_device:blk_file { getattr rw_file_perms };
+
