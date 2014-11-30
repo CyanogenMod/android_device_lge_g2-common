@@ -37,7 +37,7 @@ TARGET_NO_BOOTLOADER := true
 
 # Kernel information
 BOARD_KERNEL_BASE     := 0x00000000
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=g2 user_debug=31 msm_rtb.filter=0x0
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=g2 user_debug=31 msm_rtb.filter=0x0 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS  := --ramdisk_offset 0x05000000 --tags_offset 0x04800000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
@@ -72,6 +72,9 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 TARGET_DISPLAY_USE_RETIRE_FENCE := true
 
+# QCOM PowerHAL
+TARGET_POWERHAL_VARIANT := qcom
+
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
@@ -101,6 +104,9 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/g2-common/bluetooth
 BOARD_BLUEDROID_VENDOR_CONF := device/lge/g2-common/bluetooth/vnd_g2.txt
 
+# Fonts
+EXTENDED_FONT_FOOTPRINT := true
+
 # GPS
 TARGET_NO_RPC := true
 
@@ -114,6 +120,19 @@ include device/qcom/sepolicy/sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += \
         device/lge/g2-common/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+        bluetooth.te \
+        file_contexts \
+        file.te \
+        genfs_contexts \
+        mpdecision.te \
+        qseecomd.te \
+        rmt_storage.te \
+        sensors.te \
+        system_app.te \
+        thermal-engine.te \
+        wpa.te
 
 BOARD_RIL_CLASS := ../../../device/lge/g2-common/ril/
 TARGET_RELEASETOOLS_EXTENSIONS := device/lge/g2-common/releasetools
