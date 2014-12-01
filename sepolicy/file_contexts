@@ -2,6 +2,7 @@
 /dev/block/platform/msm_sdcc\.1/by-name/misc        u:object_r:misc_block_device:s0
 
 
+
 /sys/devices/virtual/input/lge_touch(/.*)?          u:object_r:touchpanel_sysfs:s0
 
 
@@ -13,4 +14,4 @@
 
 /dev/bcm2079x                         u:object_r:nfc_device:s0
 /dev/socket/mpdecision(/.*)?          u:object_r:mpctl_socket:s0
-
+/data/cam_socket.*                    u:object_r:camera_socket:s0
