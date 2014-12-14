@@ -1,11 +1,9 @@
 allow mpdecision self:process execmem;
-allow mpdecision servicemanager:binder { call };
 
 type_transition mpdecision socket_device:sock_file mpctl_socket;
 
 allow mpdecision socket_device:dir add_name;
 
-allow servicemanager mpdecision:dir { search };
-allow servicemanager mpdecision:file { r_file_perms };
 allow mpdecision mpdecision_data:file { rw_file_perms };
-allow servicemanager mpdecision:process { getattr };
+
+binder_use(mpdecision)
