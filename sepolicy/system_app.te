@@ -1,3 +1,6 @@
 # for Settings' access to TapToWake
 allow system_app touchpanel_sysfs:file rw_file_perms;
 allow system_app touchpanel_sysfs:dir { search };
+
+# for Settings' access to VibratorHW
+allow system_app vibeamp_sysfs:file rw_file_perms;

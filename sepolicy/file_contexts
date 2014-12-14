@@ -4,6 +4,7 @@
 
 
 /sys/devices/virtual/input/lge_touch(/.*)?          u:object_r:touchpanel_sysfs:s0
+/sys/devices/platform/tspdrv/nforce_timed           u:object_r:vibeamp_sysfs:s0
 
 
 /data/app/sensor_ctl_socket           u:object_r:sensors_socket:s0
@@ -15,3 +16,4 @@
 /dev/bcm2079x                         u:object_r:nfc_device:s0
 /dev/socket/mpdecision(/.*)?          u:object_r:mpctl_socket:s0
 /data/cam_socket.*                    u:object_r:camera_socket:s0
+
