@@ -1,15 +1,11 @@
 import init.g2.usb.rc
 
 on early-init
+    mkdir /sys 0771 system system
     mount debugfs debugfs /sys/kernel/debug
     write /sys/class/leds/lcd-backlight/brightness 150
 
 on init
-    chmod 0701 /mnt/media_rw
-    mkdir /mnt/media_rw/usb 0775 system system
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /storage/emulated 0555 root root
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -18,6 +14,13 @@ on init
     mkdir /factory 0775 system system
     mkdir /persist-lg 0755 system system
     mkdir /mpt 0755 system system
+    
+    mkdir /mnt/media_rw 0700 media_rw media_rw
+    mkdir /mnt/media_rw/usb 0775 system system
+    # See storage config details at http://source.android.com/tech/storage/
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage 0550 system sdcard_r
+    mkdir /storage/emulated 0555 root root
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
@@ -309,6 +312,11 @@ on property:init.svc.wpa_supplicant=stopped
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
+
+service run-parts /system/xbin/run-parts
+    class main
+    user root
+    group root system
 
 service bridgemgrd /system/bin/bridgemgrd
     class main
