@@ -129,6 +129,25 @@
        <item>"7,1"</item>
     </string-array>
 
+    <!-- Configure mobile tcp buffer sizes in the form:
+         rat-name:rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max
+         If no value is found for the rat-name in use, the system default will be applied. -->
+    <string-array name="config_mobile_tcp_buffers">
+        <!-- Don't use the LTE buffer setting, works fine without it
+             but it's here in case it's ever needed -->
+        <!-- item>"lte:4096,524228,1048576,4096,524228,1048576"</item -->
+        <item>"umts:4096,524228,1048576,4096,524228,1048576"</item>
+        <item>"hspa:4096,524228,1048576,4096,524228,1048576"</item>
+        <item>"hsupa:4096,524228,1048576,4096,524228,1048576</item>
+        <item>"hsdpa:4096,524228,1048576,4096,524228,1048576"</item>
+        <item>"hspap:4096,524228,1048576,4096,524228,1048576"</item>
+        <!-- Don't use the EDGE, GPRS and EVDO buffer settings, works
+             fine without them but they're here in case they're ever needed -->
+        <!-- item>"edge:4096,524228,1048576,4096,524228,1048576"</item>
+        <item>"gprs:4096,524228,1048576,4096,524228,1048576"</item>
+        <item>"evdo:4096,524228,1048576,4096,524228,1048576"</item -->
+    </string-array>
+
     <!-- Vibrator pattern for feedback about a long screen/key press -->
     <integer-array name="config_longPressVibePattern">
         <item>0</item>
