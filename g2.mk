@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+# Call common vendor
+$(call inherit-product-if-exists, vendor/lge/g2-common/g2-common-vendor.mk)
+
 ## overlays
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 
