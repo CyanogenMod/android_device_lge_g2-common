@@ -183,6 +183,8 @@ static char *camera_fixup_setparams(int id, const char *settings)
     params.dump();
 #endif
 
+    params.set(android::CameraParameters::KEY_LGE_CAMERA, (id == 0 && is4k(params)) ? "1" : "0");
+
     if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
         videoMode = (!strcmp(params.get(android::CameraParameters::KEY_RECORDING_HINT), "true"));
     }
