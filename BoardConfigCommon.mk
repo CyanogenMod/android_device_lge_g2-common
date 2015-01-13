@@ -25,6 +25,9 @@ TARGET_CPU_VARIANT := krait
 TARGET_NO_RADIOIMAGE := true
 TARGET_NO_BOOTLOADER := true
 
+# Assertions
+TARGET_BOARD_INFO_FILE ?= device/lge/g2-common/board-info.txt
+
 TARGET_BOOTLOADER_BOARD_NAME := galbi
 
 # Platform
@@ -136,6 +139,8 @@ BOARD_SEPOLICY_DIRS += \
 BOARD_RIL_CLASS := ../../../device/lge/g2-common/ril/
 TARGET_RELEASE_CPPFLAGS += -DNEEDS_LGE_RIL_SYMBOLS
 
+# Releasetools
+TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_g2
 TARGET_RELEASETOOLS_EXTENSIONS := device/lge/g2-common/releasetools
 
 # Qualcomm time

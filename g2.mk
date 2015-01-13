@@ -205,6 +205,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     panel.sh
 
+# Recovery
+PRODUCT_PACKAGES += \
+    librecovery_updater_g2
+
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)

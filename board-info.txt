@@ -1,0 +1,1 @@
+require version-trustzone=TZ.BF.2.0-2.0.0086|TZ.BF.2.0-2.0.0091
