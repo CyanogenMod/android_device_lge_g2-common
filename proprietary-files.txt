@@ -214,6 +214,9 @@ vendor/lib/libqmi_csvt_srvc.so
 vendor/lib/libqmi_encdec.so
 vendor/lib/libqmiservices.so
 
+# Quick Charge 2.0
+bin/hvdcp
+
 # Radio
 bin/qmuxd
 bin/rmt_storage
