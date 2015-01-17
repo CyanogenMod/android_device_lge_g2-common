@@ -40,6 +40,9 @@ on init
     mkdir /sns 0775 system system
     mkdir /sns/cal 0771 system system
 
+    # Quick Charge 2.0 daemon
+    setprop persist.usb.hvdcp.detect "true"
+
 on charger-fs
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system  /system ro barrier=1
     start rmt_storage
@@ -324,6 +327,12 @@ service qmuxd /system/bin/qmuxd
 service netmgrd /system/bin/netmgrd
     class main
 
+service hvdcp /system/bin/hvdcp
+    class core
+    user root
+    group root
+    disabled
+
 service sensors /system/bin/sensors.qcom
     class main
     user root
@@ -444,6 +453,13 @@ service time_daemon /system/bin/time_daemon
 service fuse_usb /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/usb /storage/usb
     class late_start
     disabled
+
+# Quick Charge 2.0
+on property:persist.usb.hvdcp.detect=true
+    start hvdcp
+
+on property:persist.usb.hvdcp.detect=false
+    stop hvdcp
 
 ## Power profiles (CM QS tile)
 ## restarting thermal-engine will kill the system :/
