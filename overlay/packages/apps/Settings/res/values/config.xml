@@ -1,4 +1,4 @@
 <resources>
   <bool name="has_led_flash">true</bool>
-  <bool name="config_show_volumeRockerWake">true</bool>
+  <bool name="config_show_volumeRockerWake">false</bool>
 </resources>
