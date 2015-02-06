@@ -32,7 +32,6 @@ def FullOTA_InstallEnd(info):
   info.script.AppendExtra('package_extract_file("boot.img", "/tmp/boot.img");')
   info.script.Mount("/system")
   info.script.AppendExtra('assert(run_program("/system/bin/panel.sh") == 0);')
-  info.script.AppendExtra('assert(run_program("/system/bin/loki.sh") == 0);')
+  info.script.AppendExtra('run_program("/system/xbin/dd", "if=/tmp/boot.img", "of=/dev/block/platform/msm_sdcc.1/by-name/boot");')
   info.script.AppendExtra('delete("/system/bin/panel.sh");')
-  info.script.AppendExtra('delete("/system/bin/loki.sh");')
   info.script.Unmount("/system")

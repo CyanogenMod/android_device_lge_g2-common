@@ -16,35 +16,9 @@
 
 LOCAL_PATH := $(call my-dir)
 
-# build static binary
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := loki_flash.c loki_patch.c loki_find.c loki_unlok.c main.c
-#renamed to avoid conflicts with other parts of the source tree...
-LOCAL_MODULE := loki_tool_static_g2
-LOCAL_MODULE_STEM := loki_tool
-LOCAL_MODULE_TAGS := eng
-# LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/sbin
-LOCAL_STATIC_LIBRARIES := libc
-LOCAL_FORCE_STATIC_EXECUTABLE := true
-include $(BUILD_EXECUTABLE)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := loki.sh
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH := $(TARGET_OUT)/bin
-LOCAL_SRC_FILES := loki.sh
-include $(BUILD_PREBUILT)
-
 include $(CLEAR_VARS)
 LOCAL_MODULE := panel.sh
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT)/bin
 LOCAL_SRC_FILES := panel.sh
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := recovery-transform.sh
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH := $(TARGET_OUT)/etc
-LOCAL_SRC_FILES := loki-recovery.sh
 include $(BUILD_PREBUILT)
