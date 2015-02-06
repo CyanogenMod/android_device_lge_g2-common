@@ -113,8 +113,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.sf.lcd_density=480 \
-	ro.opengles.version=196608 \
-	ro.loki_enabled=1
+	ro.opengles.version=196608
 
 # Audio Configuration
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -226,12 +225,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
         $(LOCAL_PATH)/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
-
-# This hw ships locked, work around it with loki
-PRODUCT_PACKAGES += \
-        loki.sh \
-        loki_tool_static_g2 \
-        recovery-transform.sh
 
 # Audio effects
 PRODUCT_PACKAGES += \
