@@ -163,12 +163,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
 
-# This hw ships locked, work around it with loki
-PRODUCT_PACKAGES += \
-    loki.sh \
-    loki_tool_static_g2 \
-    recovery-transform.sh
-
 # Audio effects
 PRODUCT_PACKAGES += \
     libqcomvisualizer \
