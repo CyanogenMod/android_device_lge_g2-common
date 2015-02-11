@@ -3,7 +3,7 @@
 
 
 
-/sys/devices/virtual/input/lge_touch(/.*)?          u:object_r:touchpanel_sysfs:s0
+/sys/devices/virtual/input/lge_touch/touch_gesture          u:object_r:touchpanel_sysfs:s0
 /sys/devices/platform/tspdrv/nforce_timed           u:object_r:vibeamp_sysfs:s0
 
 
