@@ -4,3 +4,6 @@ allow system_app touchpanel_sysfs:dir { search };
 
 # for Settings' access to VibratorHW
 allow system_app vibeamp_sysfs:file rw_file_perms;
+
+# for Settings' access to DisplayCalibration
+allow system_app kcal_sysfs:file rw_file_perms;
