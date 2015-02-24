@@ -31,6 +31,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.mdpcomp.enable=true
 
+# Camera
+PRODUCT_PROPERTY_OVERRIDES += \
+	camera2.portability.force_api=1
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     rild.libpath=/vendor/lib/libril-qc-qmi-1.so
 
