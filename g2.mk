@@ -183,6 +183,10 @@ PRODUCT_BOOT_JARS += qcmediaplayer
 PRODUCT_PACKAGES += \
     gps.msm8974
 
+# Keystore
+PRODUCT_PACKAGES += \
+    keystore.msm8974
+
 PRODUCT_PACKAGES += \
     hwaddrs
 
