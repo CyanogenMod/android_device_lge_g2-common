@@ -66,6 +66,8 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
     private int mSetPreferredNetworkType = -1;
     private Message mPendingNetworkResponse;
 
+    private boolean isGSM = false;
+
     public LgeLteRIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
         this(context, preferredNetworkType, cdmaSubscription);
@@ -164,8 +166,11 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
         }
         status.mApplications = new IccCardApplicationStatus[numApplications];
 
+        ca = new IccCardApplicationStatus();
         for (int i = 0; i < numApplications; i++) {
-            ca = new IccCardApplicationStatus();
+            if (i != 0) {
+                ca = new IccCardApplicationStatus();
+            }
             ca.app_type = ca.AppTypeFromRILInt(p.readInt());
             ca.app_state = ca.AppStateFromRILInt(p.readInt());
             ca.perso_substate = ca.PersoSubstateFromRILInt(p.readInt());
@@ -182,6 +187,35 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
             }
             status.mApplications[i] = ca;
         }
+        // for sprint gsm(lte) only sim
+        if (numApplications==1 && !isGSM && ca.app_type == ca.AppTypeFromRILInt(2)) {
+            status.mApplications = new IccCardApplicationStatus[numApplications+2];
+            status.mGsmUmtsSubscriptionAppIndex = 0;
+            status.mApplications[status.mGsmUmtsSubscriptionAppIndex]=ca;
+            status.mCdmaSubscriptionAppIndex = 1;
+            status.mImsSubscriptionAppIndex = 2;
+            IccCardApplicationStatus ca2 = new IccCardApplicationStatus();
+            ca2.app_type       = ca2.AppTypeFromRILInt(4); // csim state
+            ca2.app_state      = ca.app_state;
+            ca2.perso_substate = ca.perso_substate;
+            ca2.aid            = ca.aid;
+            ca2.app_label      = ca.app_label;
+            ca2.pin1_replaced  = ca.pin1_replaced;
+            ca2.pin1           = ca.pin1;
+            ca2.pin2           = ca.pin2;
+            status.mApplications[status.mCdmaSubscriptionAppIndex] = ca2;
+            IccCardApplicationStatus ca3 = new IccCardApplicationStatus();
+            ca3.app_type       = ca3.AppTypeFromRILInt(5); // ims state
+            ca3.app_state      = ca.app_state;
+            ca3.perso_substate = ca.perso_substate;
+            ca3.aid            = ca.aid;
+            ca3.app_label      = ca.app_label;
+            ca3.pin1_replaced  = ca.pin1_replaced;
+            ca3.pin1           = ca.pin1;
+            ca3.pin2           = ca.pin2;
+            status.mApplications[status.mImsSubscriptionAppIndex] = ca3;
+        }
+
         int appIndex = -1;
         if (mPhoneType == RILConstants.CDMA_PHONE &&
              status.mCdmaSubscriptionAppIndex >= 0) {
@@ -209,6 +243,12 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
         }
 
         return status;
+    }
+
+    @Override
+    public void setPhoneType(int phoneType){
+        super.setPhoneType(phoneType);
+        isGSM = (phoneType != RILConstants.CDMA_PHONE);
     }
 
     /*
