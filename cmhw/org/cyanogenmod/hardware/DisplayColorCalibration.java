@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The CyanogenMod Project
+ * Copyright (C) 2015 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,32 +16,35 @@
 
 package org.cyanogenmod.hardware;
 
+import java.io.File;
+import java.util.Scanner;
 import org.cyanogenmod.hardware.util.FileUtils;
 
 public class DisplayColorCalibration {
-    private static final String COLOR_FILE = "/sys/devices/platform/kcal_ctrl.0/kcal";
-    private static final String COLOR_FILE_CTRL = "/sys/devices/platform/kcal_ctrl.0/kcal_ctrl";
+    private static final String COLOR_FILE = "/sys/class/graphics/fb0/rgb";
 
     public static boolean isSupported() {
-        return true;
+        File f = new File(COLOR_FILE);
+        return f.exists();
     }
 
     public static int getMaxValue()  {
+        return 32768;
+    }
+
+    public static int getMinValue()  {
         return 255;
     }
+
     public static int getDefValue()  {
         return getMaxValue();
     }
-    public static int getMinValue()  {
-        return 0;
-    }
+
     public static String getCurColors()  {
         return FileUtils.readOneLine(COLOR_FILE);
     }
+
     public static boolean setColors(String colors)  {
-        if (!FileUtils.writeLine(COLOR_FILE, colors)) {
-            return false;
-        }
-        return FileUtils.writeLine(COLOR_FILE_CTRL, "1");
+        return FileUtils.writeLine(COLOR_FILE, colors);
     }
 }
