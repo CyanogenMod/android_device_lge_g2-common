@@ -218,33 +218,49 @@
     <bool name="config_showNavigationBar">true</bool>
 
 
+    <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
+         The N entries of this array define N  1 zones as follows:
+
+         Zone 0:        0 <= LUX < array[0]
+         Zone 1:        array[0] <= LUX < array[1]
+         ...
+         Zone N:        array[N - 1] <= LUX < array[N]
+         Zone N + 1     array[N] <= LUX < infinity
+
+         Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>32</item>
-        <item>82</item>
-        <item>170</item>
+        <item>1</item>
+        <item>4</item>
+        <item>40</item>
         <item>350</item>
-        <item>500</item>
-        <item>700</item>
+        <item>600</item>
         <item>1000</item>
-        <item>1400</item>
-        <item>2400</item>
-        <item>3500</item>
-        <item>9000</item>
+        <item>1600</item>
+        <item>3000</item>
+        <item>10000</item>
     </integer-array>
+
+    <!-- Array of output values for LCD backlight corresponding to the LUX values
+         in the config_autoBrightnessLevels array.  This array should have size one greater
+         than the size of the config_autoBrightnessLevels array.
+         This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>85</item>
-        <item>123</item>
-        <item>137</item>
-        <item>147</item>
-        <item>170</item>
-        <item>178</item>
-        <item>183</item>
-        <item>195</item>
-        <item>212</item>
-        <item>220</item>
-        <item>235</item>
-        <item>255</item>
+        <item>13</item>   <!-- 0-1 -->
+        <item>26</item>   <!-- 1-4 -->
+        <item>73</item>   <!-- 4-40 -->
+        <item>88</item>   <!-- 40-350 -->
+        <item>130</item>  <!-- 350-600 -->
+        <item>167</item>  <!-- 600-1000 -->
+        <item>204</item>  <!-- 1000-1600 -->
+        <item>240</item>  <!-- 1600-3000 -->
+        <item>254</item>  <!-- 3000-10000 -->
+        <item>255</item>  <!-- 10000+ -->
     </integer-array>
+
+    <!-- Array of output values for button backlight corresponding to the LUX values
+         in the config_autoBrightnessLevels array.  This array should have size one greater
+         than the size of the config_autoBrightnessLevels array.
+         This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessButtonBacklightValues">
         <item>0</item>
         <item>0</item>
@@ -256,23 +272,8 @@
         <item>0</item>
         <item>0</item>
         <item>0</item>
-        <item>0</item>
-        <item>0</item>
     </integer-array>
-    <integer-array name="config_autoBrightnessKeyboardBacklightValues">
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-    </integer-array>
+
 
     <!-- Disable lockscreen translucent decor by default -->
     <bool name="config_enableLockScreenTranslucentDecor">true</bool>
