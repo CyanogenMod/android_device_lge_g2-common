@@ -186,6 +186,9 @@ PRODUCT_PACKAGES += \
     libxml2
 
 PRODUCT_PACKAGES += \
+    libcnefeatureconfig
+
+PRODUCT_PACKAGES += \
     lights.msm8974
 
 PRODUCT_COPY_FILES += \
