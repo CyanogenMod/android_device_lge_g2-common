@@ -152,7 +152,7 @@ PRODUCT_PACKAGES += \
     libloc_eng \
     libloc_api_v02 \
     libgps.utils \
-    gps.g2
+    gps.msm8974
 
 PRODUCT_PACKAGES += \
     hwaddrs
