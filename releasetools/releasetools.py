@@ -1,5 +1,5 @@
 # Copyright (C) 2012 The Android Open Source Project
-# Copyright (C) 2013 The CyanogenMod Project
+# Copyright (C) 2013-2015 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,13 @@
 #
 #
 #
-# This leverages the loki_patch utility created by djrbliss which allows us
-# to bypass the bootloader checks on jfltevzw and jflteatt
+# This leverages the loki_patch utility created by djrbliss
 # See here for more information on loki: https://github.com/djrbliss/loki
+#
+# Detect panel and swap as necessary 
+# lcd_maker_id is determined by get_panel_maker_id on the hardware and is always accurate
+# This searches directly in the boot.img and has no other requirements
+# Do not shorten the search or you may change the actual kernel source
 #
 
 """Custom OTA commands for LG devices with locked bootloaders"""
@@ -27,6 +31,8 @@ def FullOTA_InstallEnd(info):
   info.script.script = [cmd for cmd in info.script.script if not "show_progress(0.100000, 0);" in cmd]
   info.script.AppendExtra('package_extract_file("boot.img", "/tmp/boot.img");')
   info.script.Mount("/system")
+  info.script.AppendExtra('assert(run_program("/system/bin/panel.sh") == 0);')
   info.script.AppendExtra('assert(run_program("/system/bin/loki.sh") == 0);')
+  info.script.AppendExtra('delete("/system/bin/panel.sh");')
   info.script.AppendExtra('delete("/system/bin/loki.sh");')
   info.script.Unmount("/system")
