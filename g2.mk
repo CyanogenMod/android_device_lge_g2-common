@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2011 The Android Open-Source Project
+# Copyright (C) 2013-2015 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -137,7 +137,7 @@ PRODUCT_PACKAGES += \
 
 # Local wrapper for fixups
 PRODUCT_PACKAGES += \
-    camera.g2
+    camera.msm8974
 
 PRODUCT_PACKAGES += \
     power.msm8974
@@ -183,7 +183,7 @@ PRODUCT_PACKAGES += \
     libxml2
 
 PRODUCT_PACKAGES += \
-    lights.g2
+    lights.msm8974
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
