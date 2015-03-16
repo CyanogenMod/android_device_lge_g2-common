@@ -29,6 +29,7 @@ import init.g2.usb.rc
 import init.g2.sdcard.rc
 
 on early-init
+    symlink /dev/diag_lge /dev/diag
     mkdir /sys 0771 system system
     mkdir /firmware 0771 system system
     mount debugfs debugfs /sys/kernel/debug

@@ -5,6 +5,13 @@
 /sys/devices/virtual/input/lge_touch(/.*)?          u:object_r:touchpanel_sysfs:s0
 /sys/devices/platform/tspdrv/nforce_timed           u:object_r:vibeamp_sysfs:s0
 
+/dev/diag_lge                         u:object_r:diag_device:s0
+/persist-lg(/.*)?                     u:object_r:persist_file:s0
+/persist-lg/sensors(/.*)?             u:object_r:sensors_persist_file:s0
+/persist-lg/data(/.*)?                u:object_r:persist_drm_file:s0
+/persist-lg/data/tz(/.*)?             u:object_r:persist_drm_file:s0
+/persist-lg/data/sfs(/.*)?            u:object_r:persist_drm_file:s0
+
 /data/app/sensor_ctl_socket           u:object_r:sensors_socket:s0
 /dev/rfkill                           u:object_r:rfkill_device:s0
 /sns(/.*)?                            u:object_r:sensors_persist_file:s0
