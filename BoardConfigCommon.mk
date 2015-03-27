@@ -143,8 +143,5 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/lge/g2-common/releasetools
 # Qualcomm time
 BOARD_USES_QC_TIME_SERVICES := true
 
-# Logging
-TARGET_USES_LOGD := false
-
 # Device headers
 TARGET_SPECIFIC_HEADER_PATH := device/lge/g2-common/include
