@@ -201,6 +201,8 @@ static void loc_eng_process_conn_request(loc_eng_data_s_type &loc_eng_data,
 static void loc_eng_agps_close_status(loc_eng_data_s_type &loc_eng_data, int is_succ);
 static void loc_eng_handle_engine_down(loc_eng_data_s_type &loc_eng_data) ;
 static void loc_eng_handle_engine_up(loc_eng_data_s_type &loc_eng_data) ;
+static int loc_eng_set_privacy(loc_eng_data_s_type &loc_eng_data,
+        int8_t privacy_setting);
 
 static int loc_eng_start_handler(loc_eng_data_s_type &loc_eng_data);
 static int loc_eng_stop_handler(loc_eng_data_s_type &loc_eng_data);
@@ -488,6 +490,27 @@ struct LocEngAGlonassProtocol : public LocMsg {
     }
     inline  void locallog() const {
         LOC_LOGV("A-GLONASS protocol: 0x%lx", mAGlonassProtocl);
+    }
+    inline virtual void log() const {
+        locallog();
+    }
+};
+
+//        case LOC_ENG_MSG_PRIVACY:
+struct LocEngSecPrivacyLock : public LocMsg {
+    LocEngAdapter* mAdapter;
+    const int mPrivacySetting;
+    inline LocEngSecPrivacyLock(LocEngAdapter* adapter,
+                         int8_t privacy_setting) :
+        LocMsg(), mAdapter(adapter), mPrivacySetting(privacy_setting)
+    {
+        locallog();
+    }
+    inline virtual void proc() const {
+        mAdapter->setGpsLock(mPrivacySetting);
+    }
+    inline  void locallog() const {
+        LOC_LOGV("PrivacyLock: %d", mPrivacySetting);
     }
     inline virtual void log() const {
         locallog();
@@ -1654,6 +1677,10 @@ int loc_eng_init(loc_eng_data_s_type &loc_eng_data, LocCallbacks* callbacks,
         return ret_val;
     }
 
+    if (NULL != loc_eng_data.adapter) {
+       loc_eng_set_privacy(loc_eng_data, 1);
+    }
+
     STATE_CHECK((NULL == loc_eng_data.adapter),
                 "instance already initialized", return 0);
 
@@ -1700,6 +1727,8 @@ int loc_eng_init(loc_eng_data_s_type &loc_eng_data, LocCallbacks* callbacks,
     LOC_LOGD("loc_eng_init created client, id = %p\n",
              loc_eng_data.adapter);
     loc_eng_data.adapter->sendMsg(new LocEngInit(&loc_eng_data));
+
+    loc_eng_set_privacy(loc_eng_data, 1);
 
     EXIT_LOG(%d, ret_val);
     return ret_val;
@@ -1797,6 +1826,8 @@ void loc_eng_cleanup(loc_eng_data_s_type &loc_eng_data)
         LOC_LOGD("loc_eng_cleanup: fix not stopped. stop it now.");
         loc_eng_stop(loc_eng_data);
     }
+
+    loc_eng_set_privacy(loc_eng_data, 4);
 
 #if 0 // can't afford to actually clean up, for many reason.
 
@@ -2882,4 +2913,31 @@ void loc_eng_handle_shutdown(loc_eng_data_s_type &locEng)
     ENTRY_LOG();
     locEng.shutdown_cb();
     EXIT_LOG(%d, 0);
+}
+
+/*===========================================================================
+FUNCTION    loc_eng_set_privacy
+
+DESCRIPTION
+   Sets the privacy lock setting (Values for lock
+      1 = Do not lock any position sessions -GPS ON
+      2 = Lock MI position sessions -?
+      3 = Lock MT position sessions -?
+      4 = Lock all position sessions -GPS OFF)
+DEPENDENCIES
+   None
+RETURN VALUE
+   0: success
+SIDE EFFECTS
+   N/A
+===========================================================================*/
+static int loc_eng_set_privacy(loc_eng_data_s_type &loc_eng_data,
+                               int8_t privacy_setting)
+{
+    ENTRY_LOG();
+    INIT_CHECK(loc_eng_data.adapter, return -1);
+    LocEngAdapter* adapter = loc_eng_data.adapter;
+    adapter->sendMsg(new LocEngSecPrivacyLock(adapter, privacy_setting));
+    EXIT_LOG(%d, 0);
+    return 0;
 }
