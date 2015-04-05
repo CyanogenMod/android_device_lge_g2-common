@@ -148,5 +148,3 @@ TARGET_USES_LOGD := false
 
 # Device headers
 TARGET_SPECIFIC_HEADER_PATH := device/lge/g2-common/include
-
-BOARD_USES_LEGACY_MMAP := true
