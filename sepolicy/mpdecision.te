@@ -2,6 +2,7 @@ allow mpdecision self:process execmem;
 
 type_transition mpdecision socket_device:sock_file mpctl_socket;
 
+allow mpdecision socket_device:dir write;
 allow mpdecision socket_device:dir add_name;
 
 allow mpdecision mpdecision_data:file { rw_file_perms };
