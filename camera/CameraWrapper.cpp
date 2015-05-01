@@ -153,6 +153,10 @@ static char *camera_fixup_getparams(int id, const char *settings)
         free(manipBuf);
     }
 
+    if (id == 0 && is4k(params)) {
+        params.set("preview-format", "yuv420sp");
+    }
+
     /* LIE! The camera will set 3 snaps when doing HDR, and only return one. This hangs apps
      * that wait for the rest to come in. Make sure we never return multiple snaps unless
      * doing ZSL */
