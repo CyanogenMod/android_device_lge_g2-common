@@ -113,6 +113,13 @@ static int check_vendor_module()
     return rv;
 }
 
+static bool is4k(android::CameraParameters &params) {
+    int video_width, video_height;
+    params.getVideoSize(&video_width, &video_height);
+
+    return video_width*video_height > 1920*1080;
+}
+
 static char *camera_fixup_getparams(int id, const char *settings)
 {
     bool videoMode = false;
@@ -326,6 +333,8 @@ static int camera_store_meta_data_in_buffers(struct camera_device *device,
     return VENDOR_CALL(device, store_meta_data_in_buffers, enable);
 }
 
+static char *camera_get_parameters(struct camera_device *device);
+static int camera_set_parameters(struct camera_device *device, const char *params);
 static int camera_start_recording(struct camera_device *device)
 {
     ALOGV("%s->%08X->%08X", __FUNCTION__, (uintptr_t)device,
@@ -333,6 +342,17 @@ static int camera_start_recording(struct camera_device *device)
 
     if (!device)
         return EINVAL;
+
+    android::CameraParameters parameters;
+    parameters.unflatten(android::String8(camera_get_parameters(device)));
+    if (CAMERA_ID(device) == 0 && is4k(parameters)) {
+        parameters.set("preview-format", "nv12-venus");
+    }
+    camera_set_parameters(device, strdup(parameters.flatten().string()));
+
+    android::CameraParameters parameters2;
+    parameters2.unflatten(android::String8(VENDOR_CALL(device, get_parameters)));
+    parameters2.dump();
 
     return VENDOR_CALL(device, start_recording);
 }
