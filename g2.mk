@@ -175,7 +175,8 @@ PRODUCT_BOOT_JARS += qcmediaplayer
 
 # GPS
 PRODUCT_PACKAGES += \
-    gps.msm8974
+    gps.msm8974 \
+    libloc_adapter
 
 PRODUCT_PACKAGES += \
     hwaddrs
