@@ -111,6 +111,7 @@ PRODUCT_PACKAGES += \
 # NFC packages
 PRODUCT_PACKAGES += \
     Tag \
+    NfcNci \
     com.android.nfc_extras
 
 # NFC access control + feature files + configuration
