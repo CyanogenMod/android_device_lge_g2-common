@@ -53,6 +53,10 @@ void LocInternalAdapter::getZppInt() {
     sendMsg(new LocEngGetZpp(mLocEngAdapter));
 }
 
+void LocInternalAdapter::shutdown() {
+    sendMsg(new LocEngShutdown(mLocEngAdapter));
+}
+
 LocEngAdapter::LocEngAdapter(LOC_API_ADAPTER_EVENT_MASK_T mask,
                              void* owner, ContextBase* context,
                              MsgTask::tCreate tCreator) :
@@ -65,7 +69,10 @@ LocEngAdapter::LocEngAdapter(LOC_API_ADAPTER_EVENT_MASK_T mask,
                    :context),
     mOwner(owner), mInternalAdapter(new LocInternalAdapter(this)),
     mUlp(new UlpProxyBase()), mNavigating(false),
-    mAgpsEnabled(false), mCPIEnabled(false)
+    mSupportsAgpsRequests(false),
+    mSupportsPositionInjection(false),
+    mSupportsTimeInjection(false),
+    mPowerVote(0)
 {
     memset(&mFixCriteria, 0, sizeof(mFixCriteria));
     mFixCriteria.mode = LOC_POSITION_MODE_INVALID;
@@ -121,6 +128,45 @@ void LocEngAdapter::setUlpProxy(UlpProxyBase* ulp)
 
     delete mUlp;
     mUlp = ulp;
+}
+
+int LocEngAdapter::setGpsLockMsg(LOC_GPS_LOCK_MASK lockMask)
+{
+    struct LocEngAdapterGpsLock : public LocMsg {
+        LocEngAdapter* mAdapter;
+        LOC_GPS_LOCK_MASK mLockMask;
+        inline LocEngAdapterGpsLock(LocEngAdapter* adapter, LOC_GPS_LOCK_MASK lockMask) :
+            LocMsg(), mAdapter(adapter), mLockMask(lockMask)
+        {
+            locallog();
+        }
+        inline virtual void proc() const {
+            mAdapter->setGpsLock(mLockMask);
+        }
+        inline  void locallog() const {
+            LOC_LOGV("LocEngAdapterGpsLock - mLockMask: %x", mLockMask);
+        }
+        inline virtual void log() const {
+            locallog();
+        }
+    };
+    sendMsg(new LocEngAdapterGpsLock(this, lockMask));
+    return 0;
+}
+
+void LocEngAdapter::requestPowerVote()
+{
+    if (getPowerVoteRight()) {
+        /* Power voting without engine lock:
+         * 101: vote down, 102-104 - vote up
+         * These codes are used not to confuse with actual engine lock
+         * functionality, that can't be used in SSR scenario, as it
+         * conflicts with initialization sequence.
+         */
+        bool powerUp = getPowerVote();
+        LOC_LOGV("LocEngAdapterVotePower - Vote Power: %d", (int)powerUp);
+        setGpsLock(powerUp ? 103 : 101);
+    }
 }
 
 void LocInternalAdapter::reportPosition(UlpLocation &location,
@@ -210,84 +256,84 @@ bool LocEngAdapter::reportXtraServer(const char* url1,
                                         const char* url3,
                                         const int maxlength)
 {
-    if (mAgpsEnabled) {
+    if (mSupportsAgpsRequests) {
         sendMsg(new LocEngReportXtraServer(mOwner, url1,
                                            url2, url3, maxlength));
     }
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::requestATL(int connHandle, AGpsType agps_type)
 {
-    if (mAgpsEnabled) {
+    if (mSupportsAgpsRequests) {
         sendMsg(new LocEngRequestATL(mOwner,
                                      connHandle, agps_type));
     }
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::releaseATL(int connHandle)
 {
-    if (mAgpsEnabled) {
+    if (mSupportsAgpsRequests) {
         sendMsg(new LocEngReleaseATL(mOwner, connHandle));
     }
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::requestXtraData()
 {
-    if (mAgpsEnabled) {
+    if (mSupportsAgpsRequests) {
         sendMsg(new LocEngRequestXtra(mOwner));
     }
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::requestTime()
 {
-    if (mAgpsEnabled) {
+    if (mSupportsAgpsRequests) {
         sendMsg(new LocEngRequestTime(mOwner));
     }
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::requestNiNotify(GpsNiNotification &notif, const void* data)
 {
-    if (mAgpsEnabled) {
+    if (mSupportsAgpsRequests) {
         notif.size = sizeof(notif);
         notif.timeout = LOC_NI_NO_RESPONSE_TIME;
 
         sendMsg(new LocEngRequestNi(mOwner, notif, data));
     }
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::requestSuplES(int connHandle)
 {
-    if (mAgpsEnabled)
+    if (mSupportsAgpsRequests)
         sendMsg(new LocEngRequestSuplEs(mOwner, connHandle));
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::reportDataCallOpened()
 {
-    if(mAgpsEnabled)
+    if(mSupportsAgpsRequests)
         sendMsg(new LocEngSuplEsOpened(mOwner));
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
 bool LocEngAdapter::reportDataCallClosed()
 {
-    if(mAgpsEnabled)
+    if(mSupportsAgpsRequests)
         sendMsg(new LocEngSuplEsClosed(mOwner));
-    return mAgpsEnabled;
+    return mSupportsAgpsRequests;
 }
 
 inline
@@ -300,4 +346,48 @@ inline
 void LocEngAdapter::handleEngineUpEvent()
 {
     sendMsg(new LocEngUp(mOwner));
+}
+
+enum loc_api_adapter_err LocEngAdapter::setTime(GpsUtcTime time,
+                                                int64_t timeReference,
+                                                int uncertainty)
+{
+    loc_api_adapter_err result = LOC_API_ADAPTER_ERR_SUCCESS;
+
+    LOC_LOGD("%s:%d]: mSupportsTimeInjection is %d",
+             __func__, __LINE__, mSupportsTimeInjection);
+
+    if (mSupportsTimeInjection) {
+        LOC_LOGD("%s:%d]: Injecting time", __func__, __LINE__);
+        result = mLocApi->setTime(time, timeReference, uncertainty);
+    } else {
+        mSupportsTimeInjection = true;
+    }
+    return result;
+}
+
+enum loc_api_adapter_err LocEngAdapter::setXtraVersionCheck(int check)
+{
+    enum loc_api_adapter_err ret;
+    ENTRY_LOG();
+    enum xtra_version_check eCheck;
+    switch (check) {
+    case 0:
+        eCheck = DISABLED;
+        break;
+    case 1:
+        eCheck = AUTO;
+        break;
+    case 2:
+        eCheck = XTRA2;
+        break;
+    case 3:
+        eCheck = XTRA3;
+        break;
+    default:
+        eCheck = DISABLED;
+    }
+    ret = mLocApi->setXtraVersionCheck(eCheck);
+    EXIT_LOG(%d, ret);
+    return ret;
 }

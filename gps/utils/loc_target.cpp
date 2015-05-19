@@ -1,4 +1,4 @@
-/* Copyright (c) 2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2012-2014, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -46,17 +46,22 @@
 #define MSM8930_ID_2 "116"
 #define APQ8030_ID_1 "157"
 #define APQ8074_ID_1 "184"
+#define PDS_ID_1     "178"
 
 #define LINE_LEN 100
 #define STR_LIQUID    "Liquid"
 #define STR_SURF      "Surf"
 #define STR_MTP       "MTP"
 #define STR_APQ       "apq"
+#define STR_AUTO      "auto"
 #define IS_STR_END(c) ((c) == '\0' || (c) == '\n' || (c) == '\r')
 #define LENGTH(s) (sizeof(s) - 1)
 #define GPS_CHECK_NO_ERROR 0
 #define GPS_CHECK_NO_GPS_HW 1
-#define QCA1530_DETECT_TIMEOUT 30
+/* When system server is started, it uses 20 seconds as ActivityManager
+ * timeout. After that it sends SIGSTOP signal to process.
+ */
+#define QCA1530_DETECT_TIMEOUT 15
 #define QCA1530_DETECT_PRESENT "yes"
 #define QCA1530_DETECT_PROGRESS "detect"
 
@@ -98,7 +103,7 @@ static int read_a_line(const char * file_path, char * line, int line_size)
  */
 static bool is_qca1530(void)
 {
-    static const char qca1530_property_name[] = "persist.qca1530";
+    static const char qca1530_property_name[] = "sys.qca1530";
     bool res = false;
     int ret, i;
     char buf[PROPERTY_VALUE_MAX];
@@ -141,6 +146,34 @@ static bool is_qca1530(void)
     return res;
 }
 
+/*The character array passed to this function should have length
+  of atleast PROPERTY_VALUE_MAX*/
+void loc_get_target_baseband(char *baseband, int array_length)
+{
+    if(baseband && (array_length >= PROPERTY_VALUE_MAX)) {
+        property_get("ro.baseband", baseband, "");
+        LOC_LOGD("%s:%d]: Baseband: %s\n", __func__, __LINE__, baseband);
+    }
+    else {
+        LOC_LOGE("%s:%d]: NULL parameter or array length less than PROPERTY_VALUE_MAX\n",
+                 __func__, __LINE__);
+    }
+}
+
+/*The character array passed to this function should have length
+  of atleast PROPERTY_VALUE_MAX*/
+void loc_get_platform_name(char *platform_name, int array_length)
+{
+    if(platform_name && (array_length >= PROPERTY_VALUE_MAX)) {
+        property_get("ro.board.platform", platform_name, "");
+        LOC_LOGD("%s:%d]: Target name: %s\n", __func__, __LINE__, platform_name);
+    }
+    else {
+        LOC_LOGE("%s:%d]: Null parameter or array length less than PROPERTY_VALUE_MAX\n",
+                 __func__, __LINE__);
+    }
+}
+
 unsigned int loc_get_target(void)
 {
     if (gTarget != (unsigned int)-1)
@@ -163,7 +196,8 @@ unsigned int loc_get_target(void)
         goto detected;
     }
 
-    property_get("ro.baseband", baseband, "");
+    loc_get_target_baseband(baseband, sizeof(baseband));
+
     if (!access(hw_platform, F_OK)) {
         read_a_line(hw_platform, rd_hw_platform, LINE_LEN);
     } else {
@@ -174,8 +208,17 @@ unsigned int loc_get_target(void)
     } else {
         read_a_line(id_dep, rd_id, LINE_LEN);
     }
-
-    if( !memcmp(baseband, STR_APQ, LENGTH(STR_APQ)) ){
+    if( !memcmp(baseband, STR_AUTO, LENGTH(STR_AUTO)) )
+    {
+          gTarget = TARGET_AUTO;
+          goto detected;
+    }
+    if( !memcmp(rd_hw_platform, STR_MTP, LENGTH(STR_MTP)) ){
+        if( !memcmp(rd_id, PDS_ID_1, LENGTH(PDS_ID_1))
+            && IS_STR_END(rd_id[LENGTH(PDS_ID_1)]) )
+            gTarget = TARGET_PDS;
+    }
+    else if( !memcmp(baseband, STR_APQ, LENGTH(STR_APQ)) ){
         if( !memcmp(rd_id, MPQ8064_ID_1, LENGTH(MPQ8064_ID_1))
             && IS_STR_END(rd_id[LENGTH(MPQ8064_ID_1)]) )
             gTarget = TARGET_MPQ;
