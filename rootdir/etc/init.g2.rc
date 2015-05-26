@@ -61,14 +61,14 @@ on init
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
-    export SECONDARY_STORAGE /storage/usbdisk
+    export SECONDARY_STORAGE /storage/usbdisk0
 
     # Support legacy paths
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
-    symlink /storage/usbdisk /storage/usb
+    symlink /storage/usbdisk0 /storage/usb
 
     # Setup custom emergency number list based on
     # the MCC. This is needed by RIL.
