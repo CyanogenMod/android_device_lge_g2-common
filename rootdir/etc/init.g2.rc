@@ -285,16 +285,6 @@ on boot
     chown system wifi /sys/module/bcmdhd/parameters/firmware_path
     chmod 0640 /sys/module/bcmdhd/parameters/firmware_path
 
-    # access permission for secure touch
-    chmod 0660 /sys/devices/f9923000.i2c/i2c-1/1-004a/secure_touch_enable
-    chmod 0440 /sys/devices/f9923000.i2c/i2c-1/1-004a/secure_touch
-    chown system drmrpc /sys/devices/f9923000.i2c/i2c-1/1-004a/secure_touch_enable
-    chown system drmrpc /sys/devices/f9923000.i2c/i2c-1/1-004a/secure_touch
-    chmod 0660 /sys/devices/f9924000.i2c/i2c-2/2-004a/secure_touch_enable
-    chmod 0440 /sys/devices/f9924000.i2c/i2c-2/2-004a/secure_touch
-    chown system drmrpc /sys/devices/f9924000.i2c/i2c-2/2-004a/secure_touch_enable
-    chown system drmrpc /sys/devices/f9924000.i2c/i2c-2/2-004a/secure_touch
-
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
