@@ -45,6 +45,13 @@ start_sensors()
         mkdir -p /data/misc/sensors
         chmod -h 775 /data/misc/sensors
 
+        # LGE_START, make /sns/cal folder for save sensor registy
+        # If the sns directory exists, make sns/cal/ directory
+        if [ -d /sns ]; then
+          mkdir -p /sns/cal
+        fi
+        # LGE_END, make /sns/cal folder for save sensor registy
+
         start sensors
     fi
 }
