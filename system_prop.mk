@@ -122,10 +122,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.sensors.hal=e \
     persist.debug.ar.hal=e
 
-# USB
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
-
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0
