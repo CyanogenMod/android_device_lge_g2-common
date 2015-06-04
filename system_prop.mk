@@ -10,9 +10,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Audio Configuration
 PRODUCT_PROPERTY_OVERRIDES += \
     mm.enable.smoothstreaming=true \
-    mm.enable.qcom_parser=37491 \
+    mm.enable.qcom_parser=3310129 \
     ro.qc.sdk.audio.fluencetype=fluence \
     persist.audio.fluence.voicecall=true \
+    persist.audio.fluence.audiorec=true \
     persist.audio.dualmic.config=endfire \
     audio.offload.buffer.size.kb=32 \
     av.offload.enable=true \
