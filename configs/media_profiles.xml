@@ -189,7 +189,7 @@
 
         <EncoderProfile quality="2160p" fileFormat="mp4" duration="30">
             <Video codec="h264"
-                   bitRate="30000000"
+                   bitRate="40000000"
                    width="3840"
                    height="2160"
                    frameRate="30" />
@@ -413,7 +413,7 @@
          or query the capabilities of the codec at all if it is disabled
     -->
     <VideoEncoderCap name="h264" enabled="true"
-        minBitRate="128000" maxBitRate="40000000"
+        minBitRate="128000" maxBitRate="60000000"
         minFrameWidth="176" maxFrameWidth="3840"
         minFrameHeight="144" maxFrameHeight="2160"
         minFrameRate="15" maxFrameRate="120" />
