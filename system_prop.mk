@@ -82,7 +82,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.apm_sim_not_pwdn=1 \
-    ro.telephony.call_ring.multiple=0
+    ro.telephony.call_ring.multiple=0 \
+    persist.qcril.disable_retry=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.qmi.adb_logmask=0 \
