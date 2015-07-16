@@ -33,6 +33,8 @@
 
 #include <hardware/lights.h>
 
+#define UNUSED __attribute__((unused))
+
 /******************************************************************************/
 
 static pthread_once_t g_init = PTHREAD_ONCE_INIT;
@@ -124,7 +126,7 @@ rgb_to_brightness(struct light_state_t const* state)
 }
 
 static int
-set_light_backlight(struct light_device_t* dev,
+set_light_backlight(UNUSED struct light_device_t* dev,
         struct light_state_t const* state)
 {
     int err = 0;
@@ -136,7 +138,7 @@ set_light_backlight(struct light_device_t* dev,
 }
 
 static int
-set_speaker_light_locked(struct light_device_t* dev,
+set_speaker_light_locked(UNUSED struct light_device_t* dev,
         struct light_state_t const* state)
 {
 
@@ -169,7 +171,7 @@ set_speaker_light_locked(struct light_device_t* dev,
 
 static void
 handle_led_prioritized_locked(struct light_device_t* dev,
-        struct light_state_t const* state)
+        UNUSED struct light_state_t const* state)
 {
     if (is_lit(&g_attention)) {
         set_speaker_light_locked(dev, &g_attention);
