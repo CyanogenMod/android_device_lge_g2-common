@@ -1,0 +1,2 @@
+allow kernel touchpanel_sysfs:file relabelto;
+allow kernel vibeamp_sysfs:file relabelto;
