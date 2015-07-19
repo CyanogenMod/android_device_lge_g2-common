@@ -3,3 +3,4 @@ allow sensors qmuxd_socket:dir { write add_name search };
 allow sensors qmuxd_socket:sock_file { create setattr write };
 allow sensors self:capability sys_nice;
 allow sensors unlabeled:dir search;
+r_dir_file(sensors, radio_efs_file)
