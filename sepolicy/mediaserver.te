@@ -1,1 +1,2 @@
-allow mediaserver default_prop:property_service set;
+# 4k2k property
+allow mediaserver camera_prop:property_service set;

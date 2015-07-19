@@ -1,0 +1,2 @@
+allow untrusted_app unlabeled:dir { read open };
+allow untrusted_app unlabeled:file { read getattr open };
