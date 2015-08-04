@@ -1,12 +1,12 @@
 allow mpdecision self:process execmem;
 
 type_transition mpdecision socket_device:sock_file mpctl_socket;
+type_transition mpdecision system_data_file:file mpctl_data_file;
 
 allow mpdecision mpdecision_data:file { rw_file_perms };
 
 binder_use(mpdecision)
 
-allow mpdecision system_data_file:dir write;
 allow mpdecision socket_device:dir {add_name remove_name write};
 allow mpdecision socket_device:sock_file { write create setattr };
 allow mpdecision thermal_socket:sock_file write;

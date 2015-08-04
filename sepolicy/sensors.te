@@ -2,6 +2,7 @@ allow sensors qmuxd:unix_stream_socket connectto;
 allow sensors qmuxd_socket:dir { write add_name search };
 allow sensors qmuxd_socket:sock_file { create setattr write };
 allow sensors self:capability sys_nice;
-allow sensors unlabeled:dir search;
+allow sensors unlabeled:dir { search read };
+allow sensors unlabeled:file { read getattr open };
 allow sensors firmware_file:file { read getattr open };
 allow sensors firmware_file:dir r_dir_perms;
