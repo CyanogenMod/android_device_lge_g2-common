@@ -42,7 +42,7 @@
     <bool name="config_automatic_brightness_available">true</bool>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">50</integer>
+    <integer name="config_screenBrightnessDim">30</integer>
 
     <!-- Default screen brightness setting.
          Must be in the range specified by minimum and maximum. -->
@@ -50,7 +50,7 @@
 
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
-    <integer name="config_screenBrightnessSettingMinimum">50</integer>
+    <integer name="config_screenBrightnessSettingMinimum">30</integer>
 
     <!-- The duration (in milliseconds) that the radio will scan for a signal
          when there's no network connection. If the scan doesn't timeout, use zero -->
@@ -223,6 +223,9 @@
 
 
     <integer-array name="config_autoBrightnessLevels">
+        <item>1</item>
+        <item>4</item>
+        <item>10</item>
         <item>32</item>
         <item>82</item>
         <item>170</item>
@@ -236,6 +239,9 @@
         <item>9000</item>
     </integer-array>
     <integer-array name="config_autoBrightnessLcdBacklightValues">
+        <item>30</item>
+        <item>50</item>
+        <item>72</item>
         <item>85</item>
         <item>123</item>
         <item>137</item>
