@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <device name="Android">
     <item name="none">0</item>
-    <item name="screen.on">44.04</item>
-    <item name="bluetooth.active">115.45</item>
-    <item name="bluetooth.on">0.23</item>
-    <item name="screen.full">165.83</item>
-    <item name="wifi.on">1.78</item>
-    <item name="wifi.active">109.64</item>
-    <item name="wifi.scan">64.62</item>
+    <item name="screen.on">53.65</item>
+    <item name="bluetooth.active">83.38</item>
+    <item name="bluetooth.on">0.56</item>
+    <item name="screen.full">186.7</item>
+    <item name="wifi.on">1.07</item>
+    <item name="wifi.active">50.97</item>
+    <item name="wifi.scan">92.88</item>
     <item name="dsp.audio">0.1</item>
     <item name="dsp.video">0.1</item>
-    <item name="radio.active">70.79</item>
-    <item name="radio.scanning">51.76</item>
-    <item name="gps.on">85.79</item>
+    <item name="radio.active">190.0</item>
+    <item name="radio.scanning">11.0</item>
+    <item name="gps.on">102.94</item>
     <array name="radio.on">
-        <value>1.32</value>
-        <value>3.54</value>
+        <value>0.08</value>
+        <value>6.0</value>
     </array>
     <array name="cpu.speeds">
         <value>300000</value>
@@ -33,23 +33,23 @@
         <value>1958400</value>
         <value>2265600</value>
     </array>
-    <item name="cpu.idle">3.53</item>
-    <item name="cpu.awake">14.71</item>
+    <item name="cpu.idle">3.51</item>
+    <item name="cpu.awake">20.74</item>
     <array name="cpu.active">
-        <value>39.94</value>
-        <value>78.49</value>
-        <value>87.24</value>
-        <value>137.27</value>
-        <value>143.86</value>
-        <value>175.81</value>
-        <value>187.6</value>
-        <value>197.58</value>
-        <value>231.58</value>
-        <value>251.41</value>
-        <value>258.39</value>
-        <value>274.48</value>
-        <value>302.17</value>
-        <value>344.98</value>
+        <value>51.37</value>
+        <value>93.97</value>
+        <value>115.53</value>
+        <value>138.22</value>
+        <value>145.29</value>
+        <value>182.41</value>
+        <value>194.69</value>
+        <value>206.29</value>
+        <value>243.09</value>
+        <value>272.58</value>
+        <value>282.84</value>
+        <value>308.24</value>
+        <value>346.81</value>
+        <value>405.82</value>
     </array>
     <item name="battery.capacity">3000</item>
 </device>
