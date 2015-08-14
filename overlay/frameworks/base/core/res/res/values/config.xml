@@ -305,7 +305,7 @@
          NOTE ! - Enable for devices that have a fast response proximity sensor
     -->
     <bool name="config_proximityCheckOnWake">true</bool>
-    <integer name="config_proximityCheckTimeout">400</integer>
+    <integer name="config_proximityCheckTimeout">250</integer>
 
     <!--  Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">4</integer>
