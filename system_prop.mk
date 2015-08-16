@@ -4,14 +4,12 @@
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=480 \
-    ro.opengles.version=196608 \
-    ro.loki_enabled=1
+    ro.opengles.version=196608
 
 # Audio Configuration
 PRODUCT_PROPERTY_OVERRIDES += \
     mm.enable.smoothstreaming=true \
     mm.enable.qcom_parser=3310129 \
-    ro.qc.sdk.audio.fluencetype=fluence \
     persist.audio.fluence.voicecall=true \
     persist.audio.fluence.voicerec=false \
     persist.audio.fluence.speaker=false \
