@@ -16,6 +16,7 @@
 
 package org.cyanogenmod.hardware;
 
+import java.io.File;
 import org.cyanogenmod.hardware.util.FileUtils;
 
 public class TapToWake {
@@ -24,15 +25,15 @@ public class TapToWake {
     private static boolean mEnabled = true;
 
     public static boolean isSupported() {
-        return true;
+        File f = new File(CONTROL_PATH);
+        return f.exists();
     }
 
     public static boolean isEnabled()  {
-        return mEnabled;
+        return "1".equals(FileUtils.readOneLine(CONTROL_PATH));
     }
 
     public static boolean setEnabled(boolean state)  {
-        mEnabled = state;
         return FileUtils.writeLine(CONTROL_PATH, (state ? "1" : "0"));
     }
 }
