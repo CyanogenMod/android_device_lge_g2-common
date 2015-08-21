@@ -45,7 +45,7 @@ on init
     mkdir /sns 0775 system system
     # Create directory for sensordaemon
     mkdir /sns/cal 0644 system system
-    
+
     mkdir /mnt/media_rw 0700 media_rw media_rw
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
@@ -425,6 +425,8 @@ on post-fs-data
     # Tap to wake
     chown system radio /sys/devices/virtual/input/lge_touch/touch_gesture
     chmod 0664 /sys/devices/virtual/input/lge_touch/touch_gesture
+    chown system system /sys/devices/virtual/input/lge_touch/firmware
+    chmod 0664 /sys/devices/virtual/input/lge_touch/firmware
 
 on charger
     trigger charger-fs
