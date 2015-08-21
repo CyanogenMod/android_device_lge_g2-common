@@ -122,6 +122,15 @@ start_msm_irqbalance()
 	fi
 }
 
+touch=`getprop ro.touch.firmware`
+# Update touch driver after fresh install
+case "$touch" in
+        "1")
+        setprop ro.touch.firmware 0
+        echo 1 > /sys/devices/virtual/input/lge_touch/firmware
+        ;;
+esac
+
 baseband=`getprop ro.baseband`
 #
 # Suppress default route installation during RA for IPV6; user space will take
