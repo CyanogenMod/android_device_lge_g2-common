@@ -10,19 +10,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     mm.enable.smoothstreaming=true \
     mm.enable.qcom_parser=3310129 \
-    ro.qc.sdk.audio.fluencetype=fluence \
+    ro.qc.sdk.audio.fluencetype=none \
     persist.audio.fluence.voicecall=true \
-    persist.audio.fluence.audiorec=true \
-    persist.audio.dualmic.config=endfire \
+    persist.audio.fluence.voicerec=false \
+    persist.audio.fluence.speaker=false \
+    ro.qc.sdk.audio.ssr=false \
     audio.offload.buffer.size.kb=32 \
     av.offload.enable=true \
     av.streaming.offload.enable=true \
     use.voice.path.for.pcm.voip=true \
     audio.offload.multiple.enabled=false \
     audio.offload.gapless.enabled=true \
-    tunnel.audio.encode=true \
+    tunnel.audio.encode=false \
     media.aac_51_output_enabled=true \
-    audio.offload.pcm.16bit.enable=true \
     audio.offload.pcm.24bit.enable=true
 
 # Do not power down SIM card when modem is sent to Low Power Mode.
