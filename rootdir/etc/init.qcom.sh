@@ -33,8 +33,16 @@ else
     platformid=`cat /sys/devices/system/soc/soc0/id`
 fi
 
+product=`getprop ro.build.product`
 # grep the modem partition for baseband version and set it
-setprop gsm.version.baseband `strings /firmware/image/modem.b21 | grep "^M8974A-" | head -1`
+case "$product" in
+        "ls980" | "vs980")
+        setprop gsm.version.baseband `strings /firmware/image/modem.b22 | grep "^MPSS_DI" | head -1`
+        ;;
+        "d800" | "d801" | "d802" | "d803" | "f320" | "l01f")
+        setprop gsm.version.baseband `strings /firmware/image/modem.b21 | grep "^M8974A-" | head -1`
+        ;;
+esac
 
 #
 # Function to start sensors for DSPS enabled platforms
