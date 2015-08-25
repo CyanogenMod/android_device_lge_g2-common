@@ -41,7 +41,7 @@ LOCAL_CFLAGS += \
 LOCAL_C_INCLUDES:= \
     $(TARGET_OUT_HEADERS)/gps.utils \
     $(TARGET_OUT_HEADERS)/libloc_core \
-    device/lge/g2-common/gps/libloc_api_50001
+    hardware/qcom/gps/loc_api/libloc_api_50001
 
 LOCAL_COPY_HEADERS_TO:= libloc_eng/
 LOCAL_COPY_HEADERS:= \
@@ -60,7 +60,7 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := gps.msm8974
+LOCAL_MODULE := gps.$(BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE)
 LOCAL_MODULE_OWNER := qcom
 
 LOCAL_MODULE_TAGS := optional
@@ -96,7 +96,6 @@ LOCAL_C_INCLUDES:= \
     $(TARGET_OUT_HEADERS)/gps.utils \
     $(TARGET_OUT_HEADERS)/libloc_core
 
-ifneq ($(QCPATH),)
 ifeq ($(filter $(TARGET_DEVICE), apq8064 msm8960),)
 $(call print-vars, $(TARGET_DEVICE))
 LOCAL_SHARED_LIBRARIES += \
@@ -108,7 +107,6 @@ LOCAL_C_INCLUDES += \
     $(TARGET_OUT_HEADERS)/libperipheralclient/inc
 LOCAL_CFLAGS += \
     -DMODEM_POWER_VOTE
-endif
 endif
 
 LOCAL_PRELINK_MODULE := false
