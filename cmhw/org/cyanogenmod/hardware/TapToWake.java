@@ -23,7 +23,7 @@ public class TapToWake {
     private static String CONTROL_PATH = "/sys/devices/virtual/input/lge_touch/touch_gesture";
 
     public static boolean isSupported() {
-        return true;
+        return (FileUtils.readOneLine(CONTROL_PATH) != null);
     }
 
     public static boolean isEnabled()  {
