@@ -136,7 +136,6 @@ BOARD_SEPOLICY_DIRS += \
 
 # RIL
 BOARD_RIL_CLASS := ../../../device/lge/g2-common/ril/
-TARGET_RELEASE_CPPFLAGS += -DNEEDS_LGE_RIL_SYMBOLS
 
 # Releasetools
 TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_g2
