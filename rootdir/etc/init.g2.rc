@@ -425,6 +425,7 @@ on post-fs-data
     # Tap to wake
     chown system radio /sys/devices/virtual/input/lge_touch/touch_gesture
     chmod 0664 /sys/devices/virtual/input/lge_touch/touch_gesture
+    write /sys/devices/virtual/input/lge_touch/touch_gesture 1
 
 on charger
     trigger charger-fs
