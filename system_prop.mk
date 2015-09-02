@@ -6,24 +6,42 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=480 \
     ro.opengles.version=196608
 
-# Audio Configuration
+# Audio
 PRODUCT_PROPERTY_OVERRIDES += \
-    mm.enable.smoothstreaming=true \
-    mm.enable.qcom_parser=3310129 \
+    audio.offload.24bit.enable=true \
+    audio.offload.buffer.size.kb=32 \
+    audio.offload.gapless.enabled=false \
+    audio.offload.multiple.enabled=false \
+    audio.offload.pcm.enable=true \
+    media.aac_51_output_enabled=true
+
+# Streaming AV offload
+PRODUCT_PROPERTY_OVERRIDES += \
+    av.offload.enable=false \
+    av.streaming.offload.enable=true
+
+# Stagefright smooth streaming
+PRODUCT_PROPERTY_OVERRIDES += \
+    mm.enable.smoothstreaming=true
+
+# Fluence
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.fluencetype=fluence \
     persist.audio.fluence.voicecall=true \
-    persist.audio.fluence.audiorec=true \
-    persist.audio.dualmic.config=endfire \
-    audio.offload.buffer.size.kb=32 \
-    av.offload.enable=true \
-    av.streaming.offload.enable=true \
-    use.voice.path.for.pcm.voip=true \
-    audio.offload.multiple.enabled=false \
-    audio.offload.gapless.enabled=true \
-    tunnel.audio.encode=true \
-    media.aac_51_output_enabled=true \
-    audio.offload.pcm.16bit.enable=true \
-    audio.offload.pcm.24bit.enable=true
+    persist.audio.fluence.voicerec=false \
+    persist.audio.fluence.speaker=false
+
+# VoIP and Direct output for PCM format
+PRODUCT_PROPERTY_OVERRIDES += \
+    use.voice.path.for.pcm.voip=true
+
+# Surround sound recording
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qc.sdk.audio.ssr=false
+
+# Stagefright recorder compress offload
+PRODUCT_PROPERTY_OVERRIDES += \
+    tunnel.audio.encode=false
 
 # Do not power down SIM card when modem is sent to Low Power Mode.
 PRODUCT_PROPERTY_OVERRIDES += \
