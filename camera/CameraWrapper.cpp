@@ -113,10 +113,14 @@ static int check_vendor_module()
     return rv;
 }
 
+static const char *KEY_EXPOSURE_TIME = "exposure-time";
+static const char *KEY_EXPOSURE_TIME_VALUES = "exposure-time-values";
+
 static char *camera_fixup_getparams(int id, const char *settings)
 {
     bool videoMode = false;
     char *manipBuf;
+    const char *exposureTimeValues = "0,1,500000,1000000,2000000,4000000,8000000,16000000,32000000,64000000";
 
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
@@ -141,6 +145,13 @@ static char *camera_fixup_getparams(int id, const char *settings)
         free(manipBuf);
     }
 
+    /* Set supported exposure time values */
+    if (!videoMode) {
+        if (id == 0) {
+            params.set(KEY_EXPOSURE_TIME_VALUES, exposureTimeValues);
+        }
+    }
+
     /* LIE! The camera will set 3 snaps when doing HDR, and only return one. This hangs apps
      * that wait for the rest to come in. Make sure we never return multiple snaps unless
      * doing ZSL */
@@ -162,6 +173,7 @@ static char *camera_fixup_getparams(int id, const char *settings)
 static char *camera_fixup_setparams(int id, const char *settings)
 {
     bool videoMode = false;
+    bool slowShutterMode = false;
 
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
@@ -189,6 +201,20 @@ static char *camera_fixup_setparams(int id, const char *settings)
         if (previewRunning && zslState) { flipZsl = true; }
         zslState = false;
         params.set("camera-mode", "0");
+    }
+
+    if (params.get(KEY_EXPOSURE_TIME)) {
+        slowShutterMode = (strcmp(params.get(KEY_EXPOSURE_TIME), "0"));
+    }
+
+    /* Disable flash if slow shutter is enabled */
+    if (!videoMode) {
+        if (id == 0) {
+            if (slowShutterMode) {
+                params.set(android::CameraParameters::KEY_FLASH_MODE,
+                        android::CameraParameters::FLASH_MODE_OFF);
+            }
+        }
     }
 
 #ifdef LOG_NDEBUG
