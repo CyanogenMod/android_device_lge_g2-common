@@ -4,6 +4,8 @@
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
+    af.fast_track_multiplier=1 \
+    audio_hal.period_size=192 \
     persist.audio.dualmic.config=endfire \
     persist.audio.fluence.audiorec=true \
     persist.audio.fluence.voicecall=true \
