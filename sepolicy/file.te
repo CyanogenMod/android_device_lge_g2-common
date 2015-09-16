@@ -5,4 +5,3 @@ type mpdecision_data, file_type;
 type btlock_file, dev_type;
 type touchpanel_sysfs, fs_type, sysfs_type;
 type vibeamp_sysfs, sysfs_type, file_type;
-type display_sysfs, sysfs_type, file_type;
