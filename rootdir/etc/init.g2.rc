@@ -320,10 +320,8 @@ on boot
     write /sys/devices/virtual/input/lge_touch/touch_gesture 1
 
 on charger
-    wait /dev/block/platform/msm_sdcc.1/by-name/modem
-    mount vfat /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
-    wait /dev/block/platform/msm_sdcc.1/by-name/system
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system ro barrier=1
+    setprop persist.sys.usb.config charging
+    mount_all ./fstab.g2
 
     start rmt_storage
     start irsc_util
