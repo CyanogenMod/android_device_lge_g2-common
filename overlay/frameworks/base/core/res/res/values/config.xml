@@ -19,9 +19,6 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- If this is true, the screen will fade off. -->
-    <bool name="config_animateScreenLights">false</bool>
-
     <!-- Default color for notification LED is white. -->
     <color name="config_defaultNotificationColor">#ffffffff</color>
 
@@ -281,21 +278,11 @@
         <item>0</item>
     </integer-array>
 
-    <!-- Disable lockscreen translucent decor by default -->
-    <bool name="config_enableLockScreenTranslucentDecor">true</bool>
-
     <!-- Performance profiles -->
     <string name="config_perf_profile_prop">sys.perf.profile</string>
     <string name="config_perf_profile_default_entry">1</string>
 
     <bool name="config_lidControlsSleep">true</bool>
-
-    <!--integer-array name="config_smartCoverWindowCoords">
-        <item>55</item>
-        <item>200</item>
-        <item>850</item>
-        <item>880</item>
-    </integer-array-->
 
     <!-- Enable the option to check proximity sensor when deciding whether to
          turn the screen on

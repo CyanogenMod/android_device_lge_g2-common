@@ -68,9 +68,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wlan.lge.softap5g=true \
     wlan.lge.dcf.enable=true
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    debug.egl.recordable.rgba8888=1
-
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qti.sdk.sensors.gestures=true \
