@@ -185,8 +185,7 @@ PRODUCT_COPY_FILES += \
 
 # Thermal
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine-8974.conf:system/etc/thermal-engine-8974.conf \
-    $(LOCAL_PATH)/configs/thermal-engine-default.conf:system/etc/thermal-engine-default.conf
+    $(LOCAL_PATH)/configs/thermal-engine-8974.conf:system/etc/thermal-engine-8974.conf
 
 # Touchscreen
 PRODUCT_COPY_FILES += \
