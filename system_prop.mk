@@ -2,71 +2,60 @@
 # System Properties for G2
 #
 
+# Audio
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=480 \
-    ro.opengles.version=196608
-
-# Audio Configuration
-PRODUCT_PROPERTY_OVERRIDES += \
-    mm.enable.smoothstreaming=true \
-    mm.enable.qcom_parser=3310129 \
-    ro.qc.sdk.audio.fluencetype=fluence \
-    persist.audio.fluence.voicecall=true \
-    persist.audio.fluence.audiorec=true \
     persist.audio.dualmic.config=endfire \
-    audio.offload.buffer.size.kb=32 \
-    av.offload.enable=true \
-    av.streaming.offload.enable=true \
-    use.voice.path.for.pcm.voip=true \
-    audio.offload.multiple.enabled=false \
-    audio.offload.gapless.enabled=true \
-    tunnel.audio.encode=true \
-    media.aac_51_output_enabled=true \
-    audio.offload.pcm.16bit.enable=true \
-    audio.offload.pcm.24bit.enable=true
+    persist.audio.fluence.audiorec=true \
+    persist.audio.fluence.voicecall=true \
+    ro.qc.sdk.audio.fluencetype=fluence \
+    use.voice.path.for.pcm.voip=true
 
-# Do not power down SIM card when modem is sent to Low Power Mode.
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.apm_sim_not_pwdn=1
-
-# Ril sends only one RIL_UNSOL_CALL_RING, so set call_ring.multiple to false
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.call_ring.multiple=0
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.ril_class=LgeLteRIL
-
-# Up to 3 layers can go through overlays
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.hwc.mdpcomp.enable=true
-
-# Camera
-PRODUCT_PROPERTY_OVERRIDES += \
-	camera2.portability.force_api=1
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    rild.libpath=/vendor/lib/libril-qc-qmi-1.so
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    drm.service.enabled=true
-
+# Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bt.bdaddr_path=/data/misc/bdaddr
 
-# Wifi Configuration
+# Camera
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0 \
-    wlan.chip.vendor=brcm \
-    wlan.chip.version=bcm4335 \
-    wifi.lge.patch=true \
-    wlan.lge.concurrency=MCC \
-    wlan.lge.supportsimaka=yes \
-    wifi.lge.offdelay=false \
-    wifi.lge.offloading=true \
-    wifi.lge.aggregation=true \
-    wifi.lge.mhp=true \
-    wlan.lge.softap5g=true \
-    wlan.lge.dcf.enable=true
+    camera2.portability.force_api=1
+
+# Display
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.hwc.mdpcomp.enable=true \
+    ro.opengles.version=196608 \
+    ro.sf.lcd_density=480
+
+# DRM
+PRODUCT_PROPERTY_OVERRIDES += \
+    drm.service.enabled=true
+
+# Media/offload
+PRODUCT_PROPERTY_OVERRIDES += \
+    audio.offload.buffer.size.kb=32 \
+    audio.offload.gapless.enabled=true \
+    audio.offload.multiple.enabled=false \
+    audio.offload.pcm.16bit.enable=true \
+    audio.offload.pcm.24bit.enable=true
+    av.offload.enable=true \
+    av.streaming.offload.enable=true \
+    tunnel.audio.encode=true \
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.aac_51_output_enabled=true \
+    mm.enable.smoothstreaming=true \
+    mm.enable.qcom_parser=3310129
+
+# Perf
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.extension_library=/vendor/lib/libqti-perfd-client.so
+
+# Radio
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.radio.apm_sim_not_pwdn=1 \
+    ro.telephony.call_ring.multiple=0
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
+    ro.telephony.ril_class=LgeLteRIL
 
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -106,11 +95,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.sensors.hal=e \
     persist.debug.ar.hal=e
 
-# MTP and USB-OTG
+# USB
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
     persist.sys.isUsbOtgEnabled=true
 
-# QC vendor extension
+# Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=/vendor/lib/libqti-perfd-client.so
+    wifi.interface=wlan0
