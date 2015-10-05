@@ -45,7 +45,7 @@ on init
     mkdir /sns 0775 system system
     # Create directory for sensordaemon
     mkdir /sns/cal 0644 system system
-    
+
     mkdir /mnt/media_rw 0700 media_rw media_rw
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell/emulated 0700 shell shell
@@ -90,13 +90,6 @@ on fs
     restorecon_recursive /mpt
     setprop ro.crypto.fuse_sdcard true
 
-on post-fs
-    # Execute sreadahead daemon to reduce boot-time
-    start sreadahead
-
-# import cne init file
-#    export LD_PRELOAD /vendor/lib/libNimsWrap.so
-
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -105,7 +98,7 @@ on early-boot
     write /sys/kernel/boot_adsp/boot 1
 
     # disable lmk_fast_run
-	write /sys/module/lowmemorykiller/parameters/lmk_fast_run 0
+    write /sys/module/lowmemorykiller/parameters/lmk_fast_run 0
 
 on boot
     # bring CPUs online
@@ -177,8 +170,8 @@ on boot
     setprop bluetooth.chip.vendor brcm
 
     # SCMS-T property set during phone Booting
-	setprop persist.service.bdroid.a2dp_con 0
-	setprop persist.service.bdroid.scms_t 0
+    setprop persist.service.bdroid.a2dp_con 0
+    setprop persist.service.bdroid.scms_t 0
 
     chown bluetooth net_bt_stack /dev/btlock
     chmod 0600 /dev/btlock
@@ -562,10 +555,6 @@ service sensors /system/bin/sensors.qcom
 on property:ro.data.large_tcp_window_size=true
     write /proc/sys/net/ipv4/tcp_adv_win_scale 2
 
-service cnd /system/bin/cnd
-    class late_start
-    socket cnd stream 660 root inet
-
 service irsc_util /system/bin/irsc_util "/etc/sec_config"
     class main
     user root
@@ -680,14 +669,6 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
-
-# bugreport is triggered by holding down volume down, volume up and power
-service bugreport /system/bin/dumpstate -d -p -B \
-        -o /data/data/com.android.shell/files/bugreports/bugreport
-    class main
-    disabled
-    oneshot
-    keycodes 114 115 116
 
 service mpdecision /system/bin/mpdecision --avg_comp
    class main
