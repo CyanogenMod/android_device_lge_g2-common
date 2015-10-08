@@ -61,13 +61,3 @@ def AddTrustZoneAssertion(info, input_zip):
       cmd = 'assert(g2.verify_trustzone(' + ','.join(['"%s"' % tz for tz in versions]) + ') == "1");'
       info.script.AppendExtra(cmd)
   return
-
-def FullOTA_InstallEnd(info):
-  info.script.script = [cmd for cmd in info.script.script if not "boot.img" in cmd]
-  info.script.script = [cmd for cmd in info.script.script if not "show_progress(0.100000, 0);" in cmd]
-  info.script.AppendExtra('package_extract_file("boot.img", "/tmp/boot.img");')
-  info.script.Mount("/system")
-  info.script.AppendExtra('assert(run_program("/system/bin/panel.sh") == 0);')
-  info.script.AppendExtra('assert(run_program("/sbin/sh", "-c", "busybox dd if=/tmp/boot.img of=/dev/block/platform/msm_sdcc.1/by-name/boot") == 0);')
-  info.script.AppendExtra('delete("/system/bin/panel.sh");')
-  info.script.Unmount("/system")
