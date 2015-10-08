@@ -1,1 +1,2 @@
 require version-trustzone=TZ.BF.2.0-2.0.0086|TZ.BF.2.0-2.0.0091
+require version-bootloader=19e95b12db9fe4c81922db62164bb6aec1a9b7fe

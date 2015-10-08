@@ -16,14 +16,29 @@
 import hashlib
 import common
 import re
+import os
+
+TARGET_DIR = os.getenv('OUT')
 
 def FullOTA_Assertions(info):
+  AddBootloaderAssertion(info, info.input_zip)
   AddTrustZoneAssertion(info, info.input_zip)
   return
 
 def IncrementalOTA_Assertions(info):
+  AddBootloaderAssertion(info, info.input_zip)
   AddTrustZoneAssertion(info, info.target_zip)
   return
+
+def AddBootloaderAssertion(info, input_zip):
+  android_info = input_zip.read("OTA/android-info.txt")
+  m = re.search(r"require\s+version-bootloader\s*=\s*(\S+)", android_info)
+  if m:
+    bootloaders = m.group(1).split("|")
+    if "*" not in bootloaders:
+      AssertPartitionChecksum(info,
+              "/dev/block/platform/msm_sdcc.1/by-name/aboot", 1048576, bootloaders)
+    info.metadata["pre-bootloader"] = m.group(1)
 
 def AddTrustZoneAssertion(info, input_zip):
   android_info = info.input_zip.read("OTA/android-info.txt")
@@ -34,3 +49,10 @@ def AddTrustZoneAssertion(info, input_zip):
       cmd = 'assert(g2.verify_trustzone(' + ','.join(['"%s"' % tz for tz in versions]) + ') == "1");'
       info.script.AppendExtra(cmd)
   return
+
+def AssertPartitionChecksum(info, partition, size, checksums):
+    info.script.AppendExtra('assert(' +
+            ' || '.join(['sha1_check(read_file("EMMC:%s:%d:%s")) == ""' % (partition, size, c)
+                for c in checksums]) +
+            ' || abort("Invalid checksum for partition %s")' % (partition) +
+            ');')
