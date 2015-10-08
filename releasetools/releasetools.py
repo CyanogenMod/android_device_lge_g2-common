@@ -29,14 +29,28 @@
 import hashlib
 import common
 import re
+import os
+
+TARGET_DIR = os.getenv('OUT')
 
 def FullOTA_Assertions(info):
+  AddBootloaderAssertion(info, info.input_zip)
   AddTrustZoneAssertion(info, info.input_zip)
   return
 
 def IncrementalOTA_Assertions(info):
+  AddBootloaderAssertion(info, info.input_zip)
   AddTrustZoneAssertion(info, info.target_zip)
   return
+
+def AddBootloaderAssertion(info, input_zip):
+  android_info = input_zip.read("OTA/android-info.txt")
+  m = re.search(r"require\s+version-bootloader\s*=\s*(\S+)", android_info)
+  if m:
+    bootloaders = m.group(1).split("|")
+    if "*" not in bootloaders:
+      info.script.AssertSomeBootloader(*bootloaders)
+    info.metadata["pre-bootloader"] = m.group(1)
 
 def AddTrustZoneAssertion(info, input_zip):
   android_info = info.input_zip.read("OTA/android-info.txt")
