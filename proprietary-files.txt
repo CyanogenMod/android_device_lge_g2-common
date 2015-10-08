@@ -46,7 +46,9 @@ etc/permissions/qcnvitems.xml
 etc/permissions/com.qualcomm.location.xml
 lib/drm/libdrmwvmplugin.so
 lib/hw/camera.vendor.msm8974.so
+lib/hw/consumerir.msm8974.so
 lib/libchromatix_imx135_liveshot.so
+lib/libcir_driver.so
 lib/libdivxdrm_jni.so
 lib/libdivxdrmdecrypt.so
 lib/libdrmframework.so
