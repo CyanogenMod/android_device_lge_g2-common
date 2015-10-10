@@ -118,7 +118,7 @@ PRODUCT_PACKAGES += \
     init.g2.usb.rc \
     init.recovery.g2.rc \
     panel.sh \
-    set_baseband.sh \
+    set_partitions.sh \
     ueventd.g2.rc
 
 # IPv6 tethering

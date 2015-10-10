@@ -10,3 +10,14 @@ case "$product" in
         setprop gsm.version.baseband `strings /firmware/image/modem.b21 | grep "^M8974A-" | head -1`
         ;;
 esac
+
+bootloader=`strings /dev/block/platform/msm_sdcc.1/by-name/aboot | grep "mdss_mdp.panel="`
+# Check aboot version using mdss_mdp.panel string
+case "$bootloader" in
+        "mdss_mdp.panel=")
+        setprop ro.bootloader rev_b
+        ;;
+        *)
+        setprop ro.bootloader rev_a
+        ;;
+esac

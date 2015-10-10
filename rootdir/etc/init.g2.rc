@@ -415,7 +415,7 @@ service sensors /system/bin/sensors.qcom
     user root
     group root
 
-service set_baseband /system/bin/sh /system/etc/set_baseband.sh
+service set_partitions /system/bin/sh /system/etc/set_partitions.sh
     class late_start
     user root
     oneshot
