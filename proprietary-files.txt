@@ -14,12 +14,16 @@ bin/mm-qcamera-daemon
 bin/mpdecision
 bin/netmgrd
 bin/qmuxd
+bin/quipc_igsn
+bin/quipc_main
 bin/qseecomd
 bin/radish
 bin/rmt_storage
 bin/sensors.qcom
 bin/thermal-engine
 bin/time_daemon
+bin/xtwifi-client
+bin/xtwifi-inet-agent
 etc/acdbdata/Bluetooth_cal.acdb
 etc/acdbdata/General_cal.acdb
 etc/acdbdata/Global_cal.acdb
@@ -93,7 +97,6 @@ lib/libvss_resim_idl.so
 lib/libvss_resim_iface.so
 lib/libvss_sar_qcci.so
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
--priv-app/com.qualcomm.services.location/com.qualcommm.services.location.apk
 vendor/bin/slim_ap_daemon
 vendor/firmware/BCM4335B0_002.001.006.0191.0201_ORC.hcd
 vendor/lib/drm/libdrmwvmplugin.so
@@ -133,6 +136,9 @@ vendor/lib/libadiertac.so
 vendor/lib/libadreno_utils.so
 vendor/lib/libadsprpc.so
 vendor/lib/libalarmservice_jni.so
+vendor/lib/libasn1cper.so
+vendor/lib/libasn1crt.so
+vendor/lib/libasn1crtx.so
 vendor/lib/libaudcal.so
 vendor/lib/libaudioalsa.so
 vendor/lib/libbccQTI.so
@@ -299,7 +305,6 @@ vendor/lib/libwvm.so
 vendor/lib/libWVphoneAPI.so
 vendor/lib/libWVStreamControlAPI_L1.so
 vendor/lib/libxml.so
-vendor/lib/libxt_native.so
 vendor/lib/libxtadapter.so
 vendor/lib/libxtwifi_ulp_adaptor.so
 vendor/lib/libxtwifi_zpp_adaptor.so
