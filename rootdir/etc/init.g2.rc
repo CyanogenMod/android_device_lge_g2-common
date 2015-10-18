@@ -43,7 +43,7 @@ on early-init
 
 on init
     # Preload the BoringSSL wrapper
-    export LD_PRELOAD "/system/lib/libboringssl-compat.so"
+    export LD_PRELOAD "/system/lib/libboringssl-compat.so:/system/lib/liblge.so"
 
     mkdir /persist 0771 system system
     mkdir /factory 0775 system system
