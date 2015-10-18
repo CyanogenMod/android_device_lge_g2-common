@@ -79,7 +79,6 @@ lib/libmorpho_sensor_fusion_4.so
 lib/libmorpho_video_denoiser.so
 lib/libOmxVdecHevc.so
 lib/libqomx_core.so
-lib/libril.so
 lib/libuicc.so
 lib/libVDObjectTrackerAPI.so
 lib/libvss_bsp_qcci.so
