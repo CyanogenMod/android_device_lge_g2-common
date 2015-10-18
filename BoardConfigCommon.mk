@@ -108,8 +108,11 @@ TARGET_USERIMAGES_USE_F2FS := true
 TARGET_RELEASETOOLS_EXTENSIONS := device/lge/g2-common/releasetools
 
 # RIL
-BOARD_RIL_CLASS := ../../../device/lge/g2-common/ril/
-BOARD_PROVIDES_ADDITIONAL_BIONIC_STATIC_LIBS += libc_ril_symbols
+#BOARD_RIL_CLASS := ../../../device/lge/g2-common/ril/
+#BOARD_PROVIDES_ADDITIONAL_BIONIC_STATIC_LIBS += libc_ril_symbols
+
+# Radio
+TARGET_RIL_VARIANT := caf
 
 # SELinux policies
 include device/qcom/sepolicy/sepolicy.mk
