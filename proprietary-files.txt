@@ -144,6 +144,7 @@ vendor/lib/libaudioalsa.so
 vendor/lib/libbccQTI.so
 vendor/lib/libbtnv.so
 vendor/lib/libC2D2.so
+vendor/lib/libc2d30.so
 vendor/lib/libc2d30-a3xx.so
 vendor/lib/libc2d30-a4xx.so
 vendor/lib/libCB.so
