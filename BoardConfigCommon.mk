@@ -79,6 +79,9 @@ USE_OPENGL_RENDERER := true
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
 
+# Init
+TARGET_INIT_VENDOR_LIB := libinit_msm
+
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
