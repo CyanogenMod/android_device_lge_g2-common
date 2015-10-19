@@ -303,6 +303,9 @@ on boot
     chown system radio /sys/devices/virtual/input/lge_touch/touch_gesture
     chmod 0664 /sys/devices/virtual/input/lge_touch/touch_gesture
     write /sys/devices/virtual/input/lge_touch/touch_gesture 1
+    chown system system /sys/devices/virtual/input/lge_touch/tap_to_wake
+    chmod 664 /sys/devices/virtual/input/lge_touch/tap_to_wake
+    write /sys/devices/virtual/input/lge_touch/tap_to_wake 1
 
 on charger
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
