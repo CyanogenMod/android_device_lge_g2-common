@@ -65,6 +65,7 @@ COMMON_GLOBAL_CFLAGS += \
 
 # CMHW
 BOARD_HARDWARE_CLASS := device/lge/g2-common/cmhw/
+TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/touch_gesture"
 
 # Display
 HAVE_ADRENO_SOURCE := false
