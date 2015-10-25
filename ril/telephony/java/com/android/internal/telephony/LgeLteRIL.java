@@ -68,13 +68,13 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
 
     private boolean isGSM = false;
 
-    public LgeLteRIL(Context context, int preferredNetworkType,
-            int cdmaSubscription, Integer instanceId) {
-        this(context, preferredNetworkType, cdmaSubscription);
+    public LgeLteRIL(Context context, int networkModes, int cdmaSubscription) {
+        this(context, networkModes, cdmaSubscription, null);
     }
 
-    public LgeLteRIL(Context context, int networkMode, int cdmaSubscription) {
-        super(context, networkMode, cdmaSubscription);
+    public LgeLteRIL(Context context, int preferredNetworkType,
+            int cdmaSubscription, Integer instanceId) {
+        super(context, preferredNetworkType, cdmaSubscription, instanceId);
         mSetPreferredNetworkType = -1;
         mQANElements = 5;
     }
