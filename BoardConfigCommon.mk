@@ -66,7 +66,9 @@ COMMON_GLOBAL_CFLAGS += \
     -DBOARD_CHARGING_CMDLINE_VALUE='"chargerlogo"'
 
 # CMHW
-BOARD_HARDWARE_CLASS := device/lge/g2-common/cmhw/
+BOARD_HARDWARE_CLASS := \
+    hardware/cyanogen/cmhw \
+    device/lge/g2-common/cmhw
 
 # Display
 HAVE_ADRENO_SOURCE := false
