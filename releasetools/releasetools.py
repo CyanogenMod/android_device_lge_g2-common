@@ -31,12 +31,17 @@ import common
 import re
 
 def FullOTA_Assertions(info):
+  AddBootloaderAssertion(info)
   AddTrustZoneAssertion(info, info.input_zip)
   return
 
 def IncrementalOTA_Assertions(info):
+  AddBootloaderAssertion(info)
   AddTrustZoneAssertion(info, info.target_zip)
   return
+
+def AddBootloaderAssertion(info)
+  info.script.AppendExtra('assert(run_program("/sbin/sh", "-c", "aboot=`strings /dev/block/platform/msm_sdcc.1/by-name/aboot | grep "mdss_mdp.panel="` if [ $aboot == "mdss_mdp.panel=" ]; then echo "Aboot version matches!" else echo "Wrong Aboot version! Update before flashing!" exit 1 fi") == 0);')
 
 def AddTrustZoneAssertion(info, input_zip):
   android_info = info.input_zip.read("OTA/android-info.txt")
