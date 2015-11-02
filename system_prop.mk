@@ -22,9 +22,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
 
 # Display
+#
+# OpenGLES:
+# 196609 is decimal for 0x30001 to report major/minor versions as 3/1
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc.mdpcomp.enable=true \
-    ro.opengles.version=196608 \
+    ro.opengles.version=196609 \
     ro.sf.lcd_density=480
 
 # DRM
