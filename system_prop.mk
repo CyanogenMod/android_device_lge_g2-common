@@ -74,6 +74,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.netmgrd.qos.enable=false \
+    persist.data.qmi.adb_logmask=0 \
     ro.use_data_netmgrd=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
