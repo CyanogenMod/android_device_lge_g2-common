@@ -73,6 +73,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0
 
 PRODUCT_PROPERTY_OVERRIDES += \
+    persist.data.qmi.adb_logmask=0 \
+
+PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
     ro.telephony.ril_class=LgeLteRIL
 
