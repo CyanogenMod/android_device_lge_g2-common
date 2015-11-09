@@ -1,0 +1,2 @@
+allow servicemanager thermal-engine:dir search;
+allow servicemanager thermal-engine:file r_file_perms;
