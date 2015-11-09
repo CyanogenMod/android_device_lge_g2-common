@@ -1,13 +1,4 @@
-allow mpdecision self:process execmem;
-
-type_transition mpdecision socket_device:sock_file mpctl_socket;
-type_transition mpdecision system_data_file:file mpctl_data_file;
-
-allow mpdecision mpdecision_data:file { rw_file_perms };
-
-binder_use(mpdecision)
-
-allow mpdecision socket_device:dir {add_name remove_name write};
-allow mpdecision socket_device:sock_file { write create setattr };
-allow mpdecision thermal_socket:sock_file write;
-allow mpdecision thermal-engine:unix_stream_socket connectto;
+allow mpdecision socket_device:dir w_dir_perms;
+allow mpdecision system_data_file:dir w_dir_perms;
+file_type_auto_trans(mpdecision, socket_device, mpctl_socket);
+file_type_auto_trans(mpdecision, system_data_file, mpctl_data_file);
