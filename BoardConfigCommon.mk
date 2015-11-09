@@ -121,9 +121,7 @@ BOARD_RIL_CLASS := ../../../device/lge/g2-common/ril/
 
 # SELinux policies
 include device/qcom/sepolicy/sepolicy.mk
-
-BOARD_SEPOLICY_DIRS += \
-    device/lge/g2-common/sepolicy
+BOARD_SEPOLICY_DIRS += device/lge/g2-common/sepolicy
 
 # Wi-Fi
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211

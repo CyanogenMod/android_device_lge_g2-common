@@ -1,5 +1,8 @@
 # 4k2k property
 allow mediaserver camera_prop:property_service set;
-allow mediaserver default_prop:property_service set;
 allow mediaserver persist_data_file:dir search;
 allow mediaserver unlabeled:dir search;
+allow mediaserver firmware_file:dir search;
+allow mediaserver firmware_file:file r_file_perms;
+allow mediaserver socket_device:sock_file write;
+allow mediaserver thermal-engine:unix_stream_socket connectto;
