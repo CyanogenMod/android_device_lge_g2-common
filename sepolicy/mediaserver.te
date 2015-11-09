@@ -1,5 +1,2 @@
-# 4k2k property
-allow mediaserver camera_prop:property_service set;
-allow mediaserver default_prop:property_service set;
-allow mediaserver persist_data_file:dir search;
-allow mediaserver unlabeled:dir search;
+allow mediaserver persist_drm_file:dir search;
+allow mediaserver persist_drm_file:file rw_file_perms;
