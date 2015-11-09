@@ -1,3 +1,0 @@
-allow tee encrypt_block_device:blk_file rw_file_perms;
-# This is shared with vold...
-allow vold encrypt_block_device:blk_file rw_file_perms;

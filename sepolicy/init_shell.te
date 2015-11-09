@@ -1,1 +1,0 @@
-allow init_shell baseband_prop:property_service set;

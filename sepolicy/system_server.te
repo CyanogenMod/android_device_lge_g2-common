@@ -1,9 +1,3 @@
-# for Settings' access to TapToWake
-allow system_server touchpanel_sysfs:file rw_file_perms;
-allow system_server touchpanel_sysfs:dir { search };
-
-# for Settings' access to VibratorHW
-allow system_server vibeamp_sysfs:file rw_file_perms;
-
-allow system_server sensors_data_file:sock_file { getattr rw_file_perms };
-allow system_server sensors_data_file:dir search;
+allow system_server sysfs_touchpanel:dir search;
+allow system_server sysfs_touchpanel:file rw_file_perms;
+allow system_server sysfs_vibeamp:file rw_file_perms;

@@ -386,6 +386,7 @@ service sensors /system/bin/sensors.qcom
 service set_baseband /system/bin/sh /system/etc/set_baseband.sh
     class late_start
     user root
+    seclabel u:r:set_baseband:s0
     oneshot
 
 service thermal-engine /system/bin/thermal-engine
