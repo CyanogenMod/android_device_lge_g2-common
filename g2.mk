@@ -183,7 +183,6 @@ PRODUCT_PACKAGES += \
 
 # Qualcomm
 PRODUCT_PACKAGES += \
-    libcnefeatureconfig \
     libxml2
 
 # Recovery

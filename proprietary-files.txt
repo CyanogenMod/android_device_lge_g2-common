@@ -57,6 +57,7 @@ lib/hw/camera.vendor.msm8974.so
 lib/hw/consumerir.msm8974.so
 lib/libchromatix_imx135_liveshot.so
 lib/libcir_driver.so
+lib/libcnefeatureconfig.so
 lib/libdivxdrm_jni.so
 lib/libdivxdrmdecrypt.so
 lib/libdrmframework.so
