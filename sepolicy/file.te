@@ -1,6 +1,7 @@
 type encrypt_block_device, dev_type;
 type misc_block_device, dev_type;
 type rfkill_device, dev_type;
+type sysfs_rmnet, fs_type, sysfs_type;
 type mpdecision_data, file_type;
 type btlock_file, dev_type;
 type touchpanel_sysfs, fs_type, sysfs_type;

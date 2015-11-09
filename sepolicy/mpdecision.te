@@ -8,6 +8,7 @@ allow mpdecision mpdecision_data:file { rw_file_perms };
 binder_use(mpdecision)
 
 allow mpdecision socket_device:dir {add_name remove_name write};
-allow mpdecision socket_device:sock_file { write create setattr };
+allow mpdecision socket_device:sock_file { write create setattr unlink };
 allow mpdecision thermal_socket:sock_file write;
 allow mpdecision thermal-engine:unix_stream_socket connectto;
+allow mpdecision system_data_file:dir { add_name write };
