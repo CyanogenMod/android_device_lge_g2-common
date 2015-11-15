@@ -1,6 +1,9 @@
 on early-init
     write /sys/block/mmcblk0/bdi/read_ahead_kb 512
 
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
+
     write /sys/module/msm_thermal/core_control/enabled 0
 
     write /sys/devices/system/cpu/cpu1/online 1
