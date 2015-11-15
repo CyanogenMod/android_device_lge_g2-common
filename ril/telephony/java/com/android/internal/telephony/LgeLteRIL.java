@@ -25,24 +25,13 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Parcel;
-import android.os.SystemProperties;
 import android.telephony.Rlog;
-import android.telephony.SmsMessage;
 import android.telephony.SignalStrength;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.android.internal.telephony.RILConstants;
-import com.android.internal.telephony.gsm.SmsBroadcastConfigInfo;
-import com.android.internal.telephony.cdma.CdmaInformationRecords;
-
-import com.android.internal.telephony.dataconnection.DataCallResponse;
-import com.android.internal.telephony.dataconnection.DcFailCause;
-
 import com.android.internal.telephony.uicc.IccCardApplicationStatus;
 import com.android.internal.telephony.uicc.IccCardStatus;
-
-import java.util.ArrayList;
 
 /**
  * Custom Qualcomm No SimReady RIL using the latest Uicc stack
@@ -54,19 +43,13 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
     protected IccHandler mIccHandler;
     protected String mAid;
     protected boolean mUSIM = false;
-    protected String[] mLastDataIface = new String[20];
-    boolean RILJ_LOGV = true;
-    boolean RILJ_LOGD = true;
 
     private final int RIL_INT_RADIO_OFF = 0;
     private final int RIL_INT_RADIO_UNAVALIABLE = 1;
     private final int RIL_INT_RADIO_ON = 2;
     private final int RIL_INT_RADIO_ON_NG = 10;
-    private final int RIL_INT_RADIO_ON_HTC = 13;
     private int mSetPreferredNetworkType = -1;
-    private Message mPendingNetworkResponse;
-
-    private boolean isGSM = false;
+    private boolean mIsGSM = false;
 
     public LgeLteRIL(Context context, int networkModes, int cdmaSubscription) {
         this(context, networkModes, cdmaSubscription, null);
@@ -102,14 +85,14 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
     @Override
     public void
     queryFacilityLock(String facility, String password, int serviceClass,
-                            Message response) {
+            Message response) {
         queryFacilityLockForApp(facility, password, serviceClass, mAid, response);
     }
 
     @Override
     public void
-    setFacilityLock (String facility, boolean lockState, String password,
-                        int serviceClass, Message response) {
+    setFacilityLock(String facility, boolean lockState, String password,
+            int serviceClass, Message response) {
         setFacilityLockForApp(facility, lockState, password, serviceClass, mAid, response);
     }
 
@@ -126,13 +109,12 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
                               RIL_REQUEST_GET_IMSI +
                               " aid: " + mAid +
                               " " + requestToString(rr.mRequest));
-
         send(rr);
     }
 
     @Override
     public void
-    iccIO (int command, int fileid, String path, int p1, int p2, int p3,
+    iccIO(int command, int fileid, String path, int p1, int p2, int p3,
             String data, String pin2, Message result) {
         //Note: This RIL request has not been renamed to ICC,
         //       but this request is also valid for SIM and RUIM
@@ -179,16 +161,14 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
             ca.pin1_replaced = p.readInt();
             ca.pin1 = ca.PinStateFromRILInt(p.readInt());
             ca.pin2 = ca.PinStateFromRILInt(p.readInt());
-            if (!needsOldRilFeature("skippinpukcount")) {
-                p.readInt(); //remaining_count_pin1
-                p.readInt(); //remaining_count_puk1
-                p.readInt(); //remaining_count_pin2
-                p.readInt(); //remaining_count_puk2
-            }
+            p.readInt(); //remaining_count_pin1
+            p.readInt(); //remaining_count_puk1
+            p.readInt(); //remaining_count_pin2
+            p.readInt(); //remaining_count_puk2
             status.mApplications[i] = ca;
         }
         // for sprint gsm(lte) only sim
-        if (numApplications==1 && !isGSM && ca.app_type == ca.AppTypeFromRILInt(2)) {
+        if (numApplications==1 && !mIsGSM && ca.app_type == ca.AppTypeFromRILInt(2)) {
             status.mApplications = new IccCardApplicationStatus[numApplications+2];
             status.mGsmUmtsSubscriptionAppIndex = 0;
             status.mApplications[status.mGsmUmtsSubscriptionAppIndex]=ca;
@@ -248,68 +228,8 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
     @Override
     public void setPhoneType(int phoneType){
         super.setPhoneType(phoneType);
-        isGSM = (phoneType != RILConstants.CDMA_PHONE);
+        mIsGSM = (phoneType != RILConstants.CDMA_PHONE);
     }
-
-    /*
-    @Override
-    protected DataCallResponse getDataCallResponse(Parcel p, int version) {
-        DataCallResponse dataCall = new DataCallResponse();
-
-        boolean oldRil = needsOldRilFeature("datacall");
-
-        if (!oldRil && version < 5) {
-            return super.getDataCallResponse(p, version);
-        } else if (!oldRil) {
-            dataCall.version = version;
-            dataCall.status = p.readInt();
-            dataCall.suggestedRetryTime = p.readInt();
-            dataCall.cid = p.readInt();
-            dataCall.active = p.readInt();
-            dataCall.type = p.readString();
-            dataCall.ifname = p.readString();
-            if ((dataCall.status == DcFailCause.NONE.getErrorCode()) &&
-                    TextUtils.isEmpty(dataCall.ifname) && dataCall.active != 0) {
-              throw new RuntimeException("getDataCallResponse, no ifname");
-            }
-            String addresses = p.readString();
-            if (!TextUtils.isEmpty(addresses)) {
-                dataCall.addresses = addresses.split(" ");
-            }
-            String dnses = p.readString();
-            if (!TextUtils.isEmpty(dnses)) {
-                dataCall.dnses = dnses.split(" ");
-            }
-            String gateways = p.readString();
-            if (!TextUtils.isEmpty(gateways)) {
-                dataCall.gateways = gateways.split(" ");
-            }
-        } else {
-            dataCall.version = 4; // was dataCall.version = version;
-            dataCall.cid = p.readInt();
-            dataCall.active = p.readInt();
-            dataCall.type = p.readString();
-            dataCall.ifname = mLastDataIface[dataCall.cid];
-            p.readString(); // skip APN
-
-            if (TextUtils.isEmpty(dataCall.ifname)) {
-                dataCall.ifname = mLastDataIface[0];
-            }
-
-            String addresses = p.readString();
-            if (!TextUtils.isEmpty(addresses)) {
-                dataCall.addresses = addresses.split(" ");
-            }
-            p.readInt(); // RadioTechnology
-            p.readInt(); // inactiveReason
-
-            dataCall.dnses = new String[2];
-            dataCall.dnses[0] = SystemProperties.get("net."+dataCall.ifname+".dns1");
-            dataCall.dnses[1] = SystemProperties.get("net."+dataCall.ifname+".dns2");
-        }
-
-        return dataCall;
-    }*/
 
     @Override
     public void getNeighboringCids(Message response) {
@@ -318,9 +238,7 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
 
         RILRequest rr = RILRequest.obtain(
                 RILConstants.RIL_REQUEST_GET_NEIGHBORING_CELL_IDS, response);
-
         if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
-
         send(rr);
     }
 
@@ -334,7 +252,6 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
             networkType = RILConstants.NETWORK_MODE_WCDMA_PREF;
         }
         mSetPreferredNetworkType = networkType;
-
         super.setPreferredNetworkType(networkType, response);
     }
 
@@ -343,14 +260,12 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
     responseSignalStrength(Parcel p) {
         int numInts = 12;
         int response[];
-
-        boolean oldRil = needsOldRilFeature("signalstrength");
         boolean noLte = false;
 
         /* TODO: Add SignalStrength class to match RIL_SignalStrength */
         response = new int[numInts];
         for (int i = 0 ; i < numInts ; i++) {
-            if ((oldRil || noLte) && i > 6 && i < 12) {
+            if (noLte && i > 6 && i < 12) {
                 response[i] = -1;
             } else {
                 response[i] = p.readInt();
@@ -370,21 +285,7 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
         int dataPosition = p.dataPosition(); // save off position within the Parcel
         int response = p.readInt();
 
-        /* Assume devices needing the "datacall" GB-compatibility flag are
-         * running GB RILs, so skip 1031-1034 for those */
-        if (needsOldRilFeature("datacall")) {
-            switch(response) {
-                 case 1031:
-                 case 1032:
-                 case 1033:
-                 case 1034:
-                     ret = responseVoid(p);
-                     return;
-            }
-        }
-
         switch(response) {
-            //case RIL_UNSOL_RESPONSE_RADIO_STATE_CHANGED: ret =  responseVoid(p); break;
             case RIL_UNSOL_RIL_CONNECTED: ret = responseInts(p); break;
             case 1035: ret = responseVoid(p); break; // RIL_UNSOL_VOICE_RADIO_TECH_CHANGED
             case 1036: ret = responseVoid(p); break; // RIL_UNSOL_RESPONSE_IMS_NETWORK_STATE_CHANGED
@@ -445,7 +346,6 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
                 break;
             case RIL_INT_RADIO_ON:
             case RIL_INT_RADIO_ON_NG:
-            case RIL_INT_RADIO_ON_HTC:
                 if (mIccHandler == null) {
                     handlerThread = new HandlerThread("IccHandler");
                     mIccThread = handlerThread;
@@ -682,33 +582,6 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
         return response;
     }
 
-    /*
-    @Override
-    public void
-    setupDataCall(String radioTechnology, String profile, String apn,
-            String user, String password, String authType, String protocol,
-            Message result) {
-
-        riljLog("> getIMSI:UPDATING VSS PROFILE ");
-        RILRequest rrSPT = RILRequest.obtain(
-                0x88, null); // RIL_REQUEST_VSS_UPDATE_PROFILE
-        rrSPT.mParcel.writeInt(1); // pdnId
-        rrSPT.mParcel.writeInt(apn.length()); // apnLength
-        rrSPT.mParcel.writeString(apn); // apn
-        rrSPT.mParcel.writeInt(0); // ipType
-        rrSPT.mParcel.writeInt(0); // inactivityTime
-        rrSPT.mParcel.writeInt(1); // enable
-        rrSPT.mParcel.writeInt(0); // authType
-        rrSPT.mParcel.writeInt(0); // esmInfo
-        rrSPT.mParcel.writeString(""); // username
-        rrSPT.mParcel.writeString(""); // password
-        send(rrSPT);
-
-
-        super.setupDataCall(radioTechnology, profile, apn, user, password, 
-                            authType, protocol, result);
-    }*/
-
     @Override
     public void getImsRegistrationState(Message result) {
         if(mRilVersion >= 8)
@@ -722,5 +595,4 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
             }
         }
     }
-
 }
