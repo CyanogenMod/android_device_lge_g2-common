@@ -322,11 +322,6 @@ service audiod /system/bin/audiod
     user system
     group system
 
-service bridgemgrd /system/bin/bridgemgrd
-    class main
-    user radio
-    group radio
-
 service charger /sbin/healthd -c
     class charger
     critical
@@ -359,19 +354,6 @@ service netmgrd /system/bin/netmgrd
     class main
     user root
     group radio
-
-service ppd /system/bin/mm-pp-daemon
-    class late_start
-    disabled
-    user system
-    socket pps stream 0660 system system
-    group system graphics
-
-on property:init.svc.surfaceflinger=stopped
-    stop ppd
-
-on property:init.svc.surfaceflinger=running
-    start ppd
 
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
