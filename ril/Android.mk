@@ -17,11 +17,11 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
-    lge_ril.cpp
+    ril_shim.cpp
 
 LOCAL_SHARED_LIBRARIES := libbinder
 
-LOCAL_MODULE := liblge
+LOCAL_MODULE := libril_shim
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 
