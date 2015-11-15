@@ -189,9 +189,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     librecovery_updater_g2
 
-# RIL symbols
+# RIL
 PRODUCT_PACKAGES += \
-    liblge
+    libril_shim
 
 # Sensors
 PRODUCT_COPY_FILES += \
