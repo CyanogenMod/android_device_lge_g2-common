@@ -31,6 +31,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
 
+# GPS
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.gps.qc_nlp_in_use=0 \
+    ro.gps.agps_provider=1
+
 # IO Scheduler
 PRODUCT_PROPERTY_OVERRIDES += \
     sys.io.scheduler=bfq
