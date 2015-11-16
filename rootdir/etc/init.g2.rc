@@ -123,6 +123,9 @@ on post-fs-data
     chmod 0664 /data/system/sensors/settings
     chown system /data/system/sensors/settings
 
+    # Set permissions on persist
+    restorecon_recursive /persist-lg
+
     # Create /data/time folder for time-services
     mkdir /data/time/ 0700 system system
 
