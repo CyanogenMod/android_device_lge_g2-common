@@ -388,6 +388,10 @@ service set_baseband /system/bin/sh /system/etc/set_baseband.sh
     user root
     seclabel u:r:set_baseband:s0
     oneshot
+    disabled
+
+on property:sys.boot_completed=1
+    start set_baseband
 
 service thermal-engine /system/bin/thermal-engine
     class main
