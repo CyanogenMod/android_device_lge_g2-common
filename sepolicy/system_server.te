@@ -1,4 +1,5 @@
 allow system_server sysfs_touchpanel:dir search;
 allow system_server sysfs_touchpanel:file rw_file_perms;
 allow system_server sysfs_usb_supply:dir search;
+allow system_server sysfs_usb_supply:file r_file_perms;
 allow system_server sysfs_vibeamp:file rw_file_perms;
