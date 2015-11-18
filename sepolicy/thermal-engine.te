@@ -1,1 +1,2 @@
 binder_call(thermal-engine, servicemanager)
+binder_use(thermal-engine)
