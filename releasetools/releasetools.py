@@ -52,7 +52,7 @@ def AddTrustZoneAssertion(info, input_zip):
 
 def AssertPartitionChecksum(info, partition, size, checksums):
     info.script.AppendExtra('assert(' +
-            ' || '.join(['sha1_check(read_file("EMMC:%s:%d:%s")) == ""' % (partition, size, c)
+            ' || '.join(['sha1_check(read_file("EMMC:%s:%d:%s")) != ""' % (partition, size, c)
                 for c in checksums]) +
             ' || abort("Invalid checksum for partition %s")' % (partition) +
             ');')
