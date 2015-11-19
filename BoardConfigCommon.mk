@@ -25,9 +25,6 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := krait
 
-# Assertions
-TARGET_BOARD_INFO_FILE ?= device/lge/g2-common/board-info.txt
-
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := galbi
 TARGET_NO_BOOTLOADER := true
