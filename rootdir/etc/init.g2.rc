@@ -52,6 +52,16 @@ on init
     mkdir /mpt 0755 system system
     mkdir /sns 0775 system system
 
+    # Set permissions on persist
+    restorecon_recursive /persist
+    restorecon_recursive /persist-lg
+    mkdir /persist/sensors 0775 system root
+    write /persist/sensors/sensors_settings 1
+    chmod 0644 /persist/sensors/sensors_settings
+    chown system root /persist/sensors/sensors_settings
+    mkdir /persist/wifi
+    chown wifi system /persist/wifi
+
     # Create directory for sensordaemon
     mkdir /sns/cal 0644 system system
 
@@ -108,10 +118,6 @@ on post-fs-data
     mkdir /data/nfc/param 770 nfc nfc
 
     # Create directory used by sensor subsystem
-    mkdir /persist/sensors 0775 system root
-    write /persist/sensors/sensors_settings 1
-    chmod 0644 /persist/sensors/sensors_settings
-    chown system root /persist/sensors/sensors_settings
     mkdir /data/misc/sensors 0775 system system
     restorecon_recursive /data/misc/sensors
 
@@ -125,17 +131,11 @@ on post-fs-data
     chmod 0664 /data/system/sensors/settings
     chown system /data/system/sensors/settings
 
-    # Set permissions on persist
-    restorecon_recursive /persist-lg
-
     # Create /data/time folder for time-services
     mkdir /data/time/ 0700 system system
 
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
-
-    # wifi
-    chown wifi system /persist/wifi
 
     # Make sure the default firmware is loaded
     write /sys/module/bcmdhd/parameters/firmware_path "/system/etc/firmware/fw_bcmdhd.bin"
