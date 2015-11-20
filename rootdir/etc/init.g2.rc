@@ -325,7 +325,7 @@ service audiod /system/bin/audiod
     user system
     group system
 
-service charger /sbin/healthd -c
+service charger /sbin/charger_g2
     class charger
     critical
     seclabel u:r:healthd:s0
