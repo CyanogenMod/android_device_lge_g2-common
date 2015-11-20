@@ -1,2 +1,3 @@
+allow thermal-engine power_service:service_manager find;
 binder_call(thermal-engine, servicemanager)
 binder_use(thermal-engine)
