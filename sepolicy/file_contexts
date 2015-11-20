@@ -25,7 +25,6 @@
 /sys/devices/virtual/android_usb/android0/f_rmnet_smd_sdio/transport  --  u:object_r:sysfs_rmnet:s0
 
 # Sensors
-/persist/sensors/sensors_settings                   u:object_r:sensors_persist_file:s0
 /persist-lg/sensors(/.*)?                           u:object_r:sensors_persist_file:s0
 /sns(/.*)?                                          u:object_r:sensors_persist_file:s0
 
