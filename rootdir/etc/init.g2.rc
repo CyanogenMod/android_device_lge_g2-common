@@ -42,9 +42,7 @@ on early-init
     write /sys/class/leds/lcd-backlight/brightness 130
 
 on init
-    # Preload the BoringSSL wrapper
-    export LD_PRELOAD "/system/lib/libboringssl-compat.so"
-    export LD_SHIM_LIBS /system/lib/libril.so|libril_shim.so
+    export LD_SHIM_LIBS /system/vendor/lib/libqomx_jpegenc.so|libboringssl-compat.so:/system/lib/libril.so|libril_shim.so
 
     mkdir /persist 0771 system system
     mkdir /factory 0775 system system
