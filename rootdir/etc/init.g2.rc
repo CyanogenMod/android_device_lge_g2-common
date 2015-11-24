@@ -339,7 +339,7 @@ service mpdecision /system/bin/mpdecision --avg_comp
 service netmgrd /system/bin/netmgrd
     class main
     user root
-    group radio
+    group radio wakelock
 
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
@@ -349,7 +349,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
 service qmuxd /system/bin/qmuxd
     class main
     user radio
-    group radio audio bluetooth gps qcom_diag
+    group radio audio bluetooth wakelock gps qcom_diag
 
 service qseecomd /system/bin/qseecomd
     class core
@@ -359,12 +359,12 @@ service qseecomd /system/bin/qseecomd
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
-    group system
+    group system wakelock
 
 service sensors /system/bin/sensors.qcom
     class late_start
     user root
-    group root
+    group root wakelock
 
 service set_baseband /system/bin/sh /system/etc/set_baseband.sh
     class late_start
