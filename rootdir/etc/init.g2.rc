@@ -50,10 +50,6 @@ on init
     mkdir /mpt 0755 system system
     mkdir /sns 0775 system system
 
-    # Set permissions on persist
-    restorecon_recursive /persist
-    restorecon_recursive /persist-lg
-
     # Create directory for wifi
     mkdir /persist/wifi
     chown wifi system /persist/wifi
@@ -71,6 +67,8 @@ on init
 
 on fs
     mount_all ./fstab.g2
+    restorecon_recursive /persist
+    restorecon_recursive /persist-lg
     restorecon_recursive /sns
     restorecon_recursive /mpt
 
