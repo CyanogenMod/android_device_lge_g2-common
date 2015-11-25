@@ -50,9 +50,16 @@ on init
     mkdir /mpt 0755 system system
     mkdir /sns 0775 system system
 
-    # Set permissions on persist
+    # Support legacy paths
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
+
+on fs
+    mount_all ./fstab.g2
     restorecon_recursive /persist
     restorecon_recursive /persist-lg
+    restorecon_recursive /sns
+    restorecon_recursive /mpt
 
     # Create directory for wifi
     mkdir /persist/wifi
@@ -64,15 +71,6 @@ on init
     write /persist/sensors/sensors_settings 1
     chmod 0644 /persist/sensors/sensors_settings
     chown system root /persist/sensors/sensors_settings
-
-    # Support legacy paths
-    symlink /sdcard /mnt/sdcard
-    symlink /sdcard /storage/sdcard0
-
-on fs
-    mount_all ./fstab.g2
-    restorecon_recursive /sns
-    restorecon_recursive /mpt
 
 on post-fs-data
     # Create directory used by bluetooth
