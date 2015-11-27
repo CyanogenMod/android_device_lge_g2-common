@@ -185,21 +185,16 @@ lib/libcir_driver.so
 # Media
 lib/libdivxdrmdecrypt.so
 lib/libOmxVdecHevc.so
-vendor/lib/libDivxDrm.so
-vendor/lib/libExtendedExtractor.so
 vendor/lib/libFileMux.so
 vendor/lib/libHevcSwDecoder.so
 vendor/lib/libI420colorconvert.so
 vendor/lib/libmm-color-convertor.so
-vendor/lib/libmmosal.so
-vendor/lib/libmmparser.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAmrwbplusDec.so
 vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxMux.so
 vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libOmxWmaDec.so
-vendor/lib/libSHIMDivxDrm.so
 
 # Media firmware
 etc/firmware/venus.b00
