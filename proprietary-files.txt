@@ -175,7 +175,6 @@ vendor/lib/libOpenCL.so
 vendor/lib/librs_adreno_sha1.so
 vendor/lib/librs_adreno.so
 vendor/lib/libRSDriver_adreno.so
-vendor/lib/libscale.so
 vendor/lib/libsc-a3xx.so
 
 # IR
@@ -183,18 +182,19 @@ lib/hw/consumerir.msm8974.so
 lib/libcir_driver.so
 
 # Media
-lib/libdivxdrmdecrypt.so
-lib/libOmxVdecHevc.so
+vendor/lib/libDivxDrm.so
 vendor/lib/libFileMux.so
-vendor/lib/libHevcSwDecoder.so
 vendor/lib/libI420colorconvert.so
 vendor/lib/libmm-color-convertor.so
+vendor/lib/libmmosal.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAmrwbplusDec.so
 vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxMux.so
 vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libOmxWmaDec.so
+vendor/lib/libSHIMDivxDrm.so
+vendor/lib/libwfdcommonutils.so
 
 # Media firmware
 etc/firmware/venus.b00
@@ -208,11 +208,6 @@ etc/firmware/venus.mdt
 # Perf
 bin/mpdecision
 vendor/lib/libqti-perfd-client.so
-
-# Postprocessing
-vendor/lib/libdisp-aba.so
-vendor/lib/libmm-abl-oem.so
-vendor/lib/libmm-abl.so
 
 # Qualcomm framework
 bin/irsc_util
