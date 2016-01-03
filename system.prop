@@ -1,0 +1,91 @@
+# Audio
+persist.audio.dualmic.config=endfire
+persist.audio.fluence.audiorec=true
+persist.audio.fluence.voicecall=true
+ro.qc.sdk.audio.fluencetype=fluence
+use.voice.path.for.pcm.voip=true
+
+# Bluetooth
+bluetooth.chip.vendor=brcm
+persist.service.bdroid.a2dp_con=0
+persist.service.bdroid.scms_t=0
+ro.bt.bdaddr_path=/data/misc/bdaddr
+
+# Camera
+camera2.portability.force_api=1
+
+# Display
+persist.hwc.mdpcomp.enable=true
+ro.opengles.version=196608
+ro.sf.lcd_density=480
+
+# DRM
+drm.service.enabled=true
+
+# GPS
+persist.gps.qc_nlp_in_use=0
+ro.gps.agps_provider=1
+
+# IO Scheduler
+sys.io.scheduler=bfq
+
+# Media/offload
+audio.offload.buffer.size.kb=32
+audio.offload.gapless.enabled=true
+audio.offload.multiple.enabled=false
+audio.offload.pcm.16bit.enable=true
+audio.offload.pcm.24bit.enable=true
+av.offload.enable=true
+av.streaming.offload.enable=true
+tunnel.audio.encode=true
+media.aac_51_output_enabled=true
+mm.enable.smoothstreaming=true
+
+# NFC
+nfc.app_log_level=2
+nfc.enable_protocol_log=0
+
+# Perf
+ro.vendor.extension_library=/vendor/lib/libqti-perfd-client.so
+
+# Radio
+persist.radio.custom_ecc=1
+persist.radio.custom_ecc_mcc={234,235,424,426,427,430,431:999},{334:060,066},{422:9999},{730:133}
+persist.radio.custom_ecc_mcc_ex={450:111,112,113,119,122,125,127},{724:190},{440,441:110,118,119,112,911}
+persist.radio.custom_ecc_voice={515:117},{452:113,114,115}
+persist.radio.custom_ecc_hard=911,*911,#911,112,999,000,08,118,120,122,110,119,995,111,113,125,127,133
+persist.radio.apm_sim_not_pwdn=1
+ro.telephony.call_ring.multiple=0
+persist.data.qmi.adb_logmask=0
+rild.libpath=/vendor/lib/libril-qc-qmi-1.so
+ro.ril.telephony.mqanelements=5
+
+# Sensors
+ro.qti.sdk.sensors.gestures=true
+ro.qti.sensors.amd=true
+ro.qti.sensors.game_rv=true
+ro.qti.sensors.georv=true
+ro.qti.sensors.pam=true
+ro.qti.sensors.pedometer=true
+ro.qti.sensors.rmd=true
+ro.qti.sensors.smd=true
+ro.qti.sensors.step_counter=true
+ro.qti.sensors.step_detector=true
+ro.qti.sensors.tilt_detector=true
+ro.qti.sensors.cmc=false
+ro.qti.sensors.facing=false
+ro.qti.sensors.gtap=false
+ro.qti.sensors.tap=false
+ro.qti.sensors.tilt=false
+ro.qti.sensors.vmd=false
+ro.qti.sensors.wu=false
+
+# Sensor debugging
+debug.qualcomm.sns.hal=e
+debug.qualcomm.sns.daemon=e
+debug.qualcomm.sns.libsensor1=e
+persist.debug.sensors.hal=e
+persist.debug.ar.hal=e
+
+# Wifi
+wifi.interface=wlan0
