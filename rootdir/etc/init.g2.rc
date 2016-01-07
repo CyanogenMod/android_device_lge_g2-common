@@ -387,7 +387,7 @@ service set_baseband /system/bin/sh /system/etc/set_baseband.sh
     oneshot
     disabled
 
-on property:sys.boot_completed=1
+on property:gsm.version.baseband=""
     start set_baseband
 
 service thermal-engine /system/bin/thermal-engine
