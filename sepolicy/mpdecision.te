@@ -4,6 +4,7 @@ type_transition mpdecision socket_device:sock_file mpctl_socket;
 type_transition mpdecision system_data_file:file mpctl_data_file;
 
 allow mpdecision mpdecision_data:file { rw_file_perms };
+allow mpdecision mpdecision_data:dir { write add_name };
 
 binder_use(mpdecision)
 
