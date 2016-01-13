@@ -2,4 +2,6 @@
 allow mediaserver camera_prop:property_service set;
 allow mediaserver default_prop:property_service set;
 allow mediaserver persist_data_file:dir search;
+allow mediaserver persist_drm_file:file rw_file_perms;
+allow mediaserver mmosal_logmask:file rw_file_perms;
 allow mediaserver unlabeled:dir search;
