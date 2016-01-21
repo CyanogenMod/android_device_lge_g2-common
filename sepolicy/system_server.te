@@ -1,3 +1,4 @@
+allow system_server cir_device:chr_file rw_file_perms;
 allow system_server sysfs_touchpanel:dir search;
 allow system_server sysfs_touchpanel:file rw_file_perms;
 allow system_server sysfs_usb_supply:dir search;
