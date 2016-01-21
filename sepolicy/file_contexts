@@ -21,3 +21,4 @@
 /dev/socket/mpdecision(/.*)?          u:object_r:mpctl_socket:s0
 /data/cam_socket.*                    u:object_r:camera_socket:s0
 
+/dev/ttyHSL1                          u:object_r:cir_device:s0
