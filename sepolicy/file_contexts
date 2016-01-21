@@ -9,6 +9,9 @@
 /data/misc/bdaddr                                   u:object_r:hwaddrs_data_file:s0
 /system/bin/hwaddrs                                 u:object_r:hwaddrs_exec:s0
 
+# IR Blaster
+/dev/ttyHSL1                                        u:object_r:cir_device:s0
+
 # MPdecision
 /data/system/default_values                         u:object_r:mpctl_data_file:s0
 /dev/socket/mpctl                                   u:object_r:mpctl_socket:s0
