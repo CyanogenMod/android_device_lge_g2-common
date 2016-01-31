@@ -107,3 +107,4 @@ on property:recovery.perf.mode=0
 
 on property:dev.bootcomplete=1
     setprop sys.io.scheduler "bfq"
+    start mpdecision
