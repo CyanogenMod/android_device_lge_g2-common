@@ -144,7 +144,7 @@ on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
     # Allow subsystem (modem etc) debugging
-    write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
+    write /sys/module/subsystem_restart/parameters/enable_debug 0
     write /sys/kernel/boot_adsp/boot 1
 
     # disable lmk_fast_run
