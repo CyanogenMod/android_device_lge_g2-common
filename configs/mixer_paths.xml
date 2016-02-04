@@ -312,11 +312,11 @@
     </path>
 
     <path name="bt-sco-samplerate">
-        <ctl name="AUX PCM SampleRate" value="rate_8000" />
+        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_8KHZ" />
     </path>
 
     <path name="bt-sco-wb-samplerate">
-        <ctl name="AUX PCM SampleRate" value="rate_16000" />
+        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_16KHZ" />
     </path>
 
     <path name="voice-call usb-headphones">
@@ -376,14 +376,14 @@
 
     <path name="voip-loopback bt-sco">
         <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia1" value="1" />
-        <ctl name="AUX PCM SampleRate" value="rate_8000" />
+        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_8KHZ" />
         <ctl name="SEC_AUX_PCM_RX_Voice Mixer Voip" value="1" />
         <ctl name="Voip_Tx Mixer SEC_AUX_PCM_TX_Voip" value="1" />
     </path>
 
     <path name="voip-loopback bt-sco-wb">
         <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia1" value="1" />
-        <ctl name="AUX PCM SampleRate" value="rate_16000" />
+        <ctl name="AUX PCM SampleRate" value="BTSCO_RATE_16KHZ" />
         <ctl name="SEC_AUX_PCM_RX_Voice Mixer Voip" value="1" />
         <ctl name="Voip_Tx Mixer SEC_AUX_PCM_TX_Voip" value="1" />
     </path>
