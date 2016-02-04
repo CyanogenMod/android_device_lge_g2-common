@@ -41,8 +41,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.buffer.size.kb=32 \
     audio.offload.gapless.enabled=true \
     audio.offload.pcm.16bit.enable=true \
-    audio.offload.pcm.24bit.enable=true \
-    av.streaming.offload.enable=true
+    audio.offload.pcm.24bit.enable=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     media.aac_51_output_enabled=true
