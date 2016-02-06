@@ -19,8 +19,6 @@ package com.android.internal.telephony;
 import static com.android.internal.telephony.RILConstants.*;
 
 import android.content.Context;
-import android.os.AsyncResult;
-import android.os.Message;
 import android.os.Parcel;
 
 /**
@@ -55,15 +53,5 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
           failCause.vendorCause = p.readString();
         }
         return failCause;
-    }
-
-    @Override
-    public void getRadioCapability(Message response) {
-        riljLog("getRadioCapability: returning static radio capability");
-        if (response != null) {
-            Object ret = makeStaticRadioCapability();
-            AsyncResult.forMessage(response, ret, null);
-            response.sendToTarget();
-        }
     }
 }
