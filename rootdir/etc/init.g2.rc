@@ -49,8 +49,6 @@ on init
     mkdir /mpt 0755 system system
     mkdir /sns 0775 system system
 
-    # Support legacy paths
-    symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
 on fs
