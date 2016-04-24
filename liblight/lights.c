@@ -47,6 +47,15 @@ static const char LCD_FILE
 static const char PTN_BLINK_FILE
         = "/sys/class/lg_rgb_led/use_patterns/blink_patterns";
 
+static const char ATN_FILE
+        = "/sys/class/leds/button-backlight1/brightness";
+
+static const char ATN_BLINK_FILE
+        = "/sys/class/leds/button-backlight1/blink";
+
+static const char ATN_BLINK_MS
+        = "/sys/class/leds/button-backlight1/ramp_step_ms";
+
 /* device methods */
 
 static void init_globals(void)
@@ -150,11 +159,40 @@ static int set_speaker_light_locked(UNUSED struct light_device_t* dev,
     return 0;
 }
 
+static int set_attention_light_locked(UNUSED struct light_device_t* dev,
+        struct light_state_t const* state)
+{
+    int onMS, offMS;
+    unsigned int colorRGB;
+    char blink_pattern[PAGE_SIZE];
+
+    if (state != NULL) {
+        switch (state->flashMode) {
+            case LIGHT_FLASH_TIMED:
+                onMS = state->flashOnMS;
+                offMS = state->flashOffMS;
+                break;
+            case LIGHT_FLASH_NONE:
+            default:
+                onMS = -1;
+                offMS = -1;
+                break;
+        }
+
+        colorRGB = state->color;
+
+        sprintf(blink_pattern,"0x%x,%d,%d",colorRGB,onMS,offMS);
+        write_str(PTN_BLINK_FILE, blink_pattern);
+    }
+
+    return 0;
+}
+
 static void handle_led_prioritized_locked(struct light_device_t* dev,
         UNUSED struct light_state_t const* state)
 {
     if (is_lit(&g_attention)) {
-        set_speaker_light_locked(dev, &g_attention);
+        set_attention_light_locked(dev, &g_attention);
     } else if (is_lit(&g_notification)) {
         set_speaker_light_locked(dev, &g_notification);
     } else if(is_lit(&g_battery)) {
@@ -202,7 +240,6 @@ static int set_light_attention(struct light_device_t* dev,
 
     handle_led_prioritized_locked(dev, state);
 
-    /* Do the back-button lights, too */
     pthread_mutex_unlock(&g_lock);
     return 0;
 }
