@@ -313,68 +313,6 @@
                   autodetected from the Configuration. -->
     <bool name="config_showNavigationBar">true</bool>
 
-    <integer-array name="config_autoBrightnessLevels">
-        <item>1</item>
-        <item>4</item>
-        <item>10</item>
-        <item>32</item>
-        <item>82</item>
-        <item>170</item>
-        <item>350</item>
-        <item>500</item>
-        <item>700</item>
-        <item>1000</item>
-        <item>1400</item>
-        <item>2400</item>
-        <item>3500</item>
-        <item>9000</item>
-    </integer-array>
-    <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>30</item>
-        <item>50</item>
-        <item>72</item>
-        <item>85</item>
-        <item>123</item>
-        <item>137</item>
-        <item>147</item>
-        <item>170</item>
-        <item>178</item>
-        <item>183</item>
-        <item>195</item>
-        <item>212</item>
-        <item>220</item>
-        <item>235</item>
-        <item>255</item>
-    </integer-array>
-    <integer-array name="config_autoBrightnessButtonBacklightValues">
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-    </integer-array>
-    <integer-array name="config_autoBrightnessKeyboardBacklightValues">
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-    </integer-array>
-
     <bool name="config_lidControlsSleep">true</bool>
 
     <!-- Disable Button backlight settings -->
