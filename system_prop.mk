@@ -4,6 +4,8 @@
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
+    af.fast_track_multiplier=1 \
+    audio_hal.period_size=192 \
     persist.audio.dualmic.config=endfire \
     persist.audio.fluence.audiorec=true \
     persist.audio.fluence.voicecall=true \
@@ -50,11 +52,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     media.aac_51_output_enabled=true
-
-# NFC
-PRODUCT_PROPERTY_OVERRIDES += \
-    nfc.app_log_level=2 \
-    nfc.enable_protocol_log=0
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -119,4 +116,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
+    ro.data.large_tcp_window_size=true \
     wifi.interface=wlan0
