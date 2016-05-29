@@ -298,6 +298,7 @@ on boot
     # Adaptive LMK
     write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
     write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
+    write /sys/module/lowmemorykiller/parameters/debug_level 0
 
 on charger
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
