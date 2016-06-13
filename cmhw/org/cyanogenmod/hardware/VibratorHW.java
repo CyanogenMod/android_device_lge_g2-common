@@ -16,14 +16,14 @@
 
 package org.cyanogenmod.hardware;
 
-import org.cyanogenmod.hardware.util.FileUtils;
+import org.cyanogenmod.internal.util.FileUtils;
 
 public class VibratorHW {
 
     private static String NFORCE_PATH = "/sys/devices/platform/tspdrv/nforce_timed";
 
     public static boolean isSupported() {
-        return true;
+        return FileUtils.isFileWritable(NFORCE_PATH);
     }
 
     public static int getMaxIntensity()  {
