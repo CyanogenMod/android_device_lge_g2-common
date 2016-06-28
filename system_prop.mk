@@ -41,17 +41,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=0 \
     ro.gps.agps_provider=1
 
-# Media/offload
-# TODO: Re-enable when it works
+#Buffer size in kbytes for compress offload playback
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.disable=true
+    audio.offload.buffer.size.kb=32
 
+#Enable offload audio video playback by default
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.buffer.size.kb=32 \
-    audio.offload.gapless.enabled=true \
-    audio.offload.pcm.16bit.enable=true \
-    audio.offload.pcm.24bit.enable=true \
-    av.streaming.offload.enable=true
+    audio.offload.video=true
+
+#disable dsp gapless mode by default
+PRODUCT_PROPERTY_OVERRIDES += \
+    audio.offload.gapless.enabled=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
     media.aac_51_output_enabled=true
