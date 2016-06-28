@@ -39,11 +39,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.gps.agps_provider=1
 
 # Media/offload
-# TODO: Re-enable when it works
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.disable=true
-
-PRODUCT_PROPERTY_OVERRIDES += \
+    audio.offload.video=true \
     audio.offload.buffer.size.kb=32 \
     audio.offload.gapless.enabled=true \
     audio.offload.pcm.16bit.enable=true \
