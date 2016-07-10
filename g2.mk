@@ -100,6 +100,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     charger_res_images
 
+# Enable Quick Charge 2.0
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.usb.hvdcp.detect=true
+
 # Display
 PRODUCT_PACKAGES += \
     copybit.msm8974 \
