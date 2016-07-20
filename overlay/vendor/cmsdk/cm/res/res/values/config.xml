@@ -24,7 +24,7 @@
     <bool name="config_proximityCheckOnWake">true</bool>
 
     <!-- Proximity check timeout -->
-    <integer name="config_proximityCheckTimeout">100</integer>
+    <integer name="config_proximityCheckTimeout">400</integer>
 
     <!-- Proximity check on screen on default -->
     <bool name="config_proximityCheckOnWakeEnabledByDefault">true</bool>
