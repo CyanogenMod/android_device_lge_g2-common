@@ -114,7 +114,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.qualcomm.sns.daemon=e \
     debug.qualcomm.sns.libsensor1=e \
     persist.debug.sensors.hal=e \
-    persist.debug.ar.hal=e
+    persist.debug.ar.hal=e \
+    persist.sys.ssr.enable_debug=0
 
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
