@@ -78,6 +78,10 @@ USE_OPENGL_RENDERER := true
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
 
+#ifneq ($(QCPATH),)
+TARGET_PROVIDES_KEYMASTER := true
+#endif
+
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
@@ -126,3 +130,8 @@ BOARD_WLAN_DEVICE           := bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA     := "/system/etc/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmware/fw_bcmdhd_apsta.bin"
+
+# Inherit from QC proprietary
+ifneq ($(QCPATH),)
+-include $(QCPATH)/common/msm8974/BoardConfigVendor.mk
+endif
