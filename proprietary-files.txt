@@ -1,8 +1,4 @@
 # ADSP
-bin/adsprpcd
-vendor/lib/libadsprpc.so
-vendor/lib/libfastcvadsp_stub.so
-vendor/lib/libfastcvopt.so
 vendor/lib/libscve.so
 vendor/lib/libscve_stub.so
 vendor/lib/rfsa/adsp/libapps_mem_heap.so
@@ -19,17 +15,8 @@ etc/acdbdata/Handset_cal.acdb
 etc/acdbdata/Hdmi_cal.acdb
 etc/acdbdata/Headset_cal.acdb
 etc/acdbdata/Speaker_cal.acdb
-vendor/lib/libacdbloader.so
 vendor/lib/libacdbmapper.so
-vendor/lib/libacdbrtac.so
-vendor/lib/libadiertac.so
-vendor/lib/libaudcal.so
 vendor/lib/libaudioalsa.so
-
-# Audio effects
-vendor/lib/soundfx/libqcbassboost.so
-vendor/lib/soundfx/libqcreverb.so
-vendor/lib/soundfx/libqcvirt.so
 
 # Bluetooth
 vendor/firmware/BCM4335B0_002.001.006.0191.0201_ORC.hcd
@@ -138,161 +125,19 @@ etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
 etc/firmware/cpp_firmware_v1_2_1.fw
 
-# DRM
-bin/qseecomd
-vendor/lib/libdrmdecrypt.so
-vendor/lib/libdrmdiag.so
-vendor/lib/libdrmfs.so
-vendor/lib/libdrmtime.so
-vendor/lib/libQSEEComAPI.so
-vendor/lib/librpmb.so
-vendor/lib/libssd.so
-
-# GPS
-lib/libloc_api_v02.so
-lib/libloc_ds_api.so
-vendor/lib/hw/flp.default.so
-vendor/lib/libgeofence.so
-vendor/lib/libizat_core.so
-vendor/lib/liblbs_core.so
-
-# Graphics
-etc/firmware/a330_pfp.fw
-etc/firmware/a330_pm4.fw
-vendor/lib/egl/eglsubAndroid.so
-vendor/lib/egl/libEGL_adreno.so
-vendor/lib/egl/libGLESv1_CM_adreno.so
-vendor/lib/egl/libGLESv2_adreno.so
-vendor/lib/egl/libq3dtools_adreno.so
-vendor/lib/libadreno_utils.so
-vendor/lib/libbccQTI.so
-vendor/lib/libC2D2.so
-vendor/lib/libc2d30-a3xx.so
-vendor/lib/libCB.so
-vendor/lib/libgsl.so
-vendor/lib/libllvm-qcom.so
-vendor/lib/libOpenCL.so
-vendor/lib/librs_adreno_sha1.so
-vendor/lib/librs_adreno.so
-vendor/lib/libRSDriver_adreno.so
-vendor/lib/libsc-a3xx.so
-vendor/lib/libuiblur.so
-
 # IR
 lib/hw/consumerir.msm8974.so
 lib/libcir_driver.so
 
 # Media
-vendor/lib/libDivxDrm.so
 vendor/lib/libFileMux.so
-vendor/lib/libI420colorconvert.so
-vendor/lib/libmm-color-convertor.so
-vendor/lib/libmmosal.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxAmrwbplusDec.so
 vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxMux.so
 vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libOmxWmaDec.so
-vendor/lib/libSHIMDivxDrm.so
 vendor/lib/libwfdcommonutils.so
-
-# Media firmware
-etc/firmware/venus.b00
-etc/firmware/venus.b01
-etc/firmware/venus.b02
-etc/firmware/venus.b03
-etc/firmware/venus.b04
-etc/firmware/venus.mbn
-etc/firmware/venus.mdt
-
-# Perf
-bin/mpdecision
-vendor/lib/libqti-perfd-client.so
-
-# Qualcomm framework
-bin/irsc_util
-etc/permissions/qcrilhook.xml
-etc/permissions/qcnvitems.xml
--framework/qcnvitems.jar
--framework/qcrilhook.jar
-lib/libmdmdetect.so
-vendor/lib/libconfigdb.so
-vendor/lib/libdiag.so
-vendor/lib/libdsi_netctrl.so
-vendor/lib/libdsutils.so
-vendor/lib/libidl.so
-vendor/lib/liblqe.so
-vendor/lib/libperipheral_client.so
-vendor/lib/libqcci_legacy.so
-vendor/lib/libqdi.so
-vendor/lib/libqdp.so
-vendor/lib/libqmi_cci.so
-vendor/lib/libqmi_client_helper.so
-vendor/lib/libqmi_client_qmux.so
-vendor/lib/libqmi_common_so.so
-vendor/lib/libqmi_csi.so
-vendor/lib/libqmi_csvt_srvc.so
-vendor/lib/libqmi_encdec.so
-vendor/lib/libqmiservices.so
-vendor/lib/libqmi.so
-vendor/lib/libsmemlog.so
-vendor/lib/libxml.so
-
-# Radio
--app/qcrilmsgtunnel/qcrilmsgtunnel.apk
-bin/netmgrd
-bin/qmuxd
-bin/radish
-bin/rmt_storage
-etc/data/dsi_config.xml
-etc/data/netmgr_config.xml
-lib/librmnetctl.so
-lib/libuicc.so
-lib/libvss_bsp_qcci.so
-lib/libvss_common_core.so
-lib/libvss_common_idl.so
-lib/libvss_common_iface.so
-lib/libvss_dmi_qcci.so
-lib/libvss_gnss_qcci.so
-lib/libvss_ims_qcci.so
-lib/libvss_nv_core.so
-lib/libvss_nv_idl.so
-lib/libvss_nv_iface.so
-lib/libvss_resim_core.so
-lib/libvss_resim_idl.so
-lib/libvss_resim_iface.so
-lib/libvss_sar_qcci.so
-vendor/lib/libcneapiclient.so
-vendor/lib/libnetmgr.so
-vendor/lib/libril-qc-qmi-1.so
-vendor/lib/libril-qcril-hook-oem.so
-vendor/lib/libsystem_health_mon.so
-
-bin/sensors.qcom
-vendor/lib/hw/activity_recognition.msm8974.so
-vendor/lib/hw/sensors.msm8974.so
-vendor/lib/libsensor1.so
-vendor/lib/libsensor_reg.so
-
-# Thermal
-bin/thermal-engine
-vendor/lib/libthermalclient.so
-vendor/lib/libthermalioctl.so
-
-# Time
--app/TimeService/TimeService.apk
-bin/time_daemon
-vendor/lib/libalarmservice_jni.so
--vendor/lib/libtime_genoff.so
-vendor/lib/libTimeService.so
-
-# Widevine
-vendor/lib/drm/libdrmwvmplugin.so
-vendor/lib/libwvdrm_L1.so
-vendor/lib/libwvm.so
-vendor/lib/libWVStreamControlAPI_L1.so
-vendor/lib/mediadrm/libwvdrmengine.so
 
 # WiFi
 etc/firmware/fw_bcmdhd_apsta.bin
