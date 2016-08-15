@@ -19,4 +19,4 @@ Front Camera | 2.1 MP
 Release Date | August 2013
 
 
-![LG G2](http://www.lg.com/global/g2/images/main/phone00.png "LG G2")
+![LG G2](http://www.lg.com/us/images/cell-phones/ls980/gallery/large02.jpg "LG G2")
