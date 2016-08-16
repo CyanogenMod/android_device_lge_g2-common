@@ -1,5 +1,5 @@
 #
-# System Properties for G2
+# System Properties for LG G2
 #
 
 # Audio

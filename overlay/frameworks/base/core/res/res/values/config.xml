@@ -19,7 +19,7 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- Default color for notification LED is white. -->
+    <!-- Default color for notification LED is green. -->
     <color name="config_defaultNotificationColor">#ff00ff00</color>
 
     <!-- Default LED on time for notification LED in milliseconds. -->
@@ -285,9 +285,21 @@
         <item>/dev/bus/usb/001</item>
     </string-array>
 
-    <!-- reference volume index for music stream to limit headphone volume and display warning -->
+    <!-- Reference volume index for music stream to limit headphone volume and display warning -->
     <integer name="config_safe_media_volume_index">9</integer>
 
+    <!-- Whether WiFi display is supported by this device.
+         There are many prerequisites for this feature to work correctly.
+         Here are a few of them:
+         * The WiFi radio must support WiFi P2P.
+         * The WiFi radio must support concurrent connections to the WiFi display and
+           to an access point.
+         * The Audio Flinger audio_policy.conf file must specify a rule for the "r_submix"
+           remote submix module.  This module is used to record and stream system
+           audio output to the WiFi display encoder in the media server.
+         * The remote submix module "audio.r_submix.default" must be installed on the device.
+         * The device must be provisioned with HDCP keys (for protected content).
+    -->
     <bool name="config_enableWifiDisplay">true</bool>
 
     <!-- Minimum span needed to begin a touch scaling gesture.
@@ -346,12 +358,13 @@
     <!--  Whether Multiuser UI should be shown -->
     <bool name="config_enableMultiUserUI">true</bool>
 
-    <!-- enable doze powersaving mode -->
+    <!-- Enable doze powersaving mode -->
     <bool name="config_enableAutoPowerModes">true</bool>
 
     <!-- Whether device supports double tap to wake -->
     <bool name="config_supportDoubleTapWake">true</bool>
 
+    <!-- TCP buffers -->
     <string-array name="config_mobile_tcp_buffers">
         <item>"lte:2097152,4194304,8388608,262144,524288,1048576"</item>
         <item>"lte_ca:2097152,4194304,8388608,262144,524288,1048576"</item>
