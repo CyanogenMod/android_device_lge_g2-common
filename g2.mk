@@ -96,10 +96,6 @@ PRODUCT_PACKAGES += \
     Snap \
     camera.msm8974
 
-# Charger
-PRODUCT_PACKAGES += \
-    charger_res_images
-
 # Display
 PRODUCT_PACKAGES += \
     copybit.msm8974 \
