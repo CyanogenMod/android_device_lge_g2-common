@@ -121,6 +121,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.ar.hal=e \
     persist.sys.ssr.enable_debug=0
 
+# Storage
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sys.sdcardfs=true
+
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.data.large_tcp_window_size=true \
