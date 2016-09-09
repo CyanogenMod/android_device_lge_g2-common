@@ -179,15 +179,12 @@ PRODUCT_PACKAGES += \
 # Qualcomm
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
+    librmnetctl \
     libxml2
 
 # Recovery
 PRODUCT_PACKAGES += \
     librecovery_updater_g2
-
-# RIL
-PRODUCT_PACKAGES += \
-    libril_shim
 
 # Sensors
 PRODUCT_COPY_FILES += \
