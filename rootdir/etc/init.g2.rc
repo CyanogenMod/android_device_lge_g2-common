@@ -29,8 +29,6 @@ import init.g2.power.rc
 import init.g2.usb.rc
 
 on early-init
-    symlink /dev/diag_lge /dev/diag
-
     mkdir /sys 0771 system system
     mkdir /firmware 0771 system system
 
@@ -41,7 +39,7 @@ on early-init
     write /sys/class/leds/lcd-backlight/brightness 130
 
 on init
-    export LD_SHIM_LIBS /system/vendor/lib/libqomx_jpegenc.so|libboringssl-compat.so:/system/lib/libril.so|libril_shim.so
+    export LD_SHIM_LIBS /system/vendor/lib/libqomx_jpegenc.so|libboringssl-compat.so
 
     mkdir /persist 0771 system system
     mkdir /factory 0775 system system
@@ -151,6 +149,8 @@ on early-boot
     write /sys/module/lowmemorykiller/parameters/lmk_fast_run 0
 
 on boot
+    mkdir /dev/socket/netmgr 0750 radio radio
+
     # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
@@ -361,7 +361,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
 service qmuxd /system/bin/qmuxd
     class main
     user radio
-    group radio audio bluetooth gps qcom_diag
+    group radio audio bluetooth gps diag qcom_diag
 
 service qseecomd /system/bin/qseecomd
     class core
