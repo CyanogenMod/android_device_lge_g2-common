@@ -108,7 +108,7 @@ TARGET_USERIMAGES_USE_F2FS := true
 TARGET_RELEASETOOLS_EXTENSIONS := device/lge/g2-common/releasetools
 
 # RIL
-BOARD_RIL_CLASS += ../../../device/lge/g2-common/ril
+TARGET_RIL_VARIANT := caf
 
 # SELinux policies
 include device/qcom/sepolicy/sepolicy.mk
