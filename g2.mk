@@ -63,16 +63,16 @@ $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio.a2dp.default \
+    audiod \
     audio.primary.msm8974 \
+    audio_policy.msm8974 \
+    audio.a2dp.default \
     audio.r_submix.default \
     audio.usb.default \
-    audiod \
     libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
-    libqcomvoiceprocessing \
-    libqcomvoiceprocessingdescriptors
+    libqcomvoiceprocessing
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_effects.conf:system/vendor/etc/audio_effects.conf \
