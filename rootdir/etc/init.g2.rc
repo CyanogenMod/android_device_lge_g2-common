@@ -29,6 +29,9 @@ import init.g2.power.rc
 import init.g2.usb.rc
 
 on early-init
+    mount debugfs debugfs /sys/kernel/debug
+    chmod 0755 /sys/kernel/debug
+
     symlink /dev/diag_lge /dev/diag
 
     mkdir /sys 0771 system system
