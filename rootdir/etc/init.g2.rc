@@ -348,7 +348,7 @@ service loc_launcher /system/bin/loc_launcher
 service mpdecision /system/bin/mpdecision --avg_comp
    class late_start
    user root
-   group root system
+   group system readproc
    disabled
 
 service netmgrd /system/bin/netmgrd
