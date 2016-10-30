@@ -1,4 +1,6 @@
 allow mpdecision socket_device:dir w_dir_perms;
 allow mpdecision system_data_file:dir w_dir_perms;
+allow mpdecision sysfs_writable:dir search;
+allow mpdecision sysfs_writable:file { read write open };
 file_type_auto_trans(mpdecision, socket_device, mpctl_socket);
 file_type_auto_trans(mpdecision, system_data_file, mpctl_data_file);
