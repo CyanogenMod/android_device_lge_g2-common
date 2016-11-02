@@ -16,6 +16,7 @@
 
 # Call common vendor
 $(call inherit-product-if-exists, vendor/lge/g2-common/g2-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/qcom/binaries/msm8974/graphics/graphics-vendor.mk)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
@@ -71,8 +72,7 @@ PRODUCT_PACKAGES += \
     libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
-    libqcomvoiceprocessing \
-    libqcomvoiceprocessingdescriptors
+    libqcomvoiceprocessing
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_effects.conf:system/vendor/etc/audio_effects.conf \
@@ -82,6 +82,9 @@ PRODUCT_COPY_FILES += \
 # Bluetooth
 PRODUCT_PACKAGES += \
     hwaddrs
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    qcom.bluetooth.soc=rome
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/bcm4335_prepatch.hcd:system/vendor/firmware/bcm4335_prepatch.hcd
@@ -179,15 +182,12 @@ PRODUCT_PACKAGES += \
 # Qualcomm
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
+    librmnetctl \
     libxml2
 
 # Recovery
 PRODUCT_PACKAGES += \
     librecovery_updater_g2
-
-# RIL
-PRODUCT_PACKAGES += \
-    libril_shim
 
 # Sensors
 PRODUCT_COPY_FILES += \

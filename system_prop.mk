@@ -6,11 +6,10 @@
 PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1 \
     audio_hal.period_size=192 \
-    persist.audio.dualmic.config=endfire \
+    media.aac_51_output_enabled=true \
     use.voice.path.for.pcm.voip=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.audio.fluence.audiorec=false \
     persist.audio.fluence.speaker=false \
     persist.audio.fluence.voicecall=true \
     persist.audio.fluence.voicerec=false \
@@ -25,7 +24,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
-    camera2.portability.force_api=1
+    camera2.portability.force_api=1 \
+    media.stagefright.legacyencoder=true \
+    media.stagefright.less-secure=true
 
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -42,22 +43,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=0 \
     ro.gps.agps_provider=1
 
-# Media/offload
-# TODO: Re-enable when it works
-PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.disable=true
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    audio.offload.buffer.size.kb=32 \
-    audio.offload.gapless.enabled=true \
-    audio.offload.pcm.16bit.enable=true \
-    audio.offload.pcm.24bit.enable=true \
-    audio.offload.video=true \
-    av.streaming.offload.enable=true
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.aac_51_output_enabled=true
-
 # NFC
 PRODUCT_PROPERTY_OVERRIDES += \
     nfc.app_log_level=2 \
@@ -67,20 +52,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/vendor/lib/libqti-perfd-client.so
 
+# QMI
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.data.netmgrd.qos.enable=false \
+    persist.data.qmi.adb_logmask=0 \
+    persist.qcril.disable_retry=true \
+    rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
+    ro.use_data_netmgrd=true
+
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.custom_ecc=1
-
-PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.apm_sim_not_pwdn=1 \
-    ro.telephony.call_ring.multiple=0
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.data.qmi.adb_logmask=0 \
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
-    ro.ril.telephony.mqanelements=5
+    persist.telephony.oosisdc=false
 
 # Sensors
 PRODUCT_PROPERTY_OVERRIDES += \
