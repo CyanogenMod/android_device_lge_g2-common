@@ -111,6 +111,9 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/lge/g2-common/releasetools
 # RIL
 BOARD_RIL_CLASS += ../../../device/lge/g2-common/ril
 
+# SDClang
+TARGET_USE_SDCLANG := true
+
 # SELinux policies
 include device/qcom/sepolicy/sepolicy.mk
 
