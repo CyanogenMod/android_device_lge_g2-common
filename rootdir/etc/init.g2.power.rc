@@ -63,6 +63,7 @@ on enable-low-power
 
     write /sys/class/devfreq/qcom,cpubw.42/governor "cpubw_hwmon"
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor "msm-adreno-tz"
+    write /sys/module/simple_gpu_algorithm/parameters/simple_gpu_activate 1
 
 on charger
     write /sys/module/lpm_levels/enable_low_power/l2 4
