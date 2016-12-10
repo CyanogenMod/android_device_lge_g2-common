@@ -20,3 +20,4 @@
 /dev/block/platform/msm_sdcc.1/by-name/mpt          /mpt            ext4    nodev,nosuid,barrier=1,noauto_da_alloc,errors=continue                                              wait,notrim
 /dev/block/platform/msm_sdcc.1/by-name/misc         /misc           emmc    defaults                                                                                            defaults
 /devices/platform/xhci-hcd/usb*                     auto            auto    defaults                                                                                            voldmanaged=usb:auto
+/dev/block/zram0                                    none            swap    defaults                                                                                            zramsize=533413200,notrim
