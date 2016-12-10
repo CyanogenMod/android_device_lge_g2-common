@@ -55,6 +55,7 @@ on init
 
 on fs
     mount_all ./fstab.g2
+    swapon_all ./fstab.g2
     restorecon_recursive /persist
     restorecon_recursive /persist-lg
     restorecon_recursive /sns
