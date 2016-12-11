@@ -53,6 +53,9 @@ on init
     mkdir /sns 0775 system system
 
     symlink /sdcard /storage/sdcard0
+    
+    # Setup zram options
+    write /sys/block/zram0/comp_algorithm lz4
 
 on fs
     mount_all ./fstab.g2
