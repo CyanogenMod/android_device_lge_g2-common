@@ -264,9 +264,6 @@ on boot
 
     chown root system /proc/net/ip_conntrack
 
-    # Enable DEBUG_SUSPEND, DEBUG_EXIT_SUSPEND, and DEBUG_WAKEUP
-    write /sys/module/wakelock/parameters/debug_mask 7
-
     chown system wifi /sys/module/bcmdhd/parameters/firmware_path
     chmod 0640 /sys/module/bcmdhd/parameters/firmware_path
 
@@ -331,10 +328,6 @@ service irsc_util /system/bin/irsc_util "/etc/sec_config"
     class main
     user root
     oneshot
-
-service loc_launcher /system/bin/loc_launcher
-    class late_start
-    group gps inet net_raw qcom_diag net_admin wifi
 
 service mpdecision /system/bin/mpdecision --avg_comp
    class late_start
